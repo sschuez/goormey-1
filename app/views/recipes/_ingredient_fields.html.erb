@@ -2,5 +2,8 @@
     <div class="form-inputs">
       <%= form.input :name %>
       <%= form.input :description %>
+
+      <small><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" } %></small>
     </div>
+    <%= form.hidden_field :_destroy %>
   <% end %>
