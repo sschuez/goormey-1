@@ -16,9 +16,9 @@
       <% end %>
     </template>   
 
-    <%= f.fields_for :ingredients do |ingredient|%>
-      <%= render "ingredient_fields", form: ingredient %>
-    <% end %>
+    <%#= f.fields_for :ingredients do |ingredient|%>
+      <%#= render "ingredient_fields", form: ingredient %>
+    <%# end %>
 
     <div class="mb-3" data-nested-form-target="links"> <%# used to be: data-target="nested-form.links" %>
       <%= link_to "add ingredient", "#", class: "btn btn-primary", data: { action: "click->nested-form#add_association" } %>
