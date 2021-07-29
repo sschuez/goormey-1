@@ -1,0 +1,60 @@
+.cards-grid {
+  display: grid;
+  margin: 24px 0 24px 0;
+}
+
+.recipe-card {
+  background-color: white;
+  border-radius: 25px;
+  background-size: cover;
+  // border: 2px solid grey;
+  padding: 12px 12px 24px 12px;
+  a {
+    text-decoration: none;
+  }
+}
+
+
+
+// RESPONSIVE DESIGN STUFF
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px 0px;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px 0px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 6px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 34px;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 70px;
+  }
+}
+
