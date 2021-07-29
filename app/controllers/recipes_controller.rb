@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = policy_scope(Recipe).order(created_at: :desc)
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.ingredients.new
+    authorize @recipe
   end
 
   # GET /recipes/1/edit
@@ -23,7 +24,8 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-
+    authorize @recipe
+    @recipe.user = current_user
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
@@ -61,6 +63,7 @@ class RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
+      authorize @recipe
     end
 
     # Only allow a list of trusted parameters through.
