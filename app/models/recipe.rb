@@ -1,6 +1,24 @@
 class Recipe < ApplicationRecord
+	
+	# == Constants ============================================================
+	
+	# == Attributes ===========================================================
+	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
+	
+	# == Extensions ===========================================================
+	
+	# == Relationships ========================================================
 	has_many :ingredients, inverse_of: :recipe
 	belongs_to :user
-	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
-
+	
+	# == Validations ==========================================================
+	
+	# == Scopes ===============================================================
+	
+	# == Callbacks ============================================================
+	
+	# == Class Methods ========================================================
+	
+	# == Instance Methods =====================================================
+	
 end
