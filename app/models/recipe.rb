@@ -3,12 +3,12 @@ class Recipe < ApplicationRecord
 	# == Constants ============================================================
 	
 	# == Attributes ===========================================================
-	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
 	
 	# == Extensions ===========================================================
 	
 	# == Relationships ========================================================
 	has_many :ingredients, inverse_of: :recipe
+	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
 	belongs_to :user
 	
 	# == Validations ==========================================================
