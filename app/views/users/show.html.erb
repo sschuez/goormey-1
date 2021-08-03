@@ -8,29 +8,33 @@
   <nav>
     <ul>
       <li class="tab1">
-        <label for="tab1">First Tab</label>
+        <label for="tab1">your recipes</label>
       </li>
       <li class="tab2">
-        <label for="tab2">Second Tab</label>
+        <label for="tab2">saved recipes</label>
       </li>
       <li class="tab3">
-        <label for="tab3">Third Tab</label>
+        <label for="tab3">profile</label>
       </li>
     </ul>
   </nav>
   <section>
     <div class="tab1">
-      <h2>First</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus itaque quidem minus nostrum, voluptatem accusamus aspernatur quia harum ratione, officia laudantium inventore autem doloribus atque labore numquam non. Hic, animi.</p>
+      <h2>your recipes</h2>
+      <% @user.recipes.each do |recipe| %>
+        <%= link_to recipe.name, recipe_path(recipe) %>
+        <br>
+      <% end %>
     </div>
     <div class="tab2">
-      <h2>Second</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum nesciunt ipsum dolore error repellendus officiis aliquid a, vitae reprehenderit, accusantium vero, ad. Obcaecati numquam sapiente cupiditate. Praesentium eaque, quae error!</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, maiores.</p>
+      <h2>saved recipes</h2>
+      <p>you have not yet saved any recipes</p>
     </div>
     <div class="tab3">
-      <h2>Third</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, nobis culpa rem, vitae earum aliquid.</p>
+      <h2>profile</h2>
+      <p><strong>username:</strong> <%= @user.email %></p>
+      <p><strong>email:</strong> <%= @user.email %></p>
+      <%= link_to "edit email or password", edit_user_registration_path %>
     </div>
   </section>
 </div>
