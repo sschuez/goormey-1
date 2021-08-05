@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # RECIPES
-  resources :recipes
+  resources :recipes do
+    # FORM WIZARD
+    resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
+  end
   
   # USERS
   devise_for :users
@@ -8,4 +11,5 @@ Rails.application.routes.draw do
   
   # LAYOUTS
   root to: 'pages#home'
+
 end
