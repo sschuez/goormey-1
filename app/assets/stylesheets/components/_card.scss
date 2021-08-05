@@ -3,17 +3,23 @@
   margin: 24px 0 24px 0;
 }
 
-.recipe-card {
-  background-color: white;
+.main-card {
+  padding: 20px; 
+  width: 100%;
   border-radius: 25px;
-  background-size: cover;
-  // border: 2px solid grey;
-  padding: 12px 12px 24px 12px;
+  background: white;
+  line-height: 1.5em;
+  letter-spacing: 0.3px;
+  margin: 12px 0 0 0;
   a {
     text-decoration: none;
   }
 }
 
+.ingredient-card {
+ padding: 6px;
+ background: #f8f9fa;
+}
 
 // RESPONSIVE DESIGN STUFF
 

@@ -3,14 +3,14 @@
 <h1><%= @recipe.name %></h1>
 
 <div class="cards-grid">
-  <div class="recipe-card">
+  <div class="main-card">
     <p>
       <strong>Description</strong><br>
       <%= @recipe.description %>
     </p>
   </div>
 
-  <div class="recipe-card">
+  <div class="main-card">
     <p>
       <strong>Ingredients</strong><br>
       <% @recipe.ingredients.each do |ingredient| %>

@@ -1,9 +1,25 @@
   <%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record? } do %>
-    <div class="form-inputs inline-form">
-      <%= form.input :amount %>
-      <%= form.input :measurement %> of
-      <%= form.input :name %>
-      <%= form.input :description %>
+    <div class="form-inputs inline-form main-card ingredient-card">
+      
+      <%= form.input  :amount, 
+                      label: false, 
+                      class: "form-input amount", 
+                      placeholder: "amount" 
+                      %>
+      <%= form.input  :measurement, 
+                      label: false, 
+                      class: "form-input measurement", 
+                      collection: Ingredient::MEASUREMENTS 
+                      %> of
+      <%= form.input  :name, 
+                      label: false, 
+                      class: "form-input name",
+                      placeholder: "ingredient" 
+                      %>
+      <%= form.input  :description, 
+                      label: false, 
+                      class: "form-input description", 
+                      placeholder: "Description (optional)" %>
 
       <small><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" } %></small>
     </div>
