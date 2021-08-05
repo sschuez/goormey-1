@@ -6,11 +6,13 @@ module StepsControllers
 
     def show
       @recipe = Recipe.find(params[:recipe_id])
+      authorize @recipe
       render_wizard
     end
 
     def update
       @recipe = Recipe.find(params[:recipe_id])
+      authorize @recipe
       # Use #assign_attributes since render_wizard runs a #save for us
       @recipe.assign_attributes recipe_params
       render_wizard @recipe

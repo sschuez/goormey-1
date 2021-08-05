@@ -19,10 +19,9 @@ class Recipe < ApplicationRecord
 
   with_options if: -> { required_for_step?(:ingredients) } do
 		validates :name, presence: true
-		validates :exterior_color, presence: true
   end
 
-	# with_options if: -> { required_for_step?(:steps) } do
+	# with_options if: -> { required_for_step?(:instructions) } do
 		
 	# end
 
@@ -33,8 +32,8 @@ class Recipe < ApplicationRecord
 	# == Class Methods ========================================================
 	enum form_steps: {
 		recipe: [:name, :description],
-		ingredients: [:amount, :measurement, :name, :description],
-		steps: []
+		ingredients: [ingredients_attributes: [:id, :name, :description, :amount, :measurement, :_destroy]],
+		# instructions: []
 	}
 	attr_accessor :form_step
 	
