@@ -15,6 +15,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.ingredients.new
     authorize @recipe
+    @recipe.save! validate: false
+    redirect_to recipe_step_path(@recipe, Recipe.form_steps.keys.first)
   end
 
   # GET /recipes/1/edit

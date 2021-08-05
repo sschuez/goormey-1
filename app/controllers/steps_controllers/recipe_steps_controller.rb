@@ -1,0 +1,30 @@
+module StepsControllers
+  class RecipeStepsController < ApplicationController
+    include Wicked::Wizard
+
+    steps *Recipe.form_steps.keys
+
+    def show
+      @recipe = Recipe.find(params[:recipe_id])
+      render_wizard
+    end
+
+    def update
+      @recipe = Recipe.find(params[:recipe_id])
+      # Use #assign_attributes since render_wizard runs a #save for us
+      @recipe.assign_attributes recipe_params
+      render_wizard @recipe
+    end
+
+    private
+
+    # Only allow the params for specific attributes allowed in this step
+    def recipe_params
+      params.require(:recipe).permit(Recipe.form_steps[step]).merge(form_step: step.to_sym)
+    end
+
+    def finish_wizard_path
+      recipe_path(@recipe)
+    end
+  end
+end
