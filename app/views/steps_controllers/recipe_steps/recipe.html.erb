@@ -1,17 +1,12 @@
-<div class="main-card">
-  <%= simple_form_for(@recipe, url: wizard_path) do |f| %>
+<%= render :layout => 'form' do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Next Step" %>
+  </div>
   
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-    <div class="form-inputs">
-      <%= f.input :name %>
-      <%= f.input :description %>
-    </div>
-
-    <div class="form-actions">
-      <%= f.submit "Next Step" %>
-    </div>
-
 <% end %>
-</div>
