@@ -8,7 +8,9 @@ class Ingredient < ApplicationRecord
     "tbs" => "table spoon",
     "tsp" => "tea spoon",
     "l" => "litre",
-    "ml" => "millilitre"
+    "ml" => "millilitre",
+    "pcs" => "pieces",
+    "clove" => "clove"
   }
   
   # == Attributes ===========================================================

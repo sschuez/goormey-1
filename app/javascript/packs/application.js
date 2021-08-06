@@ -32,3 +32,6 @@ document.addEventListener('turbolinks:load', () => {
 import "controllers"
 
    
+
+require("trix")
+require("@rails/actiontext")
