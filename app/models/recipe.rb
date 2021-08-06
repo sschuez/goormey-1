@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:ingredients) } do
-		validates :name, presence: true
+		
   end
 
 	# with_options if: -> { required_for_step?(:instructions) } do

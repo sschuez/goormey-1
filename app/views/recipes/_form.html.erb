@@ -3,12 +3,15 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
+  <div class="edit-form">
+    <h4>Recipe Description</h4>
+    <div class="form-inputs">
+      <%= f.input :name %>
+      <%= f.input :description %>
+    </div>
   </div>
-
-  <div class="ingredients">
+  
+  <div class="edit-form">
     <h4>Ingredients</h4>
     <div data-controller="nested-form">
       <template data-nested-form-target="template"> <%# used to be: data-target="nested-form.template" %>
@@ -32,3 +35,4 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+ 

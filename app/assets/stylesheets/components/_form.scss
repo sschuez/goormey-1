@@ -10,7 +10,16 @@
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #b5bdce;
-  padding: .75em .5em .5em;
+}
+
+.form-actions {
+  margin-top: 36px;
+}
+
+.edit-form {
+  border-bottom: grey 2px solid;
+  // margin: 36px;
+  padding: 0 0 24px 0;
 }
 
 // .recipe_ingredients_description {

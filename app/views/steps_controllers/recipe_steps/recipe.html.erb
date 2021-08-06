@@ -3,11 +3,11 @@
   <h4>Recipe</h4>
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :description, as: :text %>
   </div>
 
   <div class="form-actions">
-    <%= f.submit "add ingredients", class: "btn btn-secondary" %>
+    <%= f.submit "to ingredients", class: "btn btn-secondary" %>
   </div>
   
 <% end %>

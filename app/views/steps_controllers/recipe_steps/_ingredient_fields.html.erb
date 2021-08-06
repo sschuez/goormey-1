@@ -4,19 +4,20 @@
                     as: :integer, 
                     label: false, 
                     class: "form-input amount", 
-                    placeholder: "amount" 
+                    placeholder: "amount",
+                    step: :any
                     %>
     <%= form.input  :measurement, 
                     label: false, 
                     class: "form-input measurement", 
-                    collection: Ingredient::MEASUREMENTS 
+                    collection: Ingredient::MEASUREMENTS
                     %><p class="of">of</p>
     <%= form.input  :name,
                     label: false, 
                     class: "form-input name",
                     placeholder: "ingredient" 
                     %>
-    <%= form.input  :description,
+    <%#= form.input  :description,
                     label: false, 
                     class: "form-input description",
                     placeholder: "description (optional)" %>
