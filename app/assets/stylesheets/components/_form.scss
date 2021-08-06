@@ -2,19 +2,23 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  justify-content: space-between;
-  flex: 0 0 50%;
+  justify-content: space-around;
+  width: 75%;
 }
 
 .form-control {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #b5bdce;
-  // color: #666;
-  // font-size: 1.5em;
   padding: .75em .5em .5em;
-  // width: 100%;
 }
+
+// .recipe_ingredients_description {
+//   width: 180px;
+//   input {
+//     display: none;
+//   }
+// }
 
 /* responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
 @media (max-width: 800px) {

@@ -14,15 +14,15 @@
     <% end %>
 
     <div class="mb-3" data-nested-form-target="links"> <%# used to be: data-target="nested-form.links" %>
-      <%= link_to "add ingredient", "#", class: "btn btn-primary", data: { action: "click->nested-form#add_association" } %>
+      <%= link_to "add ingredient", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
     </div>
   </div>
-</div>
 
-<div class="form-actions">
-  <%= link_to 'Previous Step', previous_wizard_path %>
-  <%#= f.submit "Next Step" %>
-  <%= f.submit 'Complete' %>
-  <%#= link_to 'Skip', next_wizard_path %>
+  <div class="form-actions">
+    <%= link_to 'Previous Step', previous_wizard_path, class: "btn btn-primary" %>
+    <%#= f.submit "Next Step" %>
+    <%= f.submit 'Complete', class: "btn btn-secondary" %>
+    <%#= link_to 'Skip', next_wizard_path %>
+  </div>
 
 <% end %>
