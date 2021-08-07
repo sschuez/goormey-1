@@ -22,12 +22,16 @@
   padding: 0 0 24px 0;
 }
 
-// .recipe_ingredients_description {
-//   width: 180px;
-//   input {
-//     display: none;
-//   }
-// }
+.counter {
+  background-color: coral;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
 
 /* responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
 @media (max-width: 800px) {
