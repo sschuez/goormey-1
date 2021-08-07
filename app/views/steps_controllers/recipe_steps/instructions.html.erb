@@ -8,15 +8,13 @@
       <% end %>
     </template>   
 
-    <div data-controller="drag" data-drag-url="/recipes/:id/steps/instructions/move">
-      <%# INITIAL NEW FORM FOR instruction -> OPTIONAL %>
-      <%= f.fields_for :instructions do |instruction|%>   
-        <%= render "instruction_fields", form: instruction %>
-      <% end %>
+    <%# INITIAL NEW FORM FOR instruction -> OPTIONAL %>
+    <%= f.fields_for :instructions do |instruction|%>
+      <%= render "instruction_fields", form: instruction %>
+    <% end %>
 
-      <div class="mb-3" data-nested-form-target="links">
-        <%= link_to "add instruction", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
-      </div>
+    <div class="mb-3" data-nested-form-target="links">
+      <%= link_to "add instruction", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
     </div>
   </div>
 

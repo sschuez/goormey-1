@@ -6,7 +6,6 @@ class Instruction < ApplicationRecord
   # == Attributes ===========================================================
   
   # == Extensions ===========================================================
-  acts_as_list
   
   # == Relationships ========================================================
   belongs_to :recipe

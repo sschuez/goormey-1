@@ -2,12 +2,7 @@ Rails.application.routes.draw do
   # RECIPES
   resources :recipes do
     # FORM WIZARD
-    resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps' do
-      member do 
-        patch :move
-      end
-    end
-    
+    resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
   end
   
   # USERS

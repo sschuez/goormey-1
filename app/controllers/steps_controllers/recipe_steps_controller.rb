@@ -18,10 +18,6 @@ module StepsControllers
       render_wizard @recipe
     end
 
-    def move
-      
-    end
-    
     private
 
     # Only allow the params for specific attributes allowed in this step
