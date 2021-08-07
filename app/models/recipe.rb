@@ -8,7 +8,9 @@ class Recipe < ApplicationRecord
 	
 	# == Relationships ========================================================
 	has_many :ingredients, inverse_of: :recipe
+	has_many :instructions, inverse_of: :recipe
 	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
+	accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
 	belongs_to :user
 	
 	# == Validations ==========================================================
@@ -18,7 +20,7 @@ class Recipe < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:ingredients) } do
-		
+
   end
 
 	# with_options if: -> { required_for_step?(:instructions) } do
@@ -33,7 +35,7 @@ class Recipe < ApplicationRecord
 	enum form_steps: {
 		recipe: [:name, :description],
 		ingredients: [ingredients_attributes: [:id, :name, :description, :amount, :measurement, :_destroy]],
-		# instructions: []
+		instructions: [instructions_attributes: [:id, :description, :_destroy]]
 	}
 	attr_accessor :form_step
 	

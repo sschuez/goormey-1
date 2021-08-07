@@ -1,8 +1,28 @@
 <%= render :layout => 'form' do |f| %>
 
+  <h4>instructions</h4>
+  <div data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= f.fields_for :instructions, Instruction.new, child_index: 'NEW_RECORD' do |instruction| %>
+        <%= render "instruction_fields", form: instruction %>
+      <% end %>
+    </template>   
+
+    <%# INITIAL NEW FORM FOR instruction -> OPTIONAL %>
+    <%= f.fields_for :instructions do |instruction|%>
+      <%= render "instruction_fields", form: instruction %>
+    <% end %>
+
+    <div class="mb-3" data-nested-form-target="links">
+      <%= link_to "add instruction", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
+    </div>
+  </div>
+
   <div class="form-actions">
-    <%= link_to 'Previous Step', previous_wizard_path %>
-    <%= f.submit 'Complete' %>
+    <%= link_to 'previous step', previous_wizard_path, class: "btn btn-primary" %>
+    <%#= f.submit "Next Step" %>
+    <%= f.submit 'create recipe', class: "btn btn-secondary" %>
+    <%#= link_to 'Skip', next_wizard_path %>
   </div>
 
 <% end %>

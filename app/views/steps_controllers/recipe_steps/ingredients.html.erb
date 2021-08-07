@@ -1,6 +1,6 @@
 <%= render :layout => 'form' do |f| %>
 
-  <h4>Ingredients</h4>
+  <h4>ingredients</h4>
   <div data-controller="nested-form">
     <template data-nested-form-target="template"> <%# used to be: data-target="nested-form.template" %>
       <%= f.fields_for :ingredients, Ingredient.new, child_index: 'NEW_RECORD' do |ingredient| %>
@@ -19,9 +19,9 @@
   </div>
 
   <div class="form-actions">
-    <%= link_to 'Previous Step', previous_wizard_path, class: "btn btn-primary" %>
-    <%#= f.submit "Next Step" %>
-    <%= f.submit 'Complete', class: "btn btn-secondary" %>
+    <%= link_to 'previous step', previous_wizard_path, class: "btn btn-primary" %>
+    <%= f.submit "instructions", class: "btn btn-secondary" %>
+    <%#= f.submit 'Complete', class: "btn btn-secondary" %>
     <%#= link_to 'Skip', next_wizard_path %>
   </div>
 
