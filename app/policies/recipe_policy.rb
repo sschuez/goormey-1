@@ -20,4 +20,8 @@ class RecipePolicy < ApplicationPolicy
   def destroy?
     record.user == user || user.admin  # Only recipe creator or admin can destroy it
   end
+
+  def move?
+    true
+  end
 end
