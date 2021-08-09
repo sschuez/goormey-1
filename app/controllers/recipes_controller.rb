@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[ show edit update destroy move ] 
+  before_action :set_recipe, only: %i[ show edit update destroy move]
 
   # GET /recipes or /recipes.json
   def index
@@ -64,14 +64,7 @@ class RecipesController < ApplicationController
   end
 
   def move
-    @recipe = Recipe.find(params[:id])
-    @instruction = @recipe.instructions.find(params[:instruction_id])
-    @instruction.insert_at(params[:position]).to_i
-    # @ingredient = Ingredient.find(params[:ingredient_id])
-    # to_recipe = params[:to_recipe_id]
-    # @ingredient.recipe_id = to_recipe
-    # @ingredient.position = params[:position]
-    # @ingredient.save
+    @recipe.insert_at(params[:position]).to_i
     head :ok
   end
 
