@@ -32,8 +32,6 @@ gem 'devise'
 gem 'pundit'
 gem 'wicked'
 
-gem 'cocoon'
-
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'
