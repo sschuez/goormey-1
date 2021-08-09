@@ -1,4 +1,4 @@
-<%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record? } do %>
+<%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record?, id: form.object.id } do %>
   <%= form.hidden_field :id %>
   <div class="form-inputs inline-form main-card ingredient-card">
 

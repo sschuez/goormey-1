@@ -4,12 +4,14 @@ class InstructionPositionsController < ApplicationController
     @instruction = Instruction.find(params[:instruction_id])
     authorize @instruction.recipe
 
-    # @instruction.insert_at(params[:position].to_i)
-    # @instruction.position = params[:position]
+    @instruction.insert_at(params[:position].to_i)
+    # @instruction.position = params[:position].to_i
     # binding.pry
-    # @instruction.save
+    # @instruction.update
 
-    @instruction.update(:position => params[:position])
+    # @instruction.update(:position => params[:position].to_i)
+    
+    # @instruction.update(:position => params[:position])
 
     head :ok
   end

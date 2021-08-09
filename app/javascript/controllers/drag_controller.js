@@ -18,12 +18,12 @@ export default class extends Controller {
     // data.append("position", event.newIndex + 1)
 
     let id = event.item.dataset.id
-    let recipe_id = event.item.dataset.recipeId
+    // let recipe_id = event.item.dataset.recipeId
     console.log(event.item.dataset)
 
     let url = this.data.get("url")
     url = url.replace(":id", id)
-    url = url.replace(":recipe_id", recipe_id)
+    // url = url.replace(":recipe_id", recipe_id)
     console.log(url)
     
     let data = new FormData()
