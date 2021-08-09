@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[ show edit update destroy move]
+  before_action :set_recipe, only: %i[ show edit update destroy ]
 
   # GET /recipes or /recipes.json
   def index
@@ -61,11 +61,6 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def move
-    @recipe.insert_at(params[:position]).to_i
-    head :ok
   end
 
   private
