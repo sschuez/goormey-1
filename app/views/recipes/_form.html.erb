@@ -33,7 +33,7 @@
 
   <div class="edit-form">
     <h4>instructions</h4>
-    <div data-controller="nested-form drag" data-drag-url="/recipes/:id/move"> 
+    <div data-controller="nested-form"> 
       <template data-nested-form-target="template">
         <%= f.fields_for :instructions, Instruction.new, child_index: 'NEW_RECORD' do |instruction| %>
           <%= render "instruction_fields", form: instruction %>
