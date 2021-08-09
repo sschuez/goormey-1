@@ -33,7 +33,7 @@
 
   <div class="edit-form">
     <h4>instructions</h4>
-    <div data-controller="nested-form"> 
+    <div data-controller="nested-form drag" data-drag-url="/recipes/:recipe_id/instructions/:id/instruction_position"> 
       <template data-nested-form-target="template">
         <%= f.fields_for :instructions, Instruction.new, child_index: 'NEW_RECORD' do |instruction| %>
           <%= render "instruction_fields", form: instruction %>
@@ -41,8 +41,10 @@
       </template>   
 
       <%# INITIAL NEW FORM FOR instruction -> OPTIONAL %>
-      <%= f.fields_for :instructions do |instruction|%>
-        <%= render "instruction_fields", form: instruction %>
+      <%= f.fields_for :instructions, @recipe.instructions.order(position: :asc), include_id: false do |instruction|%>
+        <div data-id="<%= instruction.object.id %>" data-recipe-id="<%= @recipe.id %>">
+          <%= render "instruction_fields", form: instruction %>
+        </div>
       <% end %>
 
       <div class="mb-3" data-nested-form-target="links">
