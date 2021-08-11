@@ -13,8 +13,7 @@ Recipe.all.each do |recipe|
     recipe.ingredients.create(
       amount: rand(1..100),
       measurement: measurements.sample,
-      name: Faker::Food.ingredient,
-      description: [nil, Faker::Lorem.sentences(number: 1)].sample
+      name: Faker::Food.ingredient
       )
     progressbar.increment
   end

@@ -1,0 +1,14 @@
+<%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record? } do %>
+  <div class="form-inputs inline-form main-card ingredient-card">
+
+    <div class="counter"><h2>1</h2></div>
+    <%= form.input  :description,
+                    label: false, 
+                    class: "form-input name",
+                    placeholder: "your instructions" 
+                    %>
+
+    <div class="remove"><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" } %></div>
+  </div>
+  <%= form.hidden_field :_destroy %>
+<% end %>

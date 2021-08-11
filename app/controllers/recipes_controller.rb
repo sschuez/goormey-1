@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.ingredients.new
+    @recipe.instructions.new
     @recipe.user = current_user
     authorize @recipe
     @recipe.save! validate: false
@@ -71,6 +72,6 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, ingredients_attributes: [:id, :name, :description, :amount, :measurement, :_destroy])
+      params.require(:recipe).permit(:name, :description, ingredients_attributes: [:id, :name, :description, :amount, :measurement, :_destroy], instructions_attributes: [:id, :description, :position, :_destroy])
     end
 end
