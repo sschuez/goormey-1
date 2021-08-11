@@ -10,31 +10,35 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "links", "template", "description" ]
-  static values = { index: Number }  
+  static targets = [ "links", "template", "description", "inputElement" ]
   
   connect() {
   }
   add_association(event) {
-    event.preventDefault();
+    event.preventDefault()
     
-    var content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime());
-    this.linksTarget.insertAdjacentHTML('beforebegin', content);
+    var content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime())
+    this.linksTarget.insertAdjacentHTML('beforebegin', content)
+
+    // Assign 'position'new newly created element
+    const elements = this.inputElementTargets
+    var newElement = elements[elements.length - 1]
+    newElement.querySelector('h2').innerHTML = elements.length
   }
 
   remove_association(event) {
     event.preventDefault()
 
-    let wrapper = event.target.closest(".nested-fields");
+    let wrapper = event.target.closest(".nested-fields")
 
     // New records are simply removed from the page
     if (wrapper.dataset.newRecord == "true") {
-      wrapper.remove();
+      wrapper.remove()
 
     // Existing records are hidden and flagged for deletion
     } else {
-      wrapper.querySelector("input[name*='_destroy']").value = 1;
-      wrapper.style.display = 'none';
+      wrapper.querySelector("input[name*='_destroy']").value = 1
+      wrapper.style.display = 'none'
     }
   }
 
