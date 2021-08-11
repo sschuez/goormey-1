@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   
   # LAYOUTS
-  root to: 'pages#home'
+  root to: 'recipes#index'
 
 end
