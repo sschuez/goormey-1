@@ -1,59 +1,23 @@
+<div class="main-card">
+  <%= simple_form_for(@recipe) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= simple_form_for(@recipe) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="edit-form">
-    <h4>Recipe Description</h4>
-    <div class="form-inputs">
-      <%= f.input :name %>
-      <%= f.input :description %>
+    <div class="edit-form">
+      <%= render "recipe_form", f: f %>
     </div>
-  </div>
-  
-  <div class="edit-form">
-    <h4>Ingredients</h4>
-    <div data-controller="nested-form">
-      <template data-nested-form-target="template"> <%# used to be: data-target="nested-form.template" %>
-        <%= f.fields_for :ingredients, Ingredient.new, child_index: 'NEW_RECORD' do |ingredient| %>
-          <%= render "ingredient_fields", form: ingredient %>
-        <% end %>
-      </template>   
-
-      <%# INITIAL NEW FORM FOR INGREDIENT -> OPTIONAL %>
-      <%= f.fields_for :ingredients do |ingredient|%>
-        <%= render "ingredient_fields", form: ingredient %>
-      <% end %>
-
-      <div class="mb-3" data-nested-form-target="links"> <%# used to be: data-target="nested-form.links" %>
-        <%= link_to "add ingredient", "#", class: "btn btn-primary", data: { action: "click->nested-form#add_association" } %>
-      </div>
+    
+    <div class="edit-form">
+      <%= render "ingredients_form", f: f %>
     </div>
-  </div>
 
-  <div class="edit-form">
-    <h4>instructions</h4> 
-    <div data-controller="nested-form drag" data-drag-url="/recipes/<%= @recipe.id %>/instructions/:id/instruction_position"> 
-      <template data-nested-form-target="template">
-        <%= f.fields_for :instructions, Instruction.new, child_index: 'NEW_RECORD' do |instruction| %>
-          <%= render "instruction_fields", form: instruction %>
-        <% end %>
-      </template>   
-
-      <%# INITIAL NEW FORM FOR instruction -> OPTIONAL %>
-      <%= f.fields_for :instructions, @recipe.instructions.order(position: :asc), include_id: false do |instruction|%>
-        <%= render "instruction_fields", form: instruction %>
-      <% end %>
-
-      <div class="mb-3" data-nested-form-target="links">
-        <%= link_to "add instruction", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
-      </div>
+    <div class="edit-form">
+      <%= render "instructions_form", f: f %>
     </div>
-  </div>
 
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>
  

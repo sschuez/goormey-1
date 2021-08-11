@@ -1,22 +1,6 @@
 <%= render :layout => 'form' do |f| %>
 
-  <h4>ingredients</h4>
-  <div data-controller="nested-form">
-    <template data-nested-form-target="template"> <%# used to be: data-target="nested-form.template" %>
-      <%= f.fields_for :ingredients, Ingredient.new, child_index: 'NEW_RECORD' do |ingredient| %>
-        <%= render "ingredient_fields", form: ingredient %>
-      <% end %>
-    </template>   
-
-    <%# INITIAL NEW FORM FOR INGREDIENT -> OPTIONAL %>
-    <%= f.fields_for :ingredients do |ingredient|%>
-      <%= render "ingredient_fields", form: ingredient %>
-    <% end %>
-
-    <div class="mb-3" data-nested-form-target="links"> <%# used to be: data-target="nested-form.links" %>
-      <%= link_to "add ingredient", "#", class: "btn btn-success", data: { action: "click->nested-form#add_association" } %>
-    </div>
-  </div>
+  <%= render "recipes/ingredients_form", f: f %>  
 
   <div class="form-actions">
     <%= link_to 'previous step', previous_wizard_path, class: "btn btn-primary" %>
