@@ -1,11 +1,7 @@
 <%= render :layout => 'form' do |f| %>
   
-  <h4>recipe</h4>
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description, as: :text %>
-  </div>
-
+  <%= render "recipes/recipe_form", f: f %>
+  
   <div class="form-actions">
     <%= f.submit "ingredients", class: "btn btn-secondary" %>
   </div>

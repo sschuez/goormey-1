@@ -1,29 +1,28 @@
-// Visit The Stimulus Handbook for more details 
-// https://stimulusjs.org/handbook/introduction
-// 
-// This example controller works with specially annotated HTML like:
-//
-// <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
-// </div>
-
 import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = [ "links", "template", "description", "inputElement" ]
   
   connect() {
+    // Assign 'position' to already created elements
+    let i = 1
+    this.inputElementTargets.forEach((element) => {
+      if (element.querySelector('h2')) {
+        element.querySelector('h2').innerHTML = i++
+      }
+    })
   }
+
   add_association(event) {
     event.preventDefault()
     
     var content = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().getTime())
     this.linksTarget.insertAdjacentHTML('beforebegin', content)
 
-    // Assign 'position'new newly created element
-    const elements = this.inputElementTargets
-    var newElement = elements[elements.length - 1]
-    newElement.querySelector('h2').innerHTML = elements.length
+    // Assign 'position' to new newly created element
+      const elements = this.inputElementTargets
+      var newElement = elements[elements.length - 1]
+      if (newElement.querySelector('h2')) newElement.querySelector('h2').innerHTML = elements.length
   }
 
   remove_association(event) {

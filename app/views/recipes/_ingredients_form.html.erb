@@ -1,0 +1,17 @@
+<h4>ingredients</h4>
+<div data-controller="nested-form">
+  <template data-nested-form-target="template">
+    <%= f.fields_for :ingredients, Ingredient.new, child_index: 'NEW_RECORD' do |ingredient| %>
+      <%= render "recipes/ingredient_fields", form: ingredient %>
+    <% end %>
+  </template>   
+
+  <%= f.fields_for :ingredients do |ingredient|%>
+    <%= render "recipes/ingredient_fields", form: ingredient %>
+  <% end %>
+
+  <div class="mb-3" data-nested-form-target="links">
+    <%= link_to "add ingredient", "#", class: "btn btn-primary", data: { action: "click->nested-form#add_association" } %>
+  </div>
+</div>
+
