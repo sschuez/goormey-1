@@ -1,30 +1,41 @@
 <p id="notice"><%= notice %></p>
 
 <h4>Recipes</h4>
-<%= link_to 'New Recipe', new_recipe_path %>
-
-<ul class="cards">
-  <% @recipes.each do |recipe| %>
-    <li>
-      <%= link_to recipe_path(recipe), class: "card" do %>
-        <%= image_tag "sample_meal.jpg", class: "card__image" %>
-        <div class="card__overlay">
-          <div class="card__header">
-            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
-            <img class="card__thumb" src="https://kitt.lewagon.com/placeholder/users/sschuez" alt="" />
-            <div class="card__header-text">
-              <h3 class="card__title"><%= recipe.name %></h3>            
-              <span class="card__status">1 hour ago</span>
-            </div>
-          </div>
-          <p class="card__description"><%= recipe.description %></p>
-          <%# <p>= link_to 'Edit', edit_recipe_path(recipe)</p> %>
-          <%# <p>= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' }</p> %>
-        </div>
-      <% end %>
-    </li>
-  <% end %>  
-</ul>
 <br>
+<%= link_to '+ new recipe', new_recipe_path, class: "btn btn-ghost" %>
+<br><br>
 
-<%= link_to 'New Recipe', new_recipe_path %>
+<div class="index-grid">
+  <% @recipes.each do |recipe| %>
+    <div class="recipe-card">
+      
+      <%= link_to recipe_path(recipe) do %>
+        <%= image_tag "sample_meal.jpg", class: "card-image" %>
+      <% end %>  
+      
+      <div class="card-overlay">
+        
+        <div class="card-header">
+          
+          <%= link_to user_path(recipe.user) do %>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/sschuez", class: "card-thumb" %>
+          <% end %>
+
+          <%= link_to recipe_path(recipe) do %>
+            <div class="card-header-text">
+              <h3 class="card-title"><%= recipe.name %></h3>
+              <span class="card-status">1 hour ago</span>
+            </div>
+          <% end %>
+        
+        </div>
+
+        <%= link_to recipe_path(recipe) do %>
+          <p class="card-description"><%= recipe.description %></p>
+        <% end %>
+      
+      </div>
+
+    </div>
+  <% end %>
+</div>

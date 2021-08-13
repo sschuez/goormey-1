@@ -1,9 +1,53 @@
 // Specific CSS for your home-page
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  background-color: $background;
+}
+
+h1 {
+  color: $red-middle;
+}
+
+h2 {
+  color: $red-middle;
+}
+
+h3 {
+  color: $red-middle;
+}
+
+h4 {
+  color: $red-middle;
+}
+
+p {
+  color: $red-middle;
+}
+
+label {
+  color: $red-middle;
+}
+
+input[type="text"], textarea {
+
+  background-color: $brown-light; 
+
+}
+
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
   .background-main {
-    padding: 12px; 
+    padding: 12px 12px 64px 12px; 
   }
   
 }
@@ -11,7 +55,7 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   .background-main {
-    padding: 24px; 
+    padding: 12px 24px 64px 24px; 
   }
   
 }
@@ -19,7 +63,7 @@
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .background-main {
-    padding: 36px; 
+    padding: 12px 36px 64px 36px 0; 
   }
   
 }
@@ -27,7 +71,7 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .background-main {
-    padding: 48px; 
+    padding: 24px 150px 64px 150px; 
   }
   
 }
@@ -35,7 +79,7 @@
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .background-main {
-    padding: 64px; 
+    padding: 24px 200px 64px 200px; 
   }
   
 }

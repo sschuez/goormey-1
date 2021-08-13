@@ -3,8 +3,8 @@
   <%= render "recipes/ingredients_form", f: f %>  
 
   <div class="form-actions">
-    <%= link_to 'previous step', previous_wizard_path, class: "btn btn-primary" %>
-    <%= f.submit "instructions", class: "btn btn-secondary" %>
+    <%= link_to 'previous step', previous_wizard_path, class: "btn btn-ghost" %>
+    <%= f.submit "instructions", class: "btn btn-ghost" %>
     <%#= f.submit 'Complete', class: "btn btn-secondary" %>
     <%#= link_to 'Skip', next_wizard_path %>
   </div>
