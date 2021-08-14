@@ -5,9 +5,21 @@
   border-radius: 50px;
   font-weight: lighter;
   transition: opacity 0.3s ease;
+  font-weight: bold;
 }
 
 .btn-ghost:hover {
   color: $red-middle;
   background-color: $red-very-light;
 }
+
+.btn-coral {
+  border-color: $bright-coral;
+  color: $bright-coral;
+}
+
+.btn-coral:hover {
+  color: $bright-coral;
+  border-color: $bright-coral;
+}
+
