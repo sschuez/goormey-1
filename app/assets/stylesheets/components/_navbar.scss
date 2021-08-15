@@ -3,14 +3,27 @@
   background: $background-complimentary-light;
 }
 
-.nav-link {
-  color: $red-middle;
-}
-
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+.dropdown-menu {
+  border-radius: 25px;
+  background-color: $background-complimentary-light;
+  border: none;
+  box-shadow: 2px 1px 1px $background-complimentary-dark;
+}
+
+.dropdown-menu a {
+  color: $red-middle;
+}
+
+.dropdown-item:hover {
+  background-color: $background-complimentary-dark;
+  border-radius: 25px;
+  color: $red-middle;
 }
