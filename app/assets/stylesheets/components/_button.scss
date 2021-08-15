@@ -23,3 +23,12 @@
   border-color: $bright-coral;
 }
 
+.btn-yellow {
+  border-color: $bright-yellow;
+  color: $bright-yellow;
+}
+
+.btn-yellow:hover {
+  color: $bright-yellow;
+  border-color: $bright-yellow;
+}

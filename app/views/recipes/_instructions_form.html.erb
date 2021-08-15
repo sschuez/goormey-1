@@ -1,4 +1,5 @@
-<h4>instructions</h4> 
+<h4>instructions</h4>
+<br>
 <div data-controller="nested-form drag" data-drag-url="/recipes/<%= @recipe.id %>/instructions/:id/instruction_position"> 
   <template data-nested-form-target="template">
     <%= f.fields_for :instructions, Instruction.new, child_index: 'NEW_RECORD' do |instruction| %>
