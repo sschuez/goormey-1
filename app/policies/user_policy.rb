@@ -1,20 +1,20 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-    if user.admin?
-      scope.all
-    else
-      scope.where(user: user)
-    end
+      if user.admin?
+        scope.all
+      else
+        scope.where(user: user)
+      end
     end
   end
 
   def show?
-    record == user || user.admin
+    true
   end
   
   def update?
-    record == user || user.admin
+    user_is_owner_or_admin?
   end
   
   def destroy?
@@ -27,5 +27,11 @@ class UserPolicy < ApplicationPolicy
   
   def stop_impersonating?
     true
+  end
+
+  private
+
+  def user_is_owner_or_admin?
+    record == user || user.admin	
   end
 end

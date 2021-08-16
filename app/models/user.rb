@@ -13,7 +13,8 @@ class User < ApplicationRecord
   has_many :recipes
   
   # == Validations ==========================================================
-  
+  validates :username, uniqueness: true
+
   # == Scopes ===============================================================
   
   # == Callbacks ============================================================
@@ -21,5 +22,8 @@ class User < ApplicationRecord
   # == Class Methods ========================================================
   
   # == Instance Methods =====================================================
-  
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 end
