@@ -16,7 +16,7 @@
 
 /* Visual Styles */
 
-$activeColor: #ffffff;
+$activeColor: $brown-light;
 $unactiveColor: #eeeeee;
 $unactiveHoverColor: #dddddd;
 
@@ -40,7 +40,7 @@ $unactiveHoverColor: #dddddd;
         padding: 15px 25px;
         border-radius: 25px;
         &:hover {
-          background:white;
+          background: $brown-light;
         }
         &:active {
           background: $activeColor;
@@ -57,7 +57,7 @@ $unactiveHoverColor: #dddddd;
       padding: 20px; 
       width: 100%;
       border-radius: 25px;
-      background: white;
+      background: $brown-light;
       line-height: 1.5em;
       letter-spacing: 0.3px;
     }
@@ -68,8 +68,8 @@ $unactiveHoverColor: #dddddd;
 #tab2:checked ~ nav .tab2,
 #tab3:checked ~ nav .tab3 {
   label {
-    background: white;
-    color: #111;
+    background: $brown-light;
+    // color: #111;
     position: relative;
     // &:after {
     //   content: '';

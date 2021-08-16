@@ -51,8 +51,11 @@
 <% end %>
 <br>
 
-<h4>cancel my account</h4>
+<%= link_to "Back", :back, class: "btn btn-ghost" %>
+<br>
+<br>
+
+<h4>cancel account</h4>
 
 <p>unhappy? <%= link_to "cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost btn-coral" %></p>
 
-<%= link_to "Back", :back, class: "btn btn-ghost" %>
