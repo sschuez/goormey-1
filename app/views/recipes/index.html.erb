@@ -7,35 +7,6 @@
 
 <div class="index-grid">
   <% @recipes.each do |recipe| %>
-    <div class="recipe-card">
-
-      <%= link_to recipe_path(recipe) do %>
-        <%= image_tag "sample_meal.jpg", class: "card-image" %>
-      <% end %>
-
-      <div class="card-overlay">
-
-        <div class="card-header">
-
-          <%= link_to user_path(recipe.user) do %>
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/sschuez", class: "card-thumb" %>
-          <% end %>
-
-          <%= link_to recipe_path(recipe) do %>
-            <div class="card-header-text">
-              <h3 class="card-title"><%= recipe.name %></h3>
-              <span class="card-status">1 hour ago</span>
-            </div>
-          <% end %>
-
-        </div>
-
-        <%= link_to recipe_path(recipe) do %>
-          <p class="card-description"><%= recipe.description %></p>
-        <% end %>
-
-      </div>
-
-    </div>
+    <%= render "recipes/recipe_cards", recipe: recipe %>
   <% end %>
 </div>
