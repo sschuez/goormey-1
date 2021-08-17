@@ -22,7 +22,7 @@
       <%= link_to recipe_path(recipe) do %>
         <div class="card-header-text">
           <h3 class="card-title"><%= recipe.name %></h3>
-          <span class="card-status">1 hour ago</span>
+          <span class="card-status">by <%= recipe.user.username %></span>
         </div>
       <% end %>
 
