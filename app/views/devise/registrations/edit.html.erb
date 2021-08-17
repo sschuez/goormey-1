@@ -1,16 +1,16 @@
-<h4>edit <%= resource_name.to_s.humanize.downcase %></h4>
+<h4>Edit <%= resource_name.to_s.humanize.downcase %></h4>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <div class="main-card">
-      <h4>log in details</h4>
+      <h4>Log in details</h4>
       <br>
       <%= f.input :email, required: true, autofocus: true %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <p>currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
       <%= f.input :password,
@@ -23,7 +23,7 @@
     </div>
 
     <div class="main-card">
-      <h4>profile</h4>
+      <h4>Profile</h4>
       <br>
       <%= f.input :username,
                   required: false %>
@@ -36,7 +36,7 @@
     </div>
     
     <div class="main-card">
-      <h4>confirmation</h4>
+      <h4>Confirmation</h4>
       <br>
       <%= f.input :current_password,
                   hint: "we need your current password to confirm your changes",
@@ -55,7 +55,7 @@
 <br>
 <br>
 
-<h4>cancel account</h4>
+<h4>Cancel account</h4>
 
-<p>unhappy? <%= link_to "cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost btn-coral" %></p>
+<p>Unhappy? <%= link_to "cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost btn-coral" %></p>
 
