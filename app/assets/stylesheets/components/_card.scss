@@ -30,6 +30,10 @@
   padding: 0;
 }
 
+.grid-profile {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+}
+
 .recipe-card {
   position: relative;
   display: block;
@@ -40,9 +44,27 @@
   box-shadow: 2px 1px 1px $background-complimentary-dark;
 }
 
+.profile {
+  padding: 0 !important;
+  background-color: $background-complimentary-dark !important;
+  box-shadow: none !important;
+  height: 250px !important;
+}
+
+.profile .card-image {
+  height: auto !important;
+}
+
+.header-profile {
+  background-color: $background-complimentary-dark !important;
+  font-size: 1em !important;
+  // font-weight: bold;
+  margin: 0 !important;
+}
+
+
 .recipe-card:hover {
   box-shadow: 3px 1.5px 1.5px $background-complimentary-dark;
-
 }
 
 .card-image {

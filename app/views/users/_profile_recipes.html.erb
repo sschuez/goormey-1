@@ -1,0 +1,26 @@
+<div class="recipe-card profile">
+  
+  <%= link_to recipe_path(recipe) do %>
+    <%= image_tag "sample_meal.jpg", class: "card-image profile" %>
+  <% end %>
+
+  <div class="card-overlay profile">
+
+    <div class="card-header header-profile">
+
+      <%= link_to recipe_path(recipe) do %>
+        <div class="card-header-text header-profile">
+          <h4 class="card-title"><%= recipe.name %></h4>
+          <%# <span class="card-status">1 hour ago</span> %>
+        </div>
+      <% end %>
+
+    </div>
+
+    <%= link_to recipe_path(recipe) do %>
+      <p class="card-description"><%= recipe.description %></p>
+    <% end %>
+
+  </div>
+
+</div>

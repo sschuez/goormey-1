@@ -1,4 +1,4 @@
-<h4 class="header-profile">
+<h4 class="title-profile">
   <% if current_user == @user %>
     Your profile
   <% else %>
@@ -27,19 +27,19 @@
   <section>
     <div class="tab1">
       <h4>
-        <%= current_user == @user ? "your recipes" : "#{@user.username.possessive} recipes"%>
+        <%= current_user == @user ? "Your recipes" : "#{@user.username.possessive} recipes"%>
       </h4>
-      <br>
-      <% @user.recipes.each do |recipe| %>
-        <%= link_to recipe.name, recipe_path(recipe) %>
-        <br>
-      <% end %>
+      <div class="index-grid grid-profile">
+        <% @user.recipes.each do |recipe| %>
+          <%= render "users/profile_recipes", recipe: recipe %>
+        <% end %>      
+      </div>
     </div>
     <div class="tab2">
       <h4>Saved recipes</h4>
       <br>
       <p>
-        <%= current_user == @user ? "you have not saved any recipes yet" : "#{@user.username} has not saved any recipes yet"%>
+        <%= current_user == @user ? "You have not saved any recipes yet" : "#{@user.username} has not saved any recipes yet"%>
       </p>
     </div>
     <div class="tab3">
@@ -52,7 +52,7 @@
 
       <% if policy(@user).update? %>
         <p><strong>Email:</strong> <%= @user.email %></p>
-        <%= link_to "edit profile", edit_user_registration_path, class: "btn btn-ghost" %>
+        <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-ghost" %>
       <% end %>
     </div>
   </section>
