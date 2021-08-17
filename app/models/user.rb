@@ -11,6 +11,7 @@ class User < ApplicationRecord
   
   # == Relationships ========================================================
   has_many :recipes
+  has_one_attached :avatar
   
   # == Validations ==========================================================
   validates :username, uniqueness: true

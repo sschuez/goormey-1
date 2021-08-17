@@ -12,6 +12,7 @@ class Recipe < ApplicationRecord
 	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
 	accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
 	belongs_to :user
+	has_one_attached :photo
 	
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do

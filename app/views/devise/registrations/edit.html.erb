@@ -25,6 +25,9 @@
     <div class="main-card">
       <h4>Profile</h4>
       <br>
+      
+      <%= f.file_field :avatar %>  
+
       <%= f.input :username,
                   required: false %>
       <%= f.input :show_username,
@@ -57,5 +60,7 @@
 
 <h4>Cancel account</h4>
 
-<p>Unhappy? <%= link_to "cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost btn-coral" %></p>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost btn-coral" %></p>
+
+
 

@@ -32,6 +32,7 @@ gem 'devise'
 gem 'pundit'
 gem 'wicked'
 gem 'possessive'
+gem 'cloudinary'
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'

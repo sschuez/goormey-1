@@ -9,7 +9,14 @@
     <div class="card-header">
 
       <%= link_to user_path(recipe.user) do %>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/sschuez", class: "card-thumb" %>
+        <% if recipe.user.avatar.attached? %> 
+          <%= cl_image_tag recipe.user.avatar.key, :transformation=>[
+            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+            {:width=>200, :crop=>"scale"}], 
+            class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <% else %>
+          <%= image_tag "default_avatar_square.png", class: "avatar dropdown-toggle", id: "navbarDropdown", alt: "avatar", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <% end %>
       <% end %>
 
       <%= link_to recipe_path(recipe) do %>
