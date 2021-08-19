@@ -13,9 +13,9 @@
           <%= cl_image_tag recipe.user.avatar.key, :transformation=>[
             {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
             {:width=>200, :crop=>"scale"}], 
-            class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
         <% else %>
-          <%= image_tag "default_avatar_square.png", class: "avatar dropdown-toggle", id: "navbarDropdown", alt: "avatar", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "default_avatar_square.png", class: "avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
         <% end %>
       <% end %>
 

@@ -25,9 +25,12 @@
     <div class="main-card">
       <h4>Profile</h4>
       <br>
-      
-      <%= f.file_field :avatar %>  
-
+      <div data-controller="photo-preview">
+        <%# <div data-photo-preview-target="upload-button"> %>
+          <%= f.input :avatar, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo', data: { action: "click->photo-preview#photo_input" } %>
+        <%# </div> %>
+        <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+      </div>
       <%= f.input :username,
                   required: false %>
       <%= f.input :show_username,
