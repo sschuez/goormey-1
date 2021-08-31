@@ -6,6 +6,7 @@
   font-weight: lighter;
   transition: opacity 0.3s ease;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .btn-ghost:hover {
@@ -33,11 +34,3 @@
   border-color: $bright-yellow;
 }
 
-.upload-photo {
-  border: 1px solid #d3d3d3;
-  padding: 16px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  background: white;
-  border-radius: 2px;
-}

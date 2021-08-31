@@ -25,12 +25,11 @@
     <div class="main-card">
       <h4>Profile</h4>
       <br>
-      <div data-controller="photo-preview">
-        <%# <div data-photo-preview-target="upload-button"> %>
-          <%= f.input :avatar, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo', data: { action: "click->photo-preview#photo_input" } %>
-        <%# </div> %>
-        <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+      <div class="image-upload" data-controller="photo-preview">
+          <%= f.input :avatar, input_html: { class: 'd-none', data: { action: "click->photo-preview#photo_input", photo_preview_target: "photoInput" } }, label_html: { class: 'btn-ghost btn-coral' }, label: '📷 Upload a photo' %>
+        <%= image_tag "", width: 300, class: "hidden", id: "photo-preview", data: { photo_preview_target: "photoPreview" } %>
       </div>
+      <br>
       <%= f.input :username,
                   required: false %>
       <%= f.input :show_username,

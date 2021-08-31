@@ -39,9 +39,11 @@ label {
 }
 
 input[type="text"], textarea {
-
   background-color: $brown-light; 
+}
 
+.hidden {
+  display: none;
 }
 
 // Smallest device
