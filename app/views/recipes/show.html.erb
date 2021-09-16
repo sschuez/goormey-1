@@ -4,6 +4,18 @@
 
 <div class="cards-grid">
   <div class="main-card">
+    <% if @recipe.photo.attached? %>
+      <%= cl_image_tag @recipe.photo.key, :transformation=>[
+        {:width=>200, :height=>200, :crop=>"thumb"},
+        {:width=>200, :crop=>"scale"}], 
+        class: "photo" %>
+      <%# Alternative %>
+      <%#= cl_image_tag @recipe.photo.key, :width=>150, :crop=>"fill", class: "photo dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% else %>
+      <%= image_tag "sample_meal.jpg", class: "photo", :width=>300 %>
+    <% end %>
+  </div>
+  <div class="main-card">
     <p>
       <h4>Description</h4><br>
       <%= @recipe.description %>
