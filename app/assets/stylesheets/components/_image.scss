@@ -1,8 +1,16 @@
 .image-upload {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 }
 
 #photo-preview {
   border-radius: 25px;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .image-upload {
+    flex-direction: column;
+  }
 }
