@@ -13,18 +13,25 @@
 <input id="tab3" type="radio" name="pct" />
   <nav>
     <ul>
+      <%# USER'S RECIPES TAB %>
       <li class="tab1">
         <label for="tab1">Recipes</label>
       </li>
+      
+      <%# SAVED RECIPES TAB %>
       <li class="tab2">
         <label for="tab2">Saved recipes</label>
       </li>
+      
+      <%# PROFILE TAB %>
       <li class="tab3">
         <label for="tab3">Profile</label>
       </li>
     </ul>
   </nav>
   <section>
+
+    <%# USER'S RECIPES TAB %>
     <div class="tab1">
       <h4>
         <%= current_user == @user ? "Your recipes" : "#{@user.username.possessive} recipes"%>
@@ -35,6 +42,8 @@
         <% end %>      
       </div>
     </div>
+
+    <%# SAVED RECIPES TAB %>
     <div class="tab2">
       <h4>Saved recipes</h4>
       <br>
@@ -42,14 +51,29 @@
         <%= current_user == @user ? "You have not saved any recipes yet" : "#{@user.username} has not saved any recipes yet"%>
       </p>
     </div>
+
+    <%# PROFILE TAB %>
     <div class="tab3">
       <h4>Profile</h4>
       <br>
+      <%# AVATAR %>
+      <% if @user.avatar.attached? %>
+        <%= cl_image_tag @user.avatar.key, :transformation=>[
+          {:width=>300, :height=>300, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+          {:width=>300, :crop=>"scale"}], 
+          class: "avatar avatar-very-large" %>
+      <% else %>
+        <%= image_tag "default_avatar_square.png", class: "avatar avatar-very-large" %>
+      <% end %>
+      <br><br>
+
+      <%# PROFILE DETAILS %>
       <p><strong>Username:</strong> <%= @user.username %></p>
       <% if @user == current_user || @user.show_username == false || current_user.admin? %>
         <p><strong>Name:</strong> <%= @user.full_name %><%= policy(@user).update? ? " (name public: #{@user.show_username})" : "" %></p>
       <% end %>
 
+      <%# PUNDIT UPDATE %>
       <% if policy(@user).update? %>
         <p><strong>Email:</strong> <%= @user.email %></p>
         <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-ghost" %>
