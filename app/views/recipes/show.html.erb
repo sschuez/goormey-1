@@ -1,41 +1,64 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @recipe.name %></h1>
-
-<div class="cards-grid">
-  <div class="main-card">
+<div class="main-card recipe">
+  <%# PHOTO %>
+  <div class="photo-show">
     <% if @recipe.photo.attached? %>
       <%= cl_image_tag @recipe.photo.key, :transformation=>[
         {:width=>200, :height=>200, :crop=>"thumb"},
         {:width=>200, :crop=>"scale"}], 
         class: "photo" %>
-      <%# Alternative %>
-      <%#= cl_image_tag @recipe.photo.key, :width=>150, :crop=>"fill", class: "photo dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <% else %>
-      <%= image_tag "sample_meal.jpg", class: "photo", :width=>300 %>
+      <%= image_tag "sample_meal.jpg", class: "photo", :width=>200 %>
     <% end %>
   </div>
-  <div class="main-card">
+  <%# DESCRIPTION %>
+  <div class="description-show">
     <p>
-      <h4>Description</h4><br>
+      <h4><%= @recipe.name %></h4><br>
       <%= @recipe.description %>
     </p>
-    <%= link_to 'edit recipe', recipe_step_path(@recipe, :recipe) %>
-  </div>
-
-  <div class="main-card">
-    <p>
-      <h4>Ingredients</h4><br>
-      <% @recipe.ingredients.each do |ingredient| %>
-        <%= ingredient.amount %>
-        <%= ingredient.measurement %>
-        <%= ingredient.name %><br>
-      <% end %>
-    </p>  
-    <%= link_to 'edit ingredients', recipe_step_path(@recipe, :ingredients) %>
+    <% if policy(@recipe).update? %>
+      <br>
+      <%= link_to 'Edit recipe', recipe_step_path(@recipe, :recipe), class: "btn btn-ghost btn-coral" %>
+    <% end %>
   </div>
 </div>
 
+<div class="main-card">
+  <h4>Ingredients</h4><br>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <div class="ingredient-show">
+      <p>
+          <%= ingredient.amount %>
+          <strong><%= ingredient.measurement %></strong>
+          <%= ingredient.name %><br>
+      </p>
+    </div>
+  <% end %>
+  <% if policy(@recipe).update? %>
+    <br>
+    <%= link_to 'Edit ingredients', recipe_step_path(@recipe, :ingredients), class: "btn btn-ghost btn-coral" %>
+  <% end %>
+</div>
+
+<div data-controller="nested-form" class="main-card">
+  <h4>Instructions</h4><br>
+  <% @recipe.instructions.each do |instruction| %>
+    <div data-nested-form-target="inputElement" class="ingredient-show">
+      <div class="counter"><h4></h4></div>
+      <div class="instruction-description"><p>
+        <%= instruction.description %>
+      </p>
+      </div>
+    </div>
+  <% end %>
+  <% if policy(@recipe).update? %>
+    <br>
+    <%= link_to 'Edit instructions', recipe_step_path(@recipe, :instructions), class: "btn btn-ghost btn-coral" %>
+  <% end %>
+</div>
+<br>
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>
 

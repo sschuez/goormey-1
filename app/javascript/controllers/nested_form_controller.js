@@ -7,8 +7,8 @@ export default class extends Controller {
     // Assign 'position' to already created elements
     let i = 1
     this.inputElementTargets.forEach((element) => {
-      if (element.querySelector('h2')) {
-        element.querySelector('h2').innerHTML = i++
+      if (element.querySelector('h4')) {
+        element.querySelector('h4').innerHTML = i++
       }
     })
   }
@@ -22,7 +22,7 @@ export default class extends Controller {
     // Assign 'position' to new newly created element
       const elements = this.inputElementTargets
       var newElement = elements[elements.length - 1]
-      if (newElement.querySelector('h2')) newElement.querySelector('h2').innerHTML = elements.length
+      if (newElement.querySelector('h4')) newElement.querySelector('h4').innerHTML = elements.length
   }
 
   remove_association(event) {

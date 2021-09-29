@@ -17,6 +17,28 @@
   }
 }
 
+.main-card .description-show {
+  padding: 48px;
+}
+
+.main-card .ingredient-show {
+  display: flex;
+  border: black 1px solid;
+  border-radius: 25px;
+  margin: 12px;
+  padding: 12px;
+  background-color: $brown-dark;
+}
+
+.ingredient-show p {
+  margin: 0px;
+  color: $brown-light;
+}
+
+.ingredient-show .instruction-description {
+  margin: 12px 0px 12px 24px;
+}
+
 .ingredient-card {
   padding: 6px;
   background: #f8f9fa;
