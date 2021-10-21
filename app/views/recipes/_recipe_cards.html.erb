@@ -1,7 +1,14 @@
 <div class="recipe-card">
 
   <%= link_to recipe_path(recipe) do %>
-    <%= image_tag "sample_meal.jpg", class: "card-image" %>
+    <% if recipe.photo.attached? %>
+      <%= cl_image_tag recipe.photo.key, :transformation=>[
+      {:width=>200, :height=>200, :crop=>"thumb"},
+      {:width=>200, :crop=>"scale"}], 
+      class: "card-image" %>
+    <% else %>
+      <%= image_tag "sample_meal.jpg", class: "card-image" %>
+    <% end %>
   <% end %>
 
   <div class="card-overlay">

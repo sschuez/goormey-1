@@ -7,9 +7,9 @@
       <%= cl_image_tag @recipe.photo.key, :transformation=>[
         {:width=>200, :height=>200, :crop=>"thumb"},
         {:width=>200, :crop=>"scale"}], 
-        class: "photo" %>
+        class: "card-image" %>
     <% else %>
-      <%= image_tag "sample_meal.jpg", class: "photo", :width=>200 %>
+      <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
     <% end %>
   </div>
   <%# DESCRIPTION %>
