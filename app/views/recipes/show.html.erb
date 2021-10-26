@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="main-card recipe">
+  
   <%# PHOTO %>
   <div class="photo-show">
     <% if @recipe.photo.attached? %>
@@ -12,6 +13,7 @@
       <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
     <% end %>
   </div>
+
   <%# DESCRIPTION %>
   <div class="description-show">
     <p>
@@ -25,6 +27,7 @@
   </div>
 </div>
 
+<%# INGREDIENTS %>
 <div class="main-card">
   <h4>Ingredients</h4><br>
   <% @recipe.ingredients.each do |ingredient| %>
@@ -42,6 +45,7 @@
   <% end %>
 </div>
 
+<%# INSTRUCITONS %>
 <div data-controller="nested-form" class="main-card">
   <h4>Instructions</h4><br>
   <% @recipe.instructions.each do |instruction| %>

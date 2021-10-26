@@ -6,7 +6,7 @@
   <div class="image-upload" data-controller="photo-preview">
     <%= f.input :photo, 
                 input_html: { class: 'd-none', data: { action: "click->photo-preview#photo_input", photo_preview_target: "photoInput" } }, 
-                label_html: { class: 'btn-ghost btn-coral' }, 
+                label_html: { class: 'btn-ghost' }, 
                 label: '📷 Upload a photo',
                 hint: "You can also do this later" %>
     <%= image_tag "", width: 300, class: "hidden", id: "photo-preview", data: { photo_preview_target: "photoPreview" } %>

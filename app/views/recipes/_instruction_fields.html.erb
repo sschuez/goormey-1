@@ -1,6 +1,6 @@
 <%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record?, id: form.object.id } do %>
   <%= form.hidden_field :id %>
-  <div data-nested-form-target="inputElement" class="form-inputs inline-form main-card ingredient-card">
+  <div data-nested-form-target="inputElement" class="form-inputs inline-form ingredient-show">
 
     <div class="counter"><h4></h4></div>
     <%= form.input  :description,
@@ -9,7 +9,7 @@
                     placeholder: "your instructions" 
                     %>
 
-    <div class="remove"><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" } %></div>
+    <div class="remove"><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-ghost btn-coral" %></div>
   </div>
   <%= form.hidden_field :_destroy %>
 <% end %>
