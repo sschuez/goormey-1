@@ -33,9 +33,7 @@
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient-show">
       <p>
-          <%= ingredient.amount %>
-          <strong><%= ingredient.measurement %></strong>
-          <%= ingredient.name %><br>
+        <%= ingredient.description %>
       </p>
     </div>
   <% end %>

@@ -35,7 +35,7 @@ class Recipe < ApplicationRecord
 	# == Class Methods ========================================================
 	enum form_steps: {
 		recipe: [:name, :description, :photo],
-		ingredients: [ingredients_attributes: [:id, :name, :description, :amount, :measurement, :_destroy]],
+		ingredients: [ingredients_attributes: [:id, :description, :_destroy]],
 		instructions: [instructions_attributes: [:id, :description, :_destroy]]
 	}
 	attr_accessor :form_step
