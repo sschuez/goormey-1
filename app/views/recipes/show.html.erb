@@ -22,7 +22,7 @@
     </p>
     <% if policy(@recipe).update? %>
       <br>
-      <%= link_to 'Edit recipe', recipe_step_path(@recipe, :recipe), class: "btn btn-ghost btn-coral" %>
+      <%= link_to 'Edit description', recipe_step_path(@recipe, :recipe), class: "btn btn-ghost btn-coral" %>
     <% end %>
   </div>
 </div>
@@ -61,7 +61,7 @@
   <% end %>
 </div>
 <br>
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+<%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
 
 

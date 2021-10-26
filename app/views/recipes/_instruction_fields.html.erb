@@ -4,9 +4,9 @@
 
     <div class="counter"><h4></h4></div>
     <%= form.input  :description,
-                    label: false, 
-                    class: "form-input name",
-                    placeholder: "your instructions" 
+                    label: "Description", 
+                    class: "form-input",
+                    placeholder: "Describe what to do for this step" 
                     %>
 
     <div class="remove"><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-ghost btn-coral" %></div>
