@@ -19,12 +19,23 @@ class User < ApplicationRecord
   # == Scopes ===============================================================
   
   # == Callbacks ============================================================
-  
+  after_create :send_welcome_email
+
   # == Class Methods ========================================================
-  
-  # == Instance Methods =====================================================
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def name_or_username
+    self.first_name == "" ? self.username : self.first_name
+  end
+  
+  # == Instance Methods =====================================================
+
+  private
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome.deliver_now
   end
 
 end
