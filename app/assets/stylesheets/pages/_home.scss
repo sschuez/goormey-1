@@ -42,6 +42,13 @@ input[type="text"], textarea {
   background-color: $brown-light; 
 }
 
+textarea {
+  // resize: none !important;
+  // height: 400px !important;
+  // position: static !important;
+  min-height: 100px !important;
+}
+
 .hidden {
   display: none;
 }

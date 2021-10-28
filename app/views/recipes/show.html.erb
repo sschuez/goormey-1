@@ -61,7 +61,9 @@
   <% end %>
 </div>
 <br>
-<%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+<% if policy(@recipe).update? %>
+  <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+<% end %>
 <%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
 
 
