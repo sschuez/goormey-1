@@ -30,14 +30,14 @@
         <%= image_tag "", width: 300, class: "hidden", id: "photo-preview", data: { photo_preview_target: "photoPreview" } %>
       </div>
       <br>
-      <%= f.input :username,
-                  required: false %>
-      <%= f.input :show_username,
-                  hint: "check if you want to show only your username" %>
       <%= f.input :first_name,
                   required: false %>
       <%= f.input :last_name,
                   required: false %>
+      <%= f.input :username,
+                  required: true %>
+      <%= f.input :show_username,
+                  hint: "check if you want to show only your username" %>
     </div>
     
     <div class="main-card">
@@ -47,9 +47,11 @@
                   hint: "we need your current password to confirm your changes",
                   required: true,
                   input_html: { autocomplete: "current-password" } %>
+      
       <div class="form-actions">
         <%= f.button :submit, "Update", class: "btn btn-ghost" %>
       </div>
+    
     </div>
   </div>
 

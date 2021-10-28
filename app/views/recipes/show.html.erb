@@ -28,7 +28,7 @@
 </div>
 
 <%# INGREDIENTS %>
-<div class="main-card">
+<div class="main-card secondary-card">
   <h4>Ingredients</h4><br>
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient-show">
@@ -44,7 +44,7 @@
 </div>
 
 <%# INSTRUCITONS %>
-<div data-controller="nested-form" class="main-card">
+<div data-controller="nested-form" class="main-card secondary-card">
   <h4>Instructions</h4><br>
   <% @recipe.instructions.each do |instruction| %>
     <div data-nested-form-target="inputElement" class="ingredient-show">

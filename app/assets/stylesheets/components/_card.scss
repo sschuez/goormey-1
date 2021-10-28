@@ -171,6 +171,21 @@
     gap: 12px 0px;
   }
 
+  .secondary-card {
+    padding: 12px !important;
+  }
+
+  .secondary-card h4 {
+    padding-top: 18px;
+  }
+
+  .description-show {
+    padding: 12px !important;
+  }
+
+  .ingredient-show {
+    padding: 12px !important;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -180,6 +195,21 @@
     gap: 18px 0px;
   }
 
+  .secondary-card {
+    padding: 12px !important;
+  }
+
+  .secondary-card h4 {
+    padding-top: 24px;
+  }
+
+  .description-show {
+    padding: 12px !important;
+  }
+
+  .ingredient-show {
+    padding: 12px !important;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -187,6 +217,18 @@
   .cards-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0px 6px;
+  }
+
+  .secondary-card {
+    padding: 12px 36px 12px 36px !important;
+  }
+
+  .description-show {
+    padding: 12px 36px 12px 36px !important;
+  }
+
+  .ingredient-show {
+    padding: 12px 36px 12px 36px !important;
   }
   
 }
@@ -198,6 +240,18 @@
     gap: 0px 34px;
   }
 
+  .secondary-card {
+    padding: 12px 48px 12px 48px !important;
+  }
+
+  .description-show {
+    padding: 12px 48px 12px 48px !important;
+  }
+
+  .ingredient-show {
+    padding: 12px 48px 12px 48px !important;
+  }
+
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -205,6 +259,18 @@
   .cards-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0px 70px;
+  }
+
+  .secondary-card {
+    padding: 12px 90px 12px 90px !important;
+  }
+
+  .description-show {
+    padding: 12px 90px 12px 90px !important;
+  }
+
+  .ingredient-show {
+    padding: 12px 90px 12px 90px !important;
   }
 
 }

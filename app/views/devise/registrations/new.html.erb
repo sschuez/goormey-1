@@ -23,22 +23,23 @@
     <div class="main-card">
       <h4>Profile</h4>
       <br>
-      <%= f.input :username,
-                  required: true %>
-      <%= f.input :show_username,
-                  hint: "check if you want to show only your username, instead of your full name" %>
       <%= f.input :first_name,
                   hint: "optional" %> 
       <%= f.input :last_name, 
                   hint: "optional" %> 
+      <%= f.input :username,
+                  required: true %>
+      <%= f.input :show_username,
+                  hint: "check if you want to show only your username, instead of your full name" %>
+      <div class="form-actions">
+        <%= f.button :submit, "sign up", class: "btn btn-ghost" %>
+      </div>
     </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "sign up", class: "btn btn-ghost" %>
-  </div>
 <% end %>
 <br>
-<p>or</p>
+<br>
+<p>Already a user?</p>
 
 <%= render "devise/shared/links" %>
