@@ -31,7 +31,8 @@
 
 <%# INGREDIENTS %>
 <div class="main-card">
-  <h4>Ingredients</h4><br>
+  <h4>Ingredients</h4>
+  <p>Ingredients serve <strong><%= @recipe.serves %></strong> <%= @recipe.serves == 1 ? "person" : "persons" %></p><br>
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient-show">
       <p>

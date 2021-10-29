@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
 	with_options if: -> { required_for_step?(:recipe) } do
 		validates :name, presence: true, length: { minimum: 2, maximum: 50}
 		validates :description, presence: true, length: { minimum: 2, maximum: 250}
-		validates :serves, presence: true, length: { minimum: 2, maximum: 250}
+		validates :serves, presence: true, numericality: { only_integer: true, in: 1..50 }
   end
 
   with_options if: -> { required_for_step?(:ingredients) } do
@@ -35,7 +35,7 @@ class Recipe < ApplicationRecord
 	
 	# == Class Methods ========================================================
 	enum form_steps: {
-		recipe: [:name, :description, :photo],
+		recipe: [:name, :description, :serves, :photo],
 		ingredients: [ingredients_attributes: [:id, :description, :_destroy]],
 		instructions: [instructions_attributes: [:id, :description, :_destroy]]
 	}
