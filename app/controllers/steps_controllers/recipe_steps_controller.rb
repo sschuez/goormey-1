@@ -5,13 +5,13 @@ module StepsControllers
     steps *Recipe.form_steps.keys
 
     def show
-      @recipe = Recipe.find(params[:recipe_id])
+      @recipe = Recipe.wizard_not_completed_only.find(params[:recipe_id])
       authorize @recipe
       render_wizard
     end
 
     def update
-      @recipe = Recipe.find(params[:recipe_id])
+      @recipe = Recipe.wizard_not_completed_only.find(params[:recipe_id])
       authorize @recipe
       # Use #assign_attributes since render_wizard runs a #save for us
       @recipe.assign_attributes recipe_params
@@ -26,6 +26,7 @@ module StepsControllers
     end
 
     def finish_wizard_path
+      @recipe.update! wizard_complete: true
       recipe_path(@recipe)
     end
   end
