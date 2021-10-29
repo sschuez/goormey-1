@@ -22,13 +22,15 @@
     </p>
     <% if policy(@recipe).update? %>
       <br>
-      <%= link_to 'Edit description', recipe_step_path(@recipe, :recipe), class: "btn btn-ghost btn-coral" %>
+      <%= link_to 'Edit description', edit_recipe_path(@recipe, anchor: "edit-recipe"), class: "btn btn-ghost btn-coral" %>
+      <%# OLD LINK TO WIZARD %>
+      <%#= link_to 'Edit description', recipe_step_path(@recipe, :recipe), class: "btn btn-ghost btn-coral" %>
     <% end %>
   </div>
 </div>
 
 <%# INGREDIENTS %>
-<div class="main-card secondary-card">
+<div class="main-card">
   <h4>Ingredients</h4><br>
   <% @recipe.ingredients.each do |ingredient| %>
     <div class="ingredient-show">
@@ -39,12 +41,12 @@
   <% end %>
   <% if policy(@recipe).update? %>
     <br>
-    <%= link_to 'Edit ingredients', recipe_step_path(@recipe, :ingredients), class: "btn btn-ghost btn-coral" %>
+    <%= link_to 'Edit ingredients', edit_recipe_path(@recipe, anchor: "edit-ingredients"), class: "btn btn-ghost btn-coral" %>
   <% end %>
 </div>
 
 <%# INSTRUCITONS %>
-<div data-controller="nested-form" class="main-card secondary-card">
+<div data-controller="nested-form" class="main-card">
   <h4>Instructions</h4><br>
   <% @recipe.instructions.each do |instruction| %>
     <div data-nested-form-target="inputElement" class="ingredient-show">
@@ -57,7 +59,7 @@
   <% end %>
   <% if policy(@recipe).update? %>
     <br>
-    <%= link_to 'Edit instructions', recipe_step_path(@recipe, :instructions), class: "btn btn-ghost btn-coral" %>
+    <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
   <% end %>
 </div>
 <br>

@@ -3,15 +3,15 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <div class="edit-form">
+    <div id="edit-recipe" class="edit-form">
       <%= render "recipe_form", f: f %>
     </div>
     
-    <div class="edit-form">
+    <div id="edit-ingredients" class="edit-form">
       <%= render "ingredients_form", f: f %>
     </div>
 
-    <div class="edit-form">
+    <div id="edit-instructions" class="edit-form">
       <%= render "instructions_form", f: f %>
     </div>
 
