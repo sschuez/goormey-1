@@ -14,7 +14,7 @@ class RecipePolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user || user.admin # Only recipe creator or admin can update it
+    record.user == user || user.admin if user # Only recipe creator or admin can update it
   end
 
   def destroy?
