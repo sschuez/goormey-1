@@ -5,6 +5,19 @@
   justify-content: space-around;
 }
 
+.label-inline {
+  justify-content: flex-start !important;
+
+  p {
+    font-weight: bold;
+  }
+}
+
+#recipe_serves {
+  width: 90px;
+  margin-left: 24px;
+}
+
 .form-control {
   background-color: $brown-light;
   border: none;
@@ -21,9 +34,14 @@
 }
 
 .edit-form {
-  border-bottom: $red-middle 2px solid;
+  border-bottom: $red-middle 3px solid;
   // margin: 36px;
   padding: 24px 0 36px 0;
+}
+
+#edit-instructions {
+  border: none;
+  padding-bottom: 0;
 }
 
 
@@ -37,6 +55,7 @@
   align-items: center;
   color: white;
 }
+
 
 /* responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
 @media (max-width: 800px) {

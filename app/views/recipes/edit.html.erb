@@ -1,6 +1,6 @@
 <h4>Edit recipe</h4>
 
 <%= render 'form', recipe: @recipe %>
-
-<%= link_to 'Show', @recipe %> |
-<%= link_to 'Back', recipes_path %>
+<br>
+<%= link_to 'Back to recipe', @recipe, class: "btn-ghost" %>
+<%= link_to 'All recipes', recipes_path, class: "btn-ghost" %>

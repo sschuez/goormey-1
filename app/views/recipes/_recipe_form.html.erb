@@ -3,6 +3,16 @@
 <div class="form-inputs">
   <%= f.input :name %>
   <%= f.input :description %>
+  <div class="inline-form label-inline">
+    <div>
+      <p>Serves how many?</p>
+    </div>
+    <%= f.input :serves, 
+                label: false, 
+                as: :integer,
+                input_html: {value: f.object.serves || '2'} %>
+  </div>
+  <br>
   <div class="image-upload" data-controller="photo-preview">
     <%= f.input :photo, 
                 input_html: { class: 'd-none', data: { action: "click->photo-preview#photo_input", photo_preview_target: "photoInput" } }, 

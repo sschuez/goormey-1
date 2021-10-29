@@ -18,6 +18,7 @@ class Recipe < ApplicationRecord
 	with_options if: -> { required_for_step?(:recipe) } do
 		validates :name, presence: true, length: { minimum: 2, maximum: 50}
 		validates :description, presence: true, length: { minimum: 2, maximum: 250}
+		validates :serves, presence: true, length: { minimum: 2, maximum: 250}
   end
 
   with_options if: -> { required_for_step?(:ingredients) } do
