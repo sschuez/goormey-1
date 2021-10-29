@@ -30,7 +30,9 @@ class Recipe < ApplicationRecord
 	# end
 
 	# == Scopes ===============================================================
-	
+	default_scope { where wizard_complete: true }
+	scope :wizard_not_completed_only, -> { unscope(where: :wizard_complete).where(wizard_complete: false) }
+
 	# == Callbacks ============================================================
 	
 	# == Class Methods ========================================================

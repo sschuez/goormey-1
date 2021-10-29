@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
+    @recipe = Recipe.new wizard_complete: false
     @recipe.ingredients.new
     @recipe.instructions.new
     @recipe.user = current_user
