@@ -18,6 +18,6 @@ class RecipePolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.user == user || user.admin  # Only recipe creator or admin can destroy it
+    record.user == user || user.admin if user  # Only recipe creator or admin can destroy it
   end
 end

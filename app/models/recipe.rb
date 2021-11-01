@@ -7,7 +7,7 @@ class Recipe < ApplicationRecord
 	# == Extensions ===========================================================
 	
 	# == Relationships ========================================================
-	has_many :ingredients, inverse_of: :recipe
+	has_many :ingredients, dependent: :destroy, inverse_of: :recipe
 	has_many :instructions, -> { order(position: :asc) }, dependent: :destroy, inverse_of: :recipe
 	accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: :true
 	accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true

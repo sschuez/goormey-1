@@ -1,14 +1,17 @@
 <h4>Recipe description</h4>
 <br>
 <div class="form-inputs">
-  <%= f.input :name %>
-  <%= f.input :description %>
+  <%= f.input :name,
+              required: true %>
+  <%= f.input :description,
+              required: true %>
   <div class="inline-form label-inline">
     <div>
-      <p>Serves how many?</p>
+      <p>Serves how many? *</p>
     </div>
     <%= f.input :serves, 
-                label: false, 
+                label: false,
+                required: true, 
                 as: :integer %>
   </div>
   <br>

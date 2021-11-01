@@ -1,5 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<div class="action-btns">
+  <%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
+  
+  <% if policy(@recipe).update? %>
+    <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+  <% end %>
+
+  <% if policy(@recipe).destroy? %>
+    <%= link_to "Delete recipe", recipe_path(@recipe), data: { confirm: "Are you sure?" }, method: :delete, class: "btn-ghost btn-coral btn-delete" %>
+    <br><br>
+  <% end %>
+</div>
+
+
 <div class="main-card recipe">
   
   <%# PHOTO %>
@@ -64,9 +78,17 @@
   <% end %>
 </div>
 <br>
-<% if policy(@recipe).update? %>
-  <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
-<% end %>
-<%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
+<div class="action-btns">
+  <%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
+  
+  <% if policy(@recipe).update? %>
+    <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+  <% end %>
+
+  <% if policy(@recipe).destroy? %>
+    <%= link_to "Delete recipe", recipe_path(@recipe), data: { confirm: "Are you sure?" }, method: :delete, class: "btn-ghost btn-coral btn-delete" %>
+    <br><br>
+  <% end %>
+</div>
 
 

@@ -7,6 +7,7 @@
   transition: opacity 0.3s ease;
   font-weight: bold;
   cursor: pointer;
+  margin: 1.5px;
 }
 
 .btn-ghost:hover {
@@ -42,4 +43,10 @@
 .btn-green:hover {
   border-color: $dark-green;
   color: $dark-green;
+}
+
+.action-btns {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
 }
