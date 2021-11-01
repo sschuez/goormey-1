@@ -3,6 +3,17 @@
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-around;
+  position: relative;
+}
+
+.handle {
+  position: absolute;
+  bottom: 12px;
+  left: 24px;
+  .fa-grip-lines {
+    color: $bright-coral;
+    font-size: 36px;
+  }
 }
 
 .label-inline {

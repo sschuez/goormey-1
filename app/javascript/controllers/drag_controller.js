@@ -7,6 +7,7 @@ export default class extends Controller {
   connect() {
     this.sortable = Sortable.create(this.element, {
       animation: 150,
+      handle: ".handle",
       onEnd: this.end.bind(this),
     });
   }
