@@ -15,8 +15,10 @@
       <%= render "instructions_form", f: f %>
     </div>
 
-    <div class="form-actions">
+    <br>
+    <div class="action-btns">
       <%= f.button :submit, class: "btn-ghost btn-green" %>
+      <%= link_to "Delete recipe", recipe_path(@recipe), data: { confirm: "Are you sure?" }, method: :delete, class: "btn-ghost btn-coral btn-delete" %>
     </div>
   <% end %>
 </div>
