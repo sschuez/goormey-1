@@ -9,7 +9,7 @@
 .handle {
   position: absolute;
   bottom: 12px;
-  left: 24px;
+  right: 24px;
   .fa-grip-lines {
     color: $bright-coral;
     font-size: 36px;
@@ -69,6 +69,15 @@
 
 
 /* responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+
+// Smallest device
+@media (max-width: 412px) {
+  .handle {
+    bottom: 0;
+    top: 24px;
+  } 
+}
+
 @media (max-width: 800px) {
   .form-input {
     margin: 10px 0;
@@ -78,4 +87,5 @@
     flex-direction: column;
     align-items: stretch;
   }
+
 }
