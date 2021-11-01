@@ -73,8 +73,8 @@
 // Smallest device
 @media (max-width: 412px) {
   .handle {
-    bottom: 0;
     top: 24px;
+    bottom: auto;
   } 
 }
 
