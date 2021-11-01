@@ -6,6 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.sortable = Sortable.create(this.element, {
+      animation: 150,
       onEnd: this.end.bind(this),
     });
   }
@@ -19,11 +20,12 @@ export default class extends Controller {
 
     let url = this.data.get("url")
     url = url.replace(":id", id)
-    console.log(url)
+    // console.log(url)
     
     let data = new FormData()
     data.append("position", event.newIndex + 1)
-    
+    // console.log(data)
+
     Rails.ajax({
       url: url,
       type: "PATCH",
