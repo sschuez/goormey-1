@@ -50,3 +50,11 @@
   justify-content: space-between;
   flex-flow: row wrap;
 }
+
+.fa-trash-alt {
+  color: $bright-coral;
+  font-size: 24px;
+  position: absolute;
+  top: 24px;
+  right: 30px;
+}

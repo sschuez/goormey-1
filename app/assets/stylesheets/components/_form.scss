@@ -16,6 +16,10 @@
   }
 }
 
+.handle:hover {
+  color: $red-very-light;
+}
+
 .label-inline {
   justify-content: flex-start !important;
 
@@ -73,7 +77,7 @@
 // Smallest device
 @media (max-width: 412px) {
   .handle {
-    top: 24px;
+    top: 60px;
     bottom: auto;
   } 
 }
