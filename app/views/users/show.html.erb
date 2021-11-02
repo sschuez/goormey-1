@@ -1,3 +1,14 @@
+<%# METADATA %>
+<% content_for :meta_title, "#{@user.username} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, "Check out their latest recipes." %>
+<% if @user.avatar.attached? %>
+  <% content_for :meta_image, cl_image_path(@user.avatar.key) %>
+<% else %>
+  <% content_for :meta_image, cl_image_path("default_avatar_square.png") %>
+<% end %>
+
+<%# /METADATA %>
+
 <h4 class="title-profile">
   <% if current_user == @user %>
     Your profile

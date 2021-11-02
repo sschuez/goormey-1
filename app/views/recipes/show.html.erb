@@ -1,7 +1,11 @@
 <%# METADATA %>
 <% content_for :meta_title, "#{@recipe.name} on #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @recipe.description %>
-<% content_for :meta_image, cl_image_path(@recipe.photo.key) %>
+<% if @recipe.photo.attached? %>
+  <% content_for :meta_image, cl_image_path(@recipe.photo.key) %>
+<% else %>
+  <% content_for :meta_image, cl_image_path("sample_meal.jpg") %>
+<% end %>
 <%# /METADATA %>
 
 <p id="notice"><%= notice %></p>
