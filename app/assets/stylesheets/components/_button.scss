@@ -47,19 +47,53 @@
 
 .action-btns {
   display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.recipes-btn {
+  margin-right: auto;
+}
+
+.show-icon {
+  margin: 0 12px 0 12px;
+  padding-top: 12px;
+}
+
+.fa-edit {
+  color: $orange;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+.fa-edit:hover {
+  font-weight: bold;
 }
 
 .fa-trash-alt {
   color: $bright-coral;
   font-size: 24px;
+  font-weight: lighter;
+}
+
+.fa-trash-alt:hover {
+  font-weight: bold;
+}
+
+.inline-delete {
   position: absolute;
   top: 24px;
   right: 30px;
 }
 
-.bottom {
-  top: auto;
+.top-icon {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+}
+
+
+.bottom-icon {
+  position: absolute;
   bottom: 24px;
+  right: 30px;
 }

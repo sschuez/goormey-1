@@ -1,18 +1,20 @@
 <p id="notice"><%= notice %></p>
-
-<div class="action-btns">
-  <%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
   
-  <% if policy(@recipe).update? %>
-    <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
-  <% end %>
+  <div class="action-btns">
+    <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
+    
+    <% if policy(@recipe).update? %>
+      <%= link_to edit_recipe_path(@recipe) do %>
+        <i class="show-icon fas fa-edit"></i>
+      <% end %>
+    <% end %>
 
-  <% if policy(@recipe).destroy? %>
-    <%= link_to "Delete recipe", recipe_path(@recipe), data: { confirm: "Are you sure?" }, method: :delete, class: "btn-ghost btn-coral btn-delete" %>
-    <br><br>
-  <% end %>
-</div>
-
+    <% if policy(@recipe).destroy? %>
+      <%= link_to recipe_path(@recipe), data: { confirm: "Are you sure you want to delete recipe #{@recipe.name}?" }, method: :delete do %>
+        <i class="show-icon fas fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
 
 <div class="main-card recipe">
   
@@ -79,16 +81,18 @@
 </div>
 <br>
 <div class="action-btns">
-  <%= link_to 'Back to recipes', recipes_path, class: "btn-ghost" %>
-  
+  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
+    
   <% if policy(@recipe).update? %>
-    <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "btn-ghost" %>
+    <%= link_to edit_recipe_path(@recipe) do %>
+      <i class="show-icon fas fa-edit"></i>
+    <% end %>
   <% end %>
 
   <% if policy(@recipe).destroy? %>
-    <%= link_to "Delete recipe", recipe_path(@recipe), data: { confirm: "Are you sure?" }, method: :delete, class: "btn-ghost btn-coral btn-delete" %>
-    <br><br>
+    <%= link_to recipe_path(@recipe), data: { confirm: "Are you sure you want to delete recipe #{@recipe.name}?" }, method: :delete do %>
+      <i class="show-icon fas fa-trash-alt"></i>
+    <% end %>
   <% end %>
 </div>
-
 
