@@ -18,7 +18,7 @@ class UserPolicy < ApplicationPolicy
   end
   
   def destroy?
-    record == user || user.admin
+    record == user || user.admin if user
   end
   
   def impersonate?
@@ -32,6 +32,6 @@ class UserPolicy < ApplicationPolicy
   private
 
   def user_is_owner_or_admin?
-    record == user || user.admin	
+    record == user || user.admin if user
   end
 end
