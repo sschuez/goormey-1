@@ -10,7 +10,7 @@
   <%= f.fields_for :ingredients do |ingredient|%>
     <%= render "recipes/ingredient_fields", form: ingredient %>
   <% end %>
-
+  
   <div class="add-association" data-nested-form-target="links">
     <%= link_to "+ Add ingredient", "#", class: "btn-ghost", data: { action: "click->nested-form#add_association" } %>
   </div>
