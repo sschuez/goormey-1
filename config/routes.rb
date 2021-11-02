@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :instructions do
       resource :instruction_position, only: :update
     end
+      
+    resources :ingredients do  
+      resource :ingredient_position, only: :update
+    end
 
     # FORM WIZARD
     resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
