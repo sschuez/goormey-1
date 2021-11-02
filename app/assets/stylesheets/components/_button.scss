@@ -101,12 +101,13 @@
 .add-association {
   margin-top: 18px;
   margin-bottom: 18px;
+  text-align: center;
 }
 
 // Smallest device
 @media (max-width: 600px) {
-  .add-association {
-    text-align: center;
-  }
+  // .add-association {
+  //   text-align: center;
+  // }
   
 }
