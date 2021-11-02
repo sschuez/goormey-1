@@ -11,8 +11,8 @@
     <%= render "recipes/ingredient_fields", form: ingredient %>
   <% end %>
 
-  <div class="mb-3" data-nested-form-target="links">
-    <%= link_to "+ Add ingredient", "#", class: "btn btn-ghost", data: { action: "click->nested-form#add_association" } %>
+  <div class="add-association" data-nested-form-target="links">
+    <%= link_to "+ Add ingredient", "#", class: "btn-ghost", data: { action: "click->nested-form#add_association" } %>
   </div>
 </div>
 

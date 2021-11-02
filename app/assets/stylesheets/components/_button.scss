@@ -97,3 +97,15 @@
   bottom: 24px;
   right: 30px;
 }
+
+.add-association {
+  margin-top: 18px;
+}
+
+// Smallest device
+@media (max-width: 600px) {
+  .add-association {
+    text-align: center;
+  }
+  
+}
