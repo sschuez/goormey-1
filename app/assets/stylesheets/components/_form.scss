@@ -74,11 +74,11 @@
 /* responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
 
 // Smallest device
-@media (max-width: 412px) {
+@media (max-width: 600px) {
   .handle {
-    top: 60px;
-    bottom: auto;
-  } 
+    right: 12px;
+    bottom: -5px;
+  }
 }
 
 @media (max-width: 800px) {
