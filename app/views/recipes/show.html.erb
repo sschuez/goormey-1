@@ -32,8 +32,7 @@
   <div class="photo-show">
     <% if @recipe.photo.attached? %>
       <%= cl_image_tag @recipe.photo.key, :transformation=>[
-        {:width=>200, :height=>200, :crop=>"thumb"},
-        {:width=>200, :crop=>"scale"}], 
+        {:width=>800, :height=>800, :crop=>"thumb"}], 
         class: "card-image" %>
     <% else %>
       <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>

@@ -70,8 +70,7 @@
       <%# AVATAR %>
       <% if @user.avatar.attached? %>
         <%= cl_image_tag @user.avatar.key, :transformation=>[
-          {:width=>300, :height=>300, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-          {:width=>300, :crop=>"scale"}], 
+          {:width=>300, :height=>300, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
           class: "avatar avatar-very-large" %>
       <% else %>
         <%= image_tag "default_avatar_square.png", class: "avatar avatar-very-large" %>

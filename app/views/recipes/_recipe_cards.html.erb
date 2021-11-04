@@ -3,8 +3,7 @@
   <%= link_to recipe_path(recipe) do %>
     <% if recipe.photo.attached? %>
       <%= cl_image_tag recipe.photo.key, :transformation=>[
-      {:width=>200, :height=>200, :crop=>"thumb"},
-      {:width=>200, :crop=>"scale"}], 
+      {:width=>800, :height=>800, :crop=>"thumb"}], 
       class: "card-image" %>
     <% else %>
       <%= image_tag "sample_meal.jpg", class: "card-image" %>
@@ -18,8 +17,7 @@
       <%= link_to user_path(recipe.user) do %>
         <% if recipe.user.avatar.attached? %> 
           <%= cl_image_tag recipe.user.avatar.key, :transformation=>[
-            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-            {:width=>200, :crop=>"scale"}], 
+            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
             class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
         <% else %>
           <%= image_tag "default_avatar_square.png", class: "avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
