@@ -14,6 +14,10 @@
     color: $bright-coral;
     font-size: 36px;
   }
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .handle:hover {

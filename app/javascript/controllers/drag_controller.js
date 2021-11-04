@@ -17,7 +17,7 @@ export default class extends Controller {
 
   end(event) {
     let id = event.item.dataset.id
-    console.log(event.item.dataset)
+    // console.log(event.item.dataset)
 
     let url = this.data.get("url")
     url = url.replace(":id", id)
@@ -25,7 +25,7 @@ export default class extends Controller {
     
     let data = new FormData()
     data.append("position", event.newIndex + 1)
-    // console.log(data)
+    console.log(event)
 
     Rails.ajax({
       url: url,

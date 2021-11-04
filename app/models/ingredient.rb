@@ -6,7 +6,7 @@ class Ingredient < ApplicationRecord
   # == Attributes ===========================================================
   
   # == Extensions ===========================================================
-  acts_as_list
+  acts_as_list scope: :recipe 
   
   # == Relationships ========================================================
   belongs_to :recipe
