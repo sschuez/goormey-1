@@ -9,8 +9,8 @@ class Contact < ApplicationRecord
   # == Relationships ========================================================
   
   # == Validations ==========================================================
-  validates: :name, :email, :topic, :message, :terms, presence: true
-  validates: :message, length: { minumum: 20 }
+  validates :email, :message, presence: true
+  # validates :message, length: { minumum: 15 }
   # == Scopes ===============================================================
   
   # == Callbacks ============================================================
