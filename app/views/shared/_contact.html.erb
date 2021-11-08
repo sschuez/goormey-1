@@ -1,19 +1,5 @@
-<!-- Button trigger modal -->
-<%# <button type="button" class="btn-ghost" data-toggle="modal" data-target="#exampleModalCenter">
-  Contact
-</button> %>
-
 <br>
 <br>
-<%= link_to "#", class: "btn-ghost", data: { toggle: "modal", target: "#newContactModal" } do %>
-Contact
-<% end %>
-
-<!-- Modal -->
-<div class="modal fade" id="newContactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content main-card">
-      <%= render partial: "contacts/form", locals: { contact: Contact.new } %>
-    </div>
-  </div>
+<div class="contact-btn">
+  <%= link_to "✉️ Contact", new_contact_path, class: "btn-ghost" %>
 </div>
