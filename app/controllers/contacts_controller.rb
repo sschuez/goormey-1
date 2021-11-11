@@ -12,8 +12,10 @@ class ContactsController < ApplicationController
 
     if @contact.save
       redirect_to root_path, notice: "Thanks for your message. You will receive a confirmation at #{@contact.email} shortly."
-      message = ContactMailer.with(contact: @contact).new_contact
-      message.deliver_now
+      message_customer = ContactMailer.with(contact: @contact).new_contact
+      message_customer.deliver_now
+      message_admin = ContactMailer.with(contact: @contact).new_contact_admin
+      message_admin.deliver_now
     else
       render :new, notice: "There was an error sending your contact form. Please try agian."
     end
