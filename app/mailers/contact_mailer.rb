@@ -13,7 +13,7 @@ class ContactMailer < ApplicationMailer
   def new_contact_admin
     @contact = params[:contact]
     mail(
-      from: @contact.email,
+      # from: @contact.email,
       to: "stephens@hey.com",
       subject: "New Message from Goormey",
       message_stream: 'outbound'
