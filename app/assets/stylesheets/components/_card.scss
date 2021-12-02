@@ -53,26 +53,20 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
 }
 
-.recipe-card {
-  position: relative;
-  display: block;
-  height: 300px;  
-  border-radius: 25px;
-  overflow: hidden;
-  text-decoration: none;
-  box-shadow: 2px 1px 1px $background-complimentary-dark;
-}
-
 .profile {
   padding: 0 !important;
   background-color: $background-complimentary-dark !important;
   box-shadow: none !important;
-  height: 250px !important;
+  // height: 250px !important;
 }
 
-.profile .card-image {
-  height: auto !important;
+.card-recipe .profile-recipe-infos {
+  border-radius: 0;
+  background-color: $background-complimentary-dark;
+  line-height: 1.5;
+  font-weight: 400;
 }
+
 
 .header-profile {
   background-color: $background-complimentary-dark !important;
@@ -81,83 +75,63 @@
   margin: 0 !important;
 }
 
-
-.recipe-card:hover {
-  box-shadow: 3px 1.5px 1.5px $background-complimentary-dark;
-}
-
 .card-image {
   width: 100%;
   height: auto;
 }
 
-.card-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;      
-  border-radius: 25px;    
-  background-color: $brown-light;      
-  transform: translateY(100%);
-  transition: .2s ease-in-out;
-}
-
-.recipe-card:hover .card-overlay {
-  transform: translateY(0);
-}
-
-.card-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 2em;
-  padding: 2em;
-  background-color: $brown-light;
-  transform: translateY(-100%);
-  transition: .2s ease-in-out;
-  border-bottom: none;
-}
-
-.card-header:first-child {
-  border-radius: 25px 0 0 0;
-}
-
-.recipe-card:hover .card-header {
-  transform: translateY(0);
-}
-
-.card-thumb {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;      
-  border-radius: 50%;      
-}
-
-.card-title {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin: 0 0 .3em;
-}
-
-.card-tagline {
-  display: block;
-  margin: 1em 0;
-  font-size: .8em; 
-  color: $red-middle;  
-}
-
-.card-status {
-  font-size: .8em;
-  color: $red-middle;
-}
-
-.card-description {
-  padding: 0 2em 2em;
-  margin: 0;
+.card-recipe {
+  border-radius: 25px;
   overflow: hidden;
-  font-size: 14px;
+  background-color: $brown-light;
+  box-shadow: 2px 1px 1px $background-complimentary-dark;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  position: relative;
 }
+
+.card-recipe:hover {
+  box-shadow: 3px 1.5px 1.5px $background-complimentary-dark;
+}
+
+.card-recipe > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-recipe h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-recipe p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+.card-recipe .card-recipe-infos {
+  padding: 16px 36px 16px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-recipe-infos .card-recipe-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+}
+
+.card-recipe-save {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
 
 // RESPONSIVE DESIGN STUFF
 
