@@ -6,11 +6,15 @@ class Ingredient < ApplicationRecord
   # == Attributes ===========================================================
   
   # == Extensions ===========================================================
-  acts_as_list scope: :recipe 
+  acts_as_list scope: :recipe
+
   
   # == Relationships ========================================================
   belongs_to :recipe
   
+  include PgSearch::Model
+  multisearchable against: :description
+
   # == Validations ==========================================================
 
   # == Scopes ===============================================================

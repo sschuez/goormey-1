@@ -4,7 +4,13 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = policy_scope(Recipe).order(created_at: :desc)
+    @recipes = Recipe.search(params[:query])
+      .order(created_at: :desc)
+      .page(params[:page])
+      .without_count
+      .per(8)
+
+      skip_policy_scope
   end
 
   # GET /recipes/1 or /recipes/1.json

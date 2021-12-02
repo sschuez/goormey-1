@@ -72,3 +72,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "acts_as_list", "~> 1.0"
+
+gem "kaminari", "~> 1.2"
+
+gem "pg_search", "~> 2.3"

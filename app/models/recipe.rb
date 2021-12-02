@@ -14,6 +14,9 @@ class Recipe < ApplicationRecord
 	belongs_to :user
 	has_one_attached :photo
 	
+	include PgSearch::Model
+	multisearchable against: [ :name, :description ]
+
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do
 		validates :name, presence: true, length: { minimum: 2, maximum: 50}
@@ -22,12 +25,10 @@ class Recipe < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:ingredients) } do
-
   end
 
-	# with_options if: -> { required_for_step?(:instructions) } do
-		
-	# end
+	with_options if: -> { required_for_step?(:instructions) } do
+	end
 
 	# == Scopes ===============================================================
 	default_scope { where wizard_complete: true }
@@ -42,6 +43,27 @@ class Recipe < ApplicationRecord
 		instructions: [instructions_attributes: [:id, :description, :_destroy]]
 	}
 	attr_accessor :form_step
+
+	def self.search(query)
+		return all unless query.present?
+
+		results = PgSearch.multisearch(query)
+
+		recipes = []
+		results.each do |result|
+			if result.searchable_type == "Recipe"
+				recipes << result.searchable
+			elsif result.searchable_type == "User"
+				result.searchable.recipes.each do | user_recipe |
+					recipes << user_recipe
+				end
+			else
+				recipes << Recipe.find(result.searchable.recipe_id)
+			end
+		end
+
+		Recipe.where(id: recipes.map(&:id))
+	end
 	
 	# == Instance Methods =====================================================
 	def required_for_step?(step)

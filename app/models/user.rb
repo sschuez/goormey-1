@@ -9,16 +9,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
   
+  
   # == Relationships ========================================================
   has_many :recipes
   has_one_attached :avatar
   
+  include PgSearch::Model
+  multisearchable against: [ :first_name, :last_name ]
+
   # == Validations ==========================================================
   validates :username, uniqueness: true
   validates :username, presence: true
 
   # == Scopes ===============================================================
-  
+
   # == Callbacks ============================================================
   after_create :send_welcome_email
 
