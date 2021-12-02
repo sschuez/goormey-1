@@ -14,7 +14,7 @@
       <% end %>
 
       <%= f.input :password,
-                  hint: "leave it blank if you don't want to change it",
+                  hint: "Leave it blank if you don't want to change it",
                   required: false,
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :password_confirmation,
@@ -31,13 +31,9 @@
       </div>
       <br>
       <%= f.input :first_name,
-                  required: false %>
-      <%= f.input :last_name,
-                  required: false %>
-      <%= f.input :username,
                   required: true %>
-      <%= f.input :show_username,
-                  hint: "check if you want to show only your username" %>
+      <%= f.input :last_name,
+                  required: true %>
     </div>
     
     <div class="main-card">

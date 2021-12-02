@@ -27,7 +27,7 @@
       <%= link_to recipe_path(recipe) do %>
         <div class="card-header-text">
           <h3 class="card-title"><%= highlight(recipe.name, query_array) %></h3>
-          <span class="card-status">by <%= highlight(recipe.user.username, query_array) %></span>
+          <span class="card-status">by <%= highlight(recipe.user.first_name, query_array) %> <%= highlight(recipe.user.last_name, query_array) %></span>
         </div>
       <% end %>
 
