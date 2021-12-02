@@ -26,15 +26,15 @@
 
       <%= link_to recipe_path(recipe) do %>
         <div class="card-header-text">
-          <h3 class="card-title"><%= recipe.name %></h3>
-          <span class="card-status">by <%= recipe.user.username %></span>
+          <h3 class="card-title"><%= highlight(recipe.name, query_array) %></h3>
+          <span class="card-status">by <%= highlight(recipe.user.username, query_array) %></span>
         </div>
       <% end %>
 
     </div>
 
     <%= link_to recipe_path(recipe) do %>
-      <p class="card-description"><%= recipe.description %></p>
+      <p class="card-description"><%= highlight(recipe.description, query_array) %></p>
     <% end %>
 
   </div>
