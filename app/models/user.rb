@@ -18,8 +18,8 @@ class User < ApplicationRecord
   multisearchable against: [ :first_name, :last_name ]
 
   # == Validations ==========================================================
-  validates :username, uniqueness: true
-  validates :username, presence: true
+  # validates :username, uniqueness: true
+  # validates :username, presence: true
 
   # == Scopes ===============================================================
 
@@ -31,10 +31,6 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
-  def name_or_username
-    self.first_name == "" ? self.username : self.first_name
-  end
-  
   # == Instance Methods =====================================================
 
   private
