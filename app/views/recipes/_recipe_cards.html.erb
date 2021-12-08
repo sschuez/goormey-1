@@ -28,9 +28,8 @@
 
   </div>
 
-  <div class="card-recipe-save">
-    <i class="far fa-heart"></i>
-    <%# <i class="fas fa-heart"></i> %>
+  <div data-controller="like" class="card-recipe-like" data-like-url="/recipes/<%= recipe.id %>/likes">
+    <i data-action="click->like#save" data-like-target="heart" class="<%= current_user.liked?(recipe) ? 'fas' : 'far'%> fa-heart"></i>
   </div>
 
 </div>

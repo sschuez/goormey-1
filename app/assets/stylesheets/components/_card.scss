@@ -126,10 +126,12 @@
   width: 40px;
 }
 
-.card-recipe-save {
+.card-recipe-like {
   position: absolute;
   right: 12px;
   bottom: 12px;
+  cursor: pointer;
+  color: #D23333;
 }
 
 
