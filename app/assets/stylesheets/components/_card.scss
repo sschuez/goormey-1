@@ -22,8 +22,8 @@
   display: flex;
   border: black 1px solid;
   border-radius: 25px;
-  margin: 12px;
-  padding: 12px;
+  margin: 6px;
+  padding: 6px;
   background-color: $brown-dark;
 }
 
@@ -34,6 +34,18 @@
 
 .ingredient-show .instruction-description {
   margin: 12px 0px 12px 24px;
+}
+
+.instruction-description p {
+  font-size: 14px;
+}
+
+.user-show {
+  display: flex;
+}
+
+.user-show .user-name {
+  margin: 8px 0 0 24px;
 }
 
 .ingredient-card {
@@ -47,32 +59,6 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 0;
-}
-
-.grid-profile {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-}
-
-.profile {
-  padding: 0 !important;
-  background-color: $background-complimentary-dark !important;
-  box-shadow: none !important;
-  // height: 250px !important;
-}
-
-.card-recipe .profile-recipe-infos {
-  border-radius: 0;
-  background-color: $background-complimentary-dark;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-
-.header-profile {
-  background-color: $background-complimentary-dark !important;
-  font-size: 1em !important;
-  // font-weight: bold;
-  margin: 0 !important;
 }
 
 .card-image {
@@ -106,7 +92,7 @@
 }
 
 .card-recipe p {
-  font-size: 12px;
+  font-size: 14px;
   opacity: .7;
   margin: 0;
 }
@@ -125,15 +111,6 @@
   top: -20px;
   width: 40px;
 }
-
-.card-recipe-like {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  cursor: pointer;
-  color: #D23333;
-}
-
 
 // RESPONSIVE DESIGN STUFF
 

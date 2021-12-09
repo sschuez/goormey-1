@@ -114,6 +114,20 @@
   right: 24px;
 }
 
+.card-recipe-like {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  cursor: pointer;
+  color: #D23333;
+  font-size: 22px;
+  background-color: none !important;
+}
+
+.card-recipe-like:hover {
+  font-size: 26px;
+}
+
 // Smallest device
 @media (max-width: 600px) {
   // .add-association {

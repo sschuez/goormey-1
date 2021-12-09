@@ -6,7 +6,6 @@ progressbar = ProgressBar.create(
 USERS_TO_CREATE.times do
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
-  end
   User.create email: Faker::Internet.safe_email,
               password: "aaaaaa",
               password_confirmation: "aaaaaa",

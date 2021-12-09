@@ -6,14 +6,13 @@
 <% else %>
   <% content_for :meta_image, cl_image_path("default_avatar_square.png") %>
 <% end %>
-
 <%# /METADATA %>
 
 <h4 class="title-profile">
   <% if current_user == @user %>
     Your profile
   <% else %>
-    <%= @user.first_name %>
+    <%= @user.first_name.possessive %> profile
   <% end %>
 </h4>
 <br>
@@ -26,7 +25,7 @@
     <ul>
       <%# USER'S RECIPES TAB %>
       <li class="tab1">
-        <label for="tab1">Recipes</label>
+        <label for="tab1"><%= current_user == @user ? "Your recipes" : "#{@user.first_name.possessive} recipes"%></label>
       </li>
       
       <%# liked RECIPES TAB %>
@@ -41,26 +40,23 @@
     </ul>
   </nav>
   <section>
+  <br>
 
     <%# USER'S RECIPES TAB %>
     <div class="tab1">
-      <h4>
-        <%= current_user == @user ? "Your recipes" : "#{@user.first_name.possessive} recipes"%>
-      </h4>
-      <div class="index-grid grid-profile">
+      <div class="index-grid">
         <% @user.recipes.each do |recipe| %>
-          <%= render "users/profile_recipes", recipe: recipe %>
+          <%= render "recipes/recipe_cards", recipe: recipe %>
         <% end %>      
       </div>
     </div>
 
     <%# LIKED RECIPES TAB %>
     <div class="tab2">
-      <h4>Liked recipes</h4>
       <% if @liked_recipes.any? %>
-        <div class="index-grid grid-profile">
+        <div class="index-grid">
           <% @liked_recipes.each do |recipe| %>
-            <%= render "users/profile_recipes", recipe: recipe %>
+            <%= render "recipes/recipe_cards", recipe: recipe %>
           <% end %>
         </div>
       <% else %>
@@ -72,8 +68,7 @@
 
     <%# PROFILE TAB %>
     <div class="tab3">
-      <h4>Profile</h4>
-      <br>
+      <div class="main-card">
       <%# AVATAR %>
       <% if @user.avatar.attached? %>
         <%= cl_image_tag @user.avatar.key, :transformation=>[
@@ -93,6 +88,7 @@
         <small><p>* This is only visible to you.</p></small>
         <%= link_to "Edit profile", edit_user_registration_path, class: "btn btn-ghost" %>
       <% end %>
+      </div>
     </div>
   </section>
 </div>
