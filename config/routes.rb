@@ -5,13 +5,18 @@ Rails.application.routes.draw do
     resources :instructions do
       resource :instruction_position, only: :update
     end
-      
+    
+    # NESTED SORTABLE INGREDIENTS
     resources :ingredients do  
       resource :ingredient_position, only: :update
     end
 
     # FORM WIZARD
     resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
+
+    # LIKEABLE
+    post 'likes', to: "likes#create"
+    delete 'likes', to: "likes#destroy"
   end
   
 
