@@ -32,9 +32,6 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
-  def liked?(recipe)
-    recipe.likes.exists?(:user => self)
-  end
   # == Instance Methods =====================================================
 
   private

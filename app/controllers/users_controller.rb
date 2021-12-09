@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def show
+    likes = @user.likes
+    @liked_recipes = [] 
+    likes.each do | like |
+      @liked_recipes << like.recipe
+    end
+    @liked_recipes
   end
 
   private

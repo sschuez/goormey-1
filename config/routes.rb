@@ -15,11 +15,8 @@ Rails.application.routes.draw do
     resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
 
     # LIKEABLE
-    # resources :likes, only: [:create, :destroy] #do
     post 'likes', to: "likes#create"
     delete 'likes', to: "likes#destroy"
-      # post 'toggle_like', to: "likes#toggle_like"
-    # end  
   end
   
 

@@ -10,25 +10,35 @@ export default class extends Controller {
     let url = this.data.get("url")
     let data = new FormData()
     
-    console.log(url)
-    
     if (heart.contains('far')) {
       // Toggle Like
-      heart.replace('far', 'fas')
       Rails.ajax({
         url: url,
         type: "POST",
         data: data,
+        success: function(data) { 
+          heart.replace('far', 'fas')
+        },
+        error: function(data) { 
+          alert(data)
+        },
       });
     } else {
       // Toggle Unlike
-      heart.replace('fas', 'far')
+      confirm("Are you sure you want to remove this recipe from your favourites?")
       Rails.ajax({
         url: url,
         type: "DELETE",
         data: data,
+        success: function(data) { 
+          heart.replace('fas', 'far')
+        },
+        error: function(data) { 
+          alert(data)
+        },
       });
-    }  
+    }
+    
   }
   
   

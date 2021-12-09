@@ -8,4 +8,8 @@ class LikePolicy < ApplicationPolicy
   def create?
     true  # Anyone can create a recipe
   end
+
+  def destroy?
+    true
+  end
 end
