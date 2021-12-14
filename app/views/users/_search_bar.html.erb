@@ -1,0 +1,14 @@
+<%= simple_form_for :search, url: user_path(@user), method: :get, data: {
+  refresh_list_target: 'form' } do |f| %>
+  <div class="search-form-control form-group">
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: 'Search recipe name or description',
+      type: "text",
+      data: {
+        refresh_list_target: 'searchInput',
+        action: "keyup->refresh-list#update"
+      } %>
+  </div>
+<% end %>
