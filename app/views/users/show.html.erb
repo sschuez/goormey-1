@@ -44,26 +44,44 @@
 
     <%# USER'S RECIPES TAB %>
     <div class="tab1">
-      <div class="index-grid">
-        <% @user.recipes.each do |recipe| %>
-          <%= render "recipes/recipe_cards", recipe: recipe %>
-        <% end %>      
+      <div data-controller="refresh-list">
+      
+        <%# Search bar %>
+        <%= render 'users/search_bar' %>
+        
+        <%# List of results %>
+        <% if @user.recipes.any? %>
+          <%= render 'users/list', recipes: @user.recipes %>
+        <% else %>
+          <p>
+            <%= current_user == @user ? "You haven't created any recipes yet" : "#{@user.first_name} hasn't created any recipes yet"%>
+          </p>
+          <br>
+          <% if current_user == @user %>
+            <%= link_to "+ Go ahead and create one", new_recipe_path, class: "btn-ghost btn-coral" %>
+          <% end %>
+        <% end %>
+
       </div>
     </div>
 
     <%# LIKED RECIPES TAB %>
     <div class="tab2">
-      <% if @liked_recipes.any? %>
-        <div class="index-grid">
-          <% @liked_recipes.each do |recipe| %>
-            <%= render "recipes/recipe_cards", recipe: recipe %>
-          <% end %>
-        </div>
-      <% else %>
-        <p>
-          <%= current_user == @user ? "You have no liked recipes yet" : "#{@user.first_name} has no liked recipes yet"%>
-        </p>
-      <% end %>
+      <div data-controller="refresh-list">
+
+        <%# Search bar %>
+        <%= render 'users/search_bar' %>
+
+        <%# List of results %>
+        <% if @liked_recipes.any? %>
+          <%= render 'users/list', recipes: @liked_recipes %>           
+        <% else %>
+          <p>
+            <%= current_user == @user ? "You have no liked recipes yet. Just click on the heart on any recipe and it will magically show up here." : "#{@user.first_name} has no liked recipes yet"%>
+          </p>
+        <% end %>
+
+      </div>
     </div>
 
     <%# PROFILE TAB %>
