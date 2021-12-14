@@ -7,8 +7,10 @@
 
     <%= form.input  :description, 
                     label: "Description", 
-                    class: "form-input", 
-                    placeholder: "e.g. 250g of flour" 
+                    class: "form-input",
+                    as: :text, 
+                    placeholder: "e.g. 250g of flour",
+                    input_html: { data: { controller: "textarea-autogrow" } } 
                     %>
     <%= link_to "#", data: { action: "click->nested-form#remove_association" } do %>
       <i class="inline-delete fas fa-trash-alt"></i>

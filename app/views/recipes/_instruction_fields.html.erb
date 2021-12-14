@@ -9,7 +9,8 @@
     <%= form.input  :description,
                     label: "Description", 
                     class: "form-input",
-                    placeholder: "Describe what to do for this step" 
+                    placeholder: "Describe what to do for this step",
+                    input_html: { data: { controller: "textarea-autogrow" } } 
                     %>
     
     <%= link_to "#", data: { action: "click->nested-form#remove_association" } do %>

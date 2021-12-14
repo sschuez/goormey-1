@@ -4,7 +4,8 @@
   <%= f.input :name,
               required: true %>
   <%= f.input :description,
-              required: true %>
+              required: true,
+              input_html: { data: { controller: "textarea-autogrow" } } %>
   <div class="inline-form label-inline">
     <div>
       <p>Serves how many? *</p>
