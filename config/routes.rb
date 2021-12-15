@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
   # USERS
   devise_for :users
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    member do
+      get 'user_recipes'
+    end
+  end
   
   # CONTACTS
   resources :contacts, only: [:new, :create]

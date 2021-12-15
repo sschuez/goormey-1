@@ -12,6 +12,10 @@ class UserPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def user_recipes?
+    true
+  end
   
   def update?
     user_is_owner_or_admin?

@@ -47,11 +47,13 @@
       <div data-controller="refresh-list">
       
         <%# Search bar %>
-        <%= render 'users/search_bar' %>
-        
+        <%= simple_form_for :search, url: user_recipes_user_path(@user), method: :get, data: {
+        refresh_list_target: 'form' } do |f| %>
+          <%= render 'users/search_bar' %>
+        <% end %>
         <%# List of results %>
-        <% if @user.recipes.any? %>
-          <%= render 'users/list', recipes: @user.recipes %>
+        <% if @user_recipes.any? %>
+          <%= render 'users/list', recipes: @user_recipes %>
         <% else %>
           <p>
             <%= current_user == @user ? "You haven't created any recipes yet" : "#{@user.first_name} hasn't created any recipes yet"%>
@@ -70,8 +72,11 @@
       <div data-controller="refresh-list">
 
         <%# Search bar %>
-        <%= render 'users/search_bar' %>
-
+        <%= simple_form_for :search, url: user_path(@user), method: :get, data: {
+        refresh_list_target: 'form' } do |f| %>
+          <%= render 'users/search_bar' %>
+        <% end %>
+        
         <%# List of results %>
         <% if @liked_recipes.any? %>
           <%= render 'users/list', recipes: @liked_recipes %>           
