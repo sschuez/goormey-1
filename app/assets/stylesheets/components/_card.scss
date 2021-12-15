@@ -50,7 +50,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 0;
-  align-items: flex-start // This one changes cards to their size even if grid is larger
+  align-items: center // This one changes cards to their size even if grid is larger
 }
 
 .card-recipe {
