@@ -8,7 +8,7 @@ class RecipesController < ApplicationController
       .order(created_at: :desc)
       .page(params[:page])
       .without_count
-      .per(8)
+      .per(14)
 
       skip_policy_scope
   end
