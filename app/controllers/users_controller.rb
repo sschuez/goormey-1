@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show user_recipes edit update destroy ]
 
   def show
-    likes = @user.likes.order(updated_at: :desc)
+    likes = @user.likes.order(created_at: :desc)
     li_recipes = []
     likes.each do | like |
       li_recipes << like.recipe
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     li_recipes
     
     @liked_recipes = Recipe.where(id: li_recipes.map(&:id))
-    @user_recipes = @user.recipes.order(updated_at: :desc)
+    @user_recipes = @user.recipes.order(created_at: :desc)
 
     query_and_respond(@liked_recipes)
   end
