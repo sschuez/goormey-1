@@ -36,7 +36,7 @@ gem 'pundit'
 gem 'wicked'
 gem 'possessive'
 gem 'cloudinary'
-gem 'letter_opener', group: :development
+gem 'letter_opener', group: [:development, :staging]
 gem 'postmark-rails'
 
 gem 'autoprefixer-rails', '10.2.5'
