@@ -63,8 +63,17 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "goormey_1_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: "http://localhost:3000" }
-  config.action_mailer.delivery_method     = :smtp
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => '287eab28919022',
+    :password => '644c94b116fd95',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
   # config.action_mailer.postmark_settings   = { api_token: Rails.application.credentials.postmark_api_token }
   # config.action_mailer.default_url_options = { host: "www.goormey.com" }
 
