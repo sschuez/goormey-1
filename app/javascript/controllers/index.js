@@ -21,3 +21,6 @@ application.register("photo-preview", PhotoPreviewController)
 
 import RefreshListController from "./refresh_list_controller.js"
 application.register("refresh-list", RefreshListController)
+
+import TextareaAutogrow from "stimulus-textarea-autogrow"
+application.register("textarea-autogrow", TextareaAutogrow)
