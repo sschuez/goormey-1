@@ -52,8 +52,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.turbo_stream { redirect_to @recipe, status: :see_other, notice: "Recipe was successfully updated." }
-        format.html { redirect_to @recipe, status: :see_other, notice: "Recipe was successfully updated." }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit, status: :unprocessable_entity }
