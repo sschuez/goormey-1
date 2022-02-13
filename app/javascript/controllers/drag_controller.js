@@ -1,4 +1,4 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 import Rails from "@rails/ujs"
 import { Sortable } from "sortablejs"
 
@@ -25,7 +25,7 @@ export default class extends Controller {
     
     let data = new FormData()
     data.append("position", event.newIndex + 1)
-    console.log(event)
+    // console.log(event)
 
     Rails.ajax({
       url: url,

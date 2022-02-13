@@ -62,21 +62,21 @@
 .fa-edit {
   color: $orange;
   font-size: 24px;
-  font-weight: lighter;
+  font-weight: lighter !important;
 }
 
 .fa-edit:hover {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .fa-trash-alt {
   color: $bright-coral;
   font-size: 24px;
-  font-weight: lighter;
+  font-weight: lighter !important;
 }
 
 .fa-trash-alt:hover {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .inline-delete {

@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
 	
 	# == Attributes ===========================================================
 	
+
 	# == Extensions ===========================================================
 	
 	# == Relationships ========================================================
@@ -13,7 +14,7 @@ class Recipe < ApplicationRecord
 	accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
 	belongs_to :user
 	has_one_attached :photo
-	has_many :likes
+	has_many :likes, dependent: :destroy
 
 	include PgSearch::Model
 	multisearchable against: [ :name, :description ]
@@ -23,10 +24,10 @@ class Recipe < ApplicationRecord
 		validates :name, presence: true, length: { minimum: 2, maximum: 100}
 		validates :description, presence: true, length: { minimum: 2, maximum: 750}
 		validates :serves, presence: true, numericality: { only_integer: true, in: 1..50 }
-  end
+	end
 
-  with_options if: -> { required_for_step?(:ingredients) } do
-  end
+	with_options if: -> { required_for_step?(:ingredients) } do
+	end
 
 	with_options if: -> { required_for_step?(:instructions) } do
 	end
