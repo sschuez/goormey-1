@@ -8,9 +8,10 @@
 <% end %>
 <%# /METADATA %>
   
+<%= turbo_frame_tag "recipe" do %>
   <%# ACTION BUTTON TOP %>
   <div class="action-btns">
-    <%= link_to 'Back to recipes', recipes_url, class: "recipes-btn btn-ghost" %>
+    <%= link_to 'Back to recipes', recipes_url, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
     <% if policy(@recipe).update? %>
       <%= link_to edit_recipe_path(@recipe) do %>
         <i class="show-icon fas fa-edit"></i>
@@ -21,13 +22,12 @@
       <%= link_to recipe_path(@recipe), data: {
         turbo_method: :delete,
           turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-        } do %>
+        }, "data-turbo-frame": "_top" do %>
         <i class="show-icon fas fa-trash-alt"></i>
       <% end %>
     <% end %>
   </div>
 
-<%#= turbo_frame_tag @recipe do %>
   <div class="main-card recipe">
     
     <%# PHOTO %>
@@ -113,11 +113,10 @@
       <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
     <% end %>
   </div>
-<%# end %>
 
 <br>
 <div class="action-btns">
-  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
+  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
     
   <% if policy(@recipe).update? %>
     <%= link_to edit_recipe_path(@recipe) do %>
@@ -128,11 +127,12 @@
   <% if policy(@recipe).destroy? %>
     <%= link_to recipe_path(@recipe), data: {
       turbo_method: :delete,
-        turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-      } do %>
+      turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
+      }, "data-turbo-frame": "_top" do %>
       <i class="show-icon fas fa-trash-alt"></i>
     <% end %>
   <% end %>
 </div>
 
+<% end %>
 

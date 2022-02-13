@@ -8,7 +8,7 @@
   <%= link_to recipe_path(@recipe), data: {
       turbo_method: :delete,
       turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-    } do %>
+    }, "data-turbo-frame": "_top" do %>
     <i class="top-icon fas fa-trash-alt"></i>
   <% end %>
 
@@ -44,7 +44,7 @@
   <%= link_to recipe_path(@recipe), data: {
     turbo_method: :delete,
       turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-    } do %>
+    }, "data-turbo-frame": "_top" do %>
     <i class="bottom-icon fas fa-trash-alt"></i>
   <% end %>
 </div>
