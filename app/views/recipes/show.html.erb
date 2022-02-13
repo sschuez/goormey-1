@@ -27,7 +27,7 @@
     <% end %>
   </div>
 
-<%= turbo_frame_tag @recipe do %>
+<%#= turbo_frame_tag @recipe do %>
   <div class="main-card recipe">
     
     <%# PHOTO %>
@@ -113,6 +113,8 @@
       <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
     <% end %>
   </div>
+<%# end %>
+
 <br>
 <div class="action-btns">
   <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
@@ -133,5 +135,4 @@
   <% end %>
 </div>
 
-<% end %>
 

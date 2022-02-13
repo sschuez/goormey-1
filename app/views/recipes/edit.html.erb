@@ -1,3 +1,4 @@
+<%#= turbo_frame_tag @recipe do %>
 <h4>Edit recipe</h4>
 <br>
 <%# BUTTONS TOP %>
@@ -6,9 +7,7 @@
 <% end %>
 <%= link_to 'All recipes', recipes_path, class: "btn-ghost" %>
 
-<%= turbo_frame_tag @recipe do %>
   <%= render 'form', recipe: @recipe %>
-<% end %>
 <br>
 
 <%# BUTTONS BOTTOM %>
@@ -16,3 +15,5 @@
   <i class="fas fa-arrow-left btn-ghost"></i>
 <% end %>
 <%= link_to 'All recipes', recipes_path, class: "btn-ghost" %>
+
+<%# end %>
