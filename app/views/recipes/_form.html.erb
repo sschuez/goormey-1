@@ -16,7 +16,7 @@
       <%= render "recipe_form", f: f %>
       <br>
       <div class="save-recipe">
-        <%= f.button :submit, "✓ Save recipe", class: "btn-ghost btn-green" %>
+        <%= f.button :submit, "✓ Save recipe", :data => { turbo: "false" }, class: "btn-ghost btn-green" %>
       </div>  
     </div>
     
