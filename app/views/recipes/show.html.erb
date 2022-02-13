@@ -8,10 +8,9 @@
 <% end %>
 <%# /METADATA %>
   
-<%#= turbo_frame_tag @recipe do %>
   <%# ACTION BUTTON TOP %>
   <div class="action-btns">
-    <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
+    <%= link_to 'Back to recipes', recipes_url, class: "recipes-btn btn-ghost" %>
     <% if policy(@recipe).update? %>
       <%= link_to edit_recipe_path(@recipe) do %>
         <i class="show-icon fas fa-edit"></i>
@@ -20,7 +19,7 @@
 
     <% if policy(@recipe).destroy? %>
       <%= link_to recipe_path(@recipe), data: {
-          turbo_method: :delete,
+        turbo_method: :delete,
           turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
         } do %>
         <i class="show-icon fas fa-trash-alt"></i>
@@ -28,6 +27,7 @@
     <% end %>
   </div>
 
+<%= turbo_frame_tag @recipe do %>
   <div class="main-card recipe">
     
     <%# PHOTO %>
@@ -133,5 +133,5 @@
   <% end %>
 </div>
 
-<%# end %>
+<% end %>
 

@@ -1,4 +1,9 @@
+  <%= simple_form_for(@recipe, data: { turbo_frame: :_top }) do |f| %>
 <div class="main-card">
+  <%#= simple_form_for(@recipe) do |f| %>
+  <%#= simple_form_for(@recipe, data: { turbo: :false }) do |f| %>
+  <%#= simple_form_for(@recipe, local: :true) do |f| %>
+
   <%# DELETE ICON TOP%>
   <%= link_to recipe_path(@recipe), data: {
       turbo_method: :delete,
@@ -7,10 +12,6 @@
     <i class="top-icon fas fa-trash-alt"></i>
   <% end %>
 
-  <%#= simple_form_for(@recipe) do |f| %>
-  <%= simple_form_for(@recipe, data: { turbo: :false }) do |f| %>
-  <%#= simple_form_for(@recipe, local: :true) do |f| %>
-  <%#= simple_form_for(@recipe, data: { turbo_frame: :_top }) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   
@@ -38,14 +39,14 @@
       </div>
     </div>
 
-  <% end %>
 
   <%# DELETE ICON BOTTOM%>
   <%= link_to recipe_path(@recipe), data: {
-      turbo_method: :delete,
+    turbo_method: :delete,
       turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
     } do %>
     <i class="bottom-icon fas fa-trash-alt"></i>
   <% end %>
 </div>
+  <% end %>
  
