@@ -7,9 +7,9 @@
     <i class="top-icon fas fa-trash-alt"></i>
   <% end %>
 
-  <%= simple_form_for(@recipe) do |f| %>
+  <%#= simple_form_for(@recipe) do |f| %>
   <%#= simple_form_for(@recipe, local: :false, data: { turbo: :false }) do |f| %>
-  <%#= simple_form_for(@recipe, data: { turbo_frame: :_top }) do |f| %>
+  <%= simple_form_for(@recipe, data: { turbo_frame: :_top }) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   
