@@ -3,15 +3,25 @@
 <% content_for :meta_description, "Let everyone know how you prepare your dish with concrete instructions." %>
 <%# /METADATA %>
 
-<%= render :layout => 'form' do |f| %>
+  <%# Because it's the last step, the form is not rendered but fully added here, with a data: { turbo_frame: :_top } %>
+  <div class="main-card">
+    <%= turbo_frame_tag dom_id(@recipe) do %>
+      <%= simple_form_for(@recipe, url: wizard_path, data: { turbo_frame: :_top }, class: "wizard-form") do |f| %>
 
-  <%= render "recipes/instructions_form", f: f %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-actions save-recipe">
-    <%#= link_to 'Previous step', previous_wizard_path, class: "btn btn-ghost btn-coral" %>
-    <%#= f.submit "Next Step" %>
-    <%= f.submit '✓ Save recipe', class: "btn-ghost btn-green" %>
-    <%#= link_to 'Skip', next_wizard_path %>
+        <%= render "recipes/instructions_form", f: f %>
+
+        <div class="form-actions save-recipe">
+          <%#= link_to 'Previous step', previous_wizard_path, class: "btn btn-ghost btn-coral" %>
+          <%#= f.submit "Next Step" %>
+          <%= f.submit '✓ Save recipe', class: "btn-ghost btn-green" %>
+          <%#= link_to 'Skip', next_wizard_path %>
+        </div>
+
+      <% end %>
+
+      <%# end %>
+    <% end %>
   </div>
-
-<% end %>

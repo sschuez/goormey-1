@@ -15,7 +15,11 @@ module StepsControllers
       authorize @recipe
       # Use #assign_attributes since render_wizard runs a #save for us
       @recipe.assign_attributes recipe_params
-      render_wizard @recipe
+      if @recipe.valid?
+        render_wizard @recipe
+      else
+        render_wizard @recipe, status: :unprocessable_entity
+      end
     end
 
     private

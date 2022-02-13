@@ -50,20 +50,15 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
-    if @recipe.update(recipe_params)
-      redirect_to @recipe, status: :see_other, notice: "Recipe was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @recipe.update(recipe_params)
+        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
+        format.json { render :show, status: :ok, location: @recipe }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
     end
-    # respond_to do |format|
-    #   if @recipe.update(recipe_params)
-    #     format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @recipe }
-    #   else
-    #     format.html { render :edit, status: :unprocessable_entity }
-    #     format.json { render json: @recipe.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /recipes/1 or /recipes/1.json

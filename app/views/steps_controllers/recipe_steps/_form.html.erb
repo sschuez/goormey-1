@@ -1,9 +1,11 @@
 <div class="main-card">
-  <%= simple_form_for(@recipe, url: wizard_path, class: "wizard-form") do |f| %>
+  <%= turbo_frame_tag dom_id(@recipe) do %>
+    <%= simple_form_for(@recipe, url: wizard_path, class: "wizard-form") do |f| %>
 
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <%= yield f %>
+      <%= yield f %>
+    <% end %>
   <% end %>
 </div>

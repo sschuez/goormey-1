@@ -6,7 +6,9 @@
 <% end %>
 <%= link_to 'All recipes', recipes_path, class: "btn-ghost" %>
 
-<%= render 'form', recipe: @recipe %>
+<%= turbo_frame_tag dom_id(@recipe) do %>
+  <%= render 'form', recipe: @recipe %>
+<% end %>
 <br>
 
 <%# BUTTONS BOTTOM %>
