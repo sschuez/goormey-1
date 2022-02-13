@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,8 +52,8 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully updated." }
-        format.json { render :show, status: :see_other, location: @recipe }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
+        format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -64,7 +64,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
     @recipe.destroy
-    redirect_to root_url, status: :see_other, notice: "Recipe was successfully deleted."
+    redirect_to root_path, status: :see_other, notice: "Recipe was successfully deleted."
     # respond_to do |format|
     #   format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
     #   format.json { head :no_content }
