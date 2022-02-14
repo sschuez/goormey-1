@@ -21,7 +21,7 @@
     <% if policy(@recipe).destroy? %>
       <%= link_to recipe_path(@recipe), data: {
         turbo_method: :delete,
-          turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
+        turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
         }, "data-turbo-frame": "_top" do %>
         <i class="show-icon fas fa-trash-alt"></i>
       <% end %>
