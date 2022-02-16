@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = policy_scope(User.order(created_at: :desc))
+    query_and_respond_users(@users)
   end
 
   def show
@@ -49,4 +50,18 @@ class UsersController < ApplicationController
       format.text { render partial: "list", locals: { recipes: recipes }, formats: :html }
     end
   end
+
+# Query for users
+def query_and_respond_users(users)
+  if params[:query].present?
+    sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
+    users = users.where(sql_query, query: "%#{params[:query]}%")
+  end
+  
+  respond_to do |format|
+    format.html # Follow regular flow of Rails
+    format.text { render partial: "list_users", locals: { users: users }, formats: :html }
+  end
+end
+  
 end

@@ -1,60 +1,13 @@
-<% @users.each do |user| %>
-		
-  <div class="index-card">
-    <div class="flex-grid">
+<br>
+<div data-controller="refresh-list">
+
+    <%# Search bar %>
+    <%= simple_form_for :search, url: users_path, method: :get, data: {
+    refresh_list_target: 'form' } do |f| %>
+      <%= render 'users/search_bar' %>
+    <% end %>
         
-      <!-- Avatar -->
-      <div class="flex-col item1">
-        <%= link_to user_path(user) do %>
-          <% if user.avatar.attached? %>
-              <%= cl_image_tag user.avatar.key, :transformation=>[
-                {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-                {:width=>200, :crop=>"scale"}
-                ], 
-                class: "user-avatar", alt: "user-avatar" %>
-          <% else %>
-            <div class="default-avatar">
-              <%= image_tag "default_avatar_square.png", class: "user-avatar", alt: "user-avatar" %>
-            </div>
-          <% end %>
-        <% end %>
-        <div class="active-icon">
-          <%#= link_to edit_user_path(user) do %>
-            <i class="fas fa-check-circle"></i>
-          <%# end %>
-        </div>
-      </div>
-      
-      <!-- Name -->
-      <div class="flex-col">
-        <%= link_to user_path(user) do %>
-          <h5><%= user.first_name %> <%= user.last_name %></h5>
-          <%= mail_to user.email, class: "btn" do %>
-            <i class="far fa-envelope"></i>
-          <% end %>
-        <% end %>
-      </div>
+    <%# List of results %>
+    <%= render 'users/list_users', users: @users %>           
 
-      <!-- empty placeholder -->
-      <div class="flex-col">
-        <p>placeholder</p>
-      </div>
-
-      <!-- empty placeholder -->
-      <div class="flex-col">
-        <p>placeholder</p>
-      </div>
-
-      <!-- empty placeholder -->
-      <div class="flex-col">
-        <p>placeholder</p>
-      </div>
-
-      <!-- empty placeholder -->
-      <div class="flex-col">
-        <p>placeholder</p>
-      </div>
-   
-    </div>	
-  </div>
-<% end %>
+</div>

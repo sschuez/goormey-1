@@ -1,0 +1,13 @@
+<div data-refresh-list-target="list">
+  
+  <% if params[:query].blank? %>
+    <p><%= pluralize users.count, 'user' %> available</p>
+  <% else %>
+    <p><%= pluralize users.count, 'result' %> for <code><%= params[:query] %></code></p>
+  <% end %>
+  
+  <% users.each do |user| %>
+    <%= render "user_cards", user: user %>
+  <% end %>
+
+</div>
