@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :show, :user_recipes, :query_and_respond ]
   before_action :set_user, only: %i[ show user_recipes edit update destroy ]
 
+  def index
+    @users = policy_scope(User.order(created_at: :desc))
+  end
+
   def show
     likes = @user.likes
     li_recipes = []
