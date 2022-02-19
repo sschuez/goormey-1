@@ -15,6 +15,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    @comment = @recipe.comments.new
   end
 
   # GET /recipes/new

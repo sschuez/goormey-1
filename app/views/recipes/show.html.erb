@@ -114,6 +114,19 @@
     <% end %>
   </div>
 
+  <div class="main-card">
+    <h4>Comments</h4>
+    <div id="comments">
+      <%= render @recipe.comments %>
+    </div>
+
+    <%= simple_form_for([@comment.recipe, @comment]) do |f| %>
+      <%= f.input :content %>
+      <%= f.button :submit, "New comment", class: "btn-ghost" %>
+    <% end %>
+    <%#= link_to "New comment", new_recipe_comment_path(@recipe) %>
+  </div>
+
 <br>
 <div class="action-btns">
   <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>

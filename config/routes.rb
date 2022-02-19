@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     # LIKEABLE
     post 'likes', to: "likes#create"
     delete 'likes', to: "likes#destroy"
+
+    # COMMENTS
+    resources :comments, only: [:new, :create]
   end
   
 
