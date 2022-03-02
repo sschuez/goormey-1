@@ -28,6 +28,10 @@ class UserPolicy < ApplicationPolicy
   def impersonate?
     user.admin
   end
+
+  def is_admin?
+    user.admin
+  end
   
   def stop_impersonating?
     true

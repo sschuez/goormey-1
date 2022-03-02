@@ -114,6 +114,22 @@
     <% end %>
   </div>
 
+  <div class="main-card">
+    <h4>Comments</h4>
+    <br>
+    <div id="comments">
+      <%= render @recipe.comments.order(created_at: :desc) %>
+    </div>
+    <br>
+    <% if user_signed_in? %>
+      <%= render partial: "comments/form" %>
+    <% else %>
+      <p>
+        <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
+      </p>
+    <% end %>
+  </div>
+
 <br>
 <div class="action-btns">
   <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>

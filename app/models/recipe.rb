@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
 	belongs_to :user
 	has_one_attached :photo
 	has_many :likes, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
 	include PgSearch::Model
 	multisearchable against: [ :name, :description ]
