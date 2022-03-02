@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment.recipe = @recipe
     @comment.user = current_user
     if @comment.save
-      redirect_to recipe_path(@comment.recipe, anchor: "comment_#{@comment.id}")
+      redirect_to recipe_path(@comment.recipe, anchor: "comments")
     else
       flash[:error] = "Something went wrong"
       render "recipes/show"

@@ -120,11 +120,12 @@
       <%= render @recipe.comments %>
     </div>
 
-    <%= simple_form_for([@comment.recipe, @comment]) do |f| %>
-      <%= f.input :content %>
-      <%= f.button :submit, "New comment", class: "btn-ghost" %>
+    <h4>New Comment</h4>
+    <% if user_signed_in? %>
+      <%= render partial: "comments/form" %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
     <% end %>
-    <%#= link_to "New comment", new_recipe_comment_path(@recipe) %>
   </div>
 
 <br>
