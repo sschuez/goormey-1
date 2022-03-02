@@ -1,6 +1,9 @@
+<h4>New Comment</h4>
 <%= simple_form_for([@comment.recipe, @comment]) do |f| %>
   <div class="field">
-    <%= f.input :content, label: false %>
+    <%= f.input :content, 
+                label: false, 
+                input_html: { data: { controller: "textarea-autogrow" } } %>
     <%= f.button :submit, "Comment", class: "btn-ghost" %>
   </div>
 <% end %>

@@ -116,15 +116,17 @@
 
   <div class="main-card">
     <h4>Comments</h4>
+    <br>
     <div id="comments">
-      <%= render @recipe.comments %>
+      <%= render @recipe.comments.order(created_at: :desc) %>
     </div>
-
-    <h4>New Comment</h4>
+    <br>
     <% if user_signed_in? %>
       <%= render partial: "comments/form" %>
     <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+      <p>
+        <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
+      </p>
     <% end %>
   </div>
 
