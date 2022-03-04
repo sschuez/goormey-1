@@ -64,6 +64,7 @@
             <small><p><%= @recipe.user.full_name %></p></small>
           <% end %>
         </div>
+        
       </div>
 
       <%# LIKE BUTTON %>
@@ -115,12 +116,6 @@
   </div>
 
   <div class="main-card">
-    <h4>Comments</h4>
-    <br>
-    <div id="comments">
-      <%= render @recipe.comments.order(created_at: :desc) %>
-    </div>
-    <br>
     <% if user_signed_in? %>
       <%= render partial: "comments/form" %>
     <% else %>
@@ -128,8 +123,205 @@
         <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
       </p>
     <% end %>
+    <br>
+    <h4>Comments</h4>
+    <br>
+    <div id="comments">
+      <%= render @recipe.comments.order(created_at: :desc) %>
+    </div>
+    
   </div>
 
+  <div class="main-card">
+    <!-- comments container -->
+    <div class="comment_block">
+
+      <div class="create_new_comment">
+        <% if user_signed_in? %>
+          <%= render partial: "comments/form" %>
+        <% else %>
+          <p>
+            <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
+          </p>
+        <% end %>
+      </div>
+
+
+         <!-- new comment -->
+         <div class="new_comment">
+
+          <!-- build comment -->
+          <ul class="user_comment">
+
+            <!-- current #{user} avatar -->
+            <div class="user_avatar">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg">
+            </div><!-- the comment body --><div class="comment_body">
+              <p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
+            </div>
+
+            <!-- comments toolbar -->
+            <div class="comment_toolbar">
+
+              <!-- inc. date and time -->
+              <div class="comment_details">
+                <ul>
+                  <li><i class="fa fa-clock-o"></i> 13:94</li>
+                  <li><i class="fa fa-calendar"></i> 04/01/2015</li>
+                  <li><i class="fa fa-pencil"></i> <span class="user">John Smith</span></li>
+                </ul>
+              </div><!-- inc. share/reply and love --><div class="comment_tools">
+                <ul>
+                  <li><i class="fa fa-share-alt"></i></li>
+                  <li><i class="fa fa-reply"></i></li>
+                  <li><i class="fa fa-heart love"></i></li>
+                </ul>
+              </div>
+
+            </div>
+
+            <!-- start user replies -->
+          <li>
+		 		
+            <!-- current #{user} avatar -->
+            <div class="user_avatar">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg">
+            </div><!-- the comment body --><div class="comment_body">
+              <p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>That's exactly what I was thinking!</p>
+            </div>
+
+            <!-- comments toolbar -->
+            <div class="comment_toolbar">
+
+              <!-- inc. date and time -->
+              <div class="comment_details">
+                <ul>
+                  <li><i class="fa fa-clock-o"></i> 14:52</li>
+                  <li><i class="fa fa-calendar"></i> 04/01/2015</li>
+                  <li><i class="fa fa-pencil"></i> <span class="user">Andrew Johnson</span></li>
+                </ul>
+              </div><!-- inc. share/reply and love --><div class="comment_tools">
+                <ul>
+                  <li><i class="fa fa-share-alt"></i></li>
+                  <li><i class="fa fa-reply"></i></li>
+                  <li><i class="fa fa-heart love"><span class="love_amt"> 4</span></i></li>
+                </ul>
+              </div>
+
+            </div>
+
+
+          </li>
+
+            <!-- start user replies -->
+          <li>
+		 		
+            <!-- current #{user} avatar -->
+            <div class="user_avatar">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/73.jpg">
+            </div><!-- the comment body --><div class="comment_body">
+              <p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>Finally someone who actually gets it!<div class="replied_to"><p><span class="user">Andrew Johnson:</span>That's exactly what I was thinking!</p></div>That's awesome!</p>
+            </div>
+
+            <!-- comments toolbar -->
+            <div class="comment_toolbar">
+
+              <!-- inc. date and time -->
+              <div class="comment_details">
+                <ul>
+                  <li><i class="fa fa-clock-o"></i> 14:59</li>
+                  <li><i class="fa fa-calendar"></i> 04/01/2015</li>
+                  <li><i class="fa fa-pencil"></i> <span class="user">Simon Gregor</span></li>
+                </ul>
+              </div><!-- inc. share/reply and love --><div class="comment_tools">
+                <ul>
+                  <li><i class="fa fa-share-alt"></i></li>
+                  <li><i class="fa fa-reply"></i></li>
+                  <li><i class="fa fa-heart love"><span class="love_amt"> 4039</span></i></li>
+                </ul>
+              </div>
+
+            </div>
+
+
+          </li>
+
+          </ul>
+
+         </div>
+
+    <!-- new comment -->
+         <div class="new_comment">
+
+          <!-- build comment -->
+          <ul class="user_comment">
+
+            <!-- current #{user} avatar -->
+            <div class="user_avatar">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg">
+            </div><!-- the comment body --><div class="comment_body">
+              <p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
+            </div>
+
+            <!-- comments toolbar -->
+            <div class="comment_toolbar">
+
+              <!-- inc. date and time -->
+              <div class="comment_details">
+                <ul>
+                  <li><i class="fa fa-clock-o"></i> 13:94</li>
+                  <li><i class="fa fa-calendar"></i> 04/01/2015</li>
+                  <li><i class="fa fa-pencil"></i> <span class="user">Sarah Walkman</span></li>
+                </ul>
+              </div><!-- inc. share/reply and love --><div class="comment_tools">
+                <ul>
+                  <li><i class="fa fa-share-alt"></i></li>
+                  <li><i class="fa fa-reply"></i></li>
+                  <li><i class="fa fa-heart love"></i></li>
+                </ul>
+              </div>
+
+            </div>
+
+            <!-- start user replies -->
+          <li>
+		 		
+            <!-- current #{user} avatar -->
+            <div class="user_avatar">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/cbillins/73.jpg">
+            </div><!-- the comment body --><div class="comment_body">
+              <p><div class="replied_to"><p><span class="user">Sarah Walkman:</span>Pork belly migas flexitarian messenger bag Brooklyn gluten-free. Tilde kitsch skateboard Helvetica, lumbersexual four loko direct trade pour-over. Cronut deep v keffiyeh cornhole food truck</p></div>I'm tired, does anybody know a good place to buy extra strength coffee?</p>
+            </div>
+
+            <!-- comments toolbar -->
+            <div class="comment_toolbar">
+
+              <!-- inc. date and time -->
+              <div class="comment_details">
+                <ul>
+                  <li><i class="fa fa-clock-o"></i> 19:23</li>
+                  <li><i class="fa fa-calendar"></i> 14/01/2015</li>
+                  <li><i class="fa fa-pencil"></i> <span class="user">Blake Anderson</span></li>
+                </ul>
+              </div><!-- inc. share/reply and love --><div class="comment_tools">
+                <ul>
+                  <li><i class="fa fa-share-alt"></i></li>
+                  <li><i class="fa fa-reply"></i></li>
+                  <li><i class="fa fa-heart love"><span class="love_amt"> 12</span></i></li>
+                </ul>
+              </div>
+
+            </div>
+
+
+          </li>
+
+          </ul>
+
+         </div>
+
+        </div>
+  </div>
 <br>
 <div class="action-btns">
   <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>

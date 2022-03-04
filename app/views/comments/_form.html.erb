@@ -1,9 +1,22 @@
 <h4>New Comment</h4>
-<%= simple_form_for([@comment.recipe, @comment]) do |f| %>
-  <div class="field">
-    <%= f.input :content, 
-                label: false, 
-                input_html: { data: { controller: "textarea-autogrow" } } %>
-    <%= f.button :submit, "Comment", class: "btn-ghost" %>
-  </div>
-<% end %>
+<div class="user_avatar">
+  <%= link_to user_path(@recipe.user) do %>
+    <% if @recipe.user.avatar.attached? %> 
+      <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
+        {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
+        class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+    <% else %>
+      <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+    <% end %>
+  <% end %>
+</div>
+<div class="input_comment">
+  <%= simple_form_for([@comment.recipe, @comment]) do |f| %>
+    <div class="field">
+      <%= f.input :content, 
+                  label: false, 
+                  input_html: { data: { controller: "textarea-autogrow" } } %>
+      <%= f.button :submit, "Comment", class: "btn-ghost" %>
+    </div>
+  <% end %>
+</div>
