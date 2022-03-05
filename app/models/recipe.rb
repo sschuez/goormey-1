@@ -6,6 +6,7 @@ class Recipe < ApplicationRecord
 	
 
 	# == Extensions ===========================================================
+
 	
 	# == Relationships ========================================================
 	has_many :ingredients, -> { order(position: :asc) }, dependent: :destroy, inverse_of: :recipe
@@ -20,6 +21,8 @@ class Recipe < ApplicationRecord
 	include PgSearch::Model
 	multisearchable against: [ :name, :description ]
 
+	broadcasts
+	
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do
 		validates :name, presence: true, length: { minimum: 2, maximum: 100}

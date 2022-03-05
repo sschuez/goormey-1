@@ -116,21 +116,26 @@
   </div>
 
   <div class="main-card">
+    <%= turbo_stream_from @recipe %>
     <h4>New comment</h4>
     <% if user_signed_in? %>
-      <%= render partial: "comments/form" %>
+      <%= turbo_frame_tag "new_comment", src: new_recipe_comment_path(@recipe), target: "_top" %>
+      <%#= render partial: "comments/form" %>
     <% else %>
       <p>
         <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
       </p>
     <% end %>
-    <br>
-    <h4>Comments</h4>
-    <br>
-    <div id="comments">
-      <%= render @recipe.comments.order(created_at: :desc) %>
-    </div>
     
+    <h4>Comments</h4>
+    <% if @recipe.comments.empty? %>
+      <p>No comments here yet. Be the first to comment...</p>
+    <% else %>
+      <br>
+        <div id="comments">
+          <%= render @recipe.comments.order(created_at: :desc) %>
+        </div>
+    <% end %>
   </div>
 
 <br>

@@ -1,9 +1,9 @@
 .comment {
-  border-bottom: 1px solid rgba($red-middle,.5);
+  // border-bottom: 1px solid rgba($red-middle,.5);
   display: flex;
-  padding-top: 6px;
+  // padding-top: 6px;
   p {
-    margin-bottom: 6px;
+    // margin-bottom: 6px;
   }
 }
 
@@ -12,19 +12,11 @@
   justify-content: space-between;
 }
 
+.user-avater-comment {
+  margin-top: 6px;
+  margin-right: 10px;
+}
+
 .input-comment {
   width: 100%;
-}
-
-.comment-user {
-  // flex: 0 50%;
-  min-width: 55px;
-  p {
-    line-height: 1.5em;
-  }
-}
-
-
-.user-comment {
-  // flex: 1 0 auto;
 }

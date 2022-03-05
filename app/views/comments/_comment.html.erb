@@ -1,27 +1,21 @@
-<div class="comment" id="<%= dom_id comment %>">
-  <%# USER AVATAR %>
-  <div class="user-show">
-    <div class="comment-user">
-      <%= link_to user_path(@recipe.user) do %>
-        <% if @recipe.user.avatar.attached? %> 
-          <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
-            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
-            class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% else %>
-          <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% end %>
+<div id="comment_<%= comment.id %>" class="comment">
+
+  <div class="user-avater-comment">
+    <%= link_to user_path(comment.user) do %>
+      <% if comment.user.avatar.attached? %> 
+        <%= cl_image_tag comment.user.avatar.key, :transformation=>[
+          {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
+          class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+      <% else %>
+        <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
       <% end %>
-      <%= link_to user_path(@recipe.user) do %>
-        <small><p><%= @recipe.user.full_name %></p></small>
-      <% end %>
-    </div>
-    
-    <div class="user-comment">
-      <p>
-      <%= comment.content %>
-      - <%= time_tag comment.created_at, "data-local": "time-ago" %>
-      </p>
-    </div>
-    
+    <% end %>
   </div>
+  <div class="user-comment ingredient-show">
+    <p>
+    <%= comment.content %>
+    - <%= time_tag comment.created_at, "data-local": "time-ago" %>
+    </p>
+  </div>
+    
 </div>

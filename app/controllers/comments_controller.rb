@@ -10,11 +10,22 @@ class CommentsController < ApplicationController
     @comment = @recipe.comments.new(comment_params)
     @comment.recipe = @recipe
     @comment.user = current_user
-    if @comment.save
-      redirect_to recipe_path(@comment.recipe, anchor: "comments")
-    else
-      flash[:error] = "Something went wrong"
-      render "recipes/show"
+    # if @comment.save
+    #   redirect_to recipe_path(@comment.recipe, anchor: "comments")
+    # else
+    #   flash[:error] = "Something went wrong"
+    #   render "recipes/show"
+    # end
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend(
+            "comments",
+            partial: "comments/comment",
+            locals: { comment: @comment })
+        end
+        format.html { redirect_to @recipe }
+      end
     end
     authorize @comment
   end
@@ -26,6 +37,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:user, :recipe_id, :content)
+    params.require(:comment).permit(:content)
   end
 end
