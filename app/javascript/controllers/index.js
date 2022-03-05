@@ -21,3 +21,6 @@ application.register("photo-preview", PhotoPreviewController)
 
 import RefreshListController from "./refresh_list_controller.js"
 application.register("refresh-list", RefreshListController)
+
+import ResetFormController from "./reset_form_controller.js"
+application.register("reset-form", ResetFormController)
