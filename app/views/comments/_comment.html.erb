@@ -1,4 +1,4 @@
-<div id="comment_<%= comment.id %>" class="comment">
+<div id="<%= dom_id comment %>" class="comment">
 
   <div class="user-avater-comment">
     <%= link_to user_path(comment.user) do %>
@@ -17,5 +17,6 @@
     - <%= time_tag comment.created_at, "data-local": "time-ago" %>
     </p>
   </div>
-    
+  <%= button_to "edit", edit_recipe_comment_path(comment.recipe, comment), method: :post %>
+  <%= button_to "destroy", recipe_comment_path(comment.recipe, comment), method: :delete %>
 </div>
