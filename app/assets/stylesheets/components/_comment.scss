@@ -1,10 +1,6 @@
 .comment {
-  // border-bottom: 1px solid rgba($red-middle,.5);
   display: flex;
-  // padding-top: 6px;
-  p {
-    // margin-bottom: 6px;
-  }
+
 }
 
 .new-comment-form {
@@ -19,4 +15,8 @@
 
 .input-comment {
   width: 100%;
+}
+
+.comment-actions {
+  // display: flex;
 }

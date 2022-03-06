@@ -6,7 +6,7 @@ class LikePolicy < ApplicationPolicy
   end
 
   def create?
-    true  # Anyone can create a recipe
+    true  # Anyone can like
   end
 
   def destroy?
