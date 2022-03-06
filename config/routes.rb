@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     delete 'likes', to: "likes#destroy"
 
     # COMMENTS
-    resources :comments, only: [:new, :create]
+    resources :comments do
+      member do
+        post :edit
+      end
+    end
   end
   
 

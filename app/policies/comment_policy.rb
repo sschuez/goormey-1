@@ -5,23 +5,19 @@ class CommentPolicy < ApplicationPolicy
     end
   end
   
-  def new?
-    true
-  end
-  
   def show?
-    true  # Anyone can view a recipe
+    true  # Anyone can view a comment
   end
   
   def create?
-    true  # Anyone can create a recipe
+    true  # Anyone can create a comment
   end
   
   def update?
-    record.user == user || user.admin if user # Only recipe creator or admin can update it
+    record.user == user || user.admin if user # Only comment creator or admin can update it
   end
   
   def destroy?
-    record.user == user || user.admin if user  # Only recipe creator or admin can destroy it
+    record.user == user || user.admin if user || record.recipe.user == user  # Only comment creator or admin can destroy it
   end
 end

@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_recipe, only: %i[ new create ]
+  before_action :set_recipe, only: %i[ new create edit update destroy ]
+  before_action :set_comment, only: %i[ edit update destroy ]
 
   def new
     @comment = @recipe.comments.new
@@ -10,11 +11,71 @@ class CommentsController < ApplicationController
     @comment = @recipe.comments.new(comment_params)
     @comment.recipe = @recipe
     @comment.user = current_user
-    if @comment.save
-      redirect_to recipe_path(@comment.recipe, anchor: "comments")
-    else
-      flash[:error] = "Something went wrong"
-      render "recipes/show"
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend(
+            "comments",
+            partial: "comments/comment",
+            locals: { comment: @comment })
+        end
+        format.html { redirect_to @comment, notice: "comment was successfully created." }
+        format.json { render :show, status: :created, location: @comment }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            'new_comment',
+            partial: "comments/form",
+            locals: {comment: @comment})
+        end
+      end
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @comment.errors, status: :unprocessable_entity }
+    end
+    authorize @comment
+  end
+
+  def edit
+    respond_to do |format|
+      format.turbo_stream do 
+        render turbo_stream: turbo_stream.update(
+          @comment,
+          partial: "comments/form",
+          locals: {comment: @comment}) 
+      end
+    end
+    authorize @comment
+  end
+
+  def update
+    @comment.recipe = @comment.recipe
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.turbo_stream do 
+          render turbo_stream: [
+            turbo_stream.update(
+              @comment,
+              partial: "comments/comment",
+              locals: {comment: @comment}),
+            turbo_stream.update('notice', "Comment #{@comment.id} updated")
+          ]
+        end
+      else
+        format.turbo_stream do 
+          render turbo_stream: turbo_stream.update(
+            @comment,
+            partial: "comments/form",
+            locals: {comment: @comment}) 
+        end   
+      end
+    end
+    authorize @comment
+  end
+
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
     end
     authorize @comment
   end
@@ -25,7 +86,11 @@ class CommentsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
   end
 
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
   def comment_params
-    params.require(:comment).permit(:user, :recipe_id, :content)
+    params.require(:comment).permit(:content)
   end
 end

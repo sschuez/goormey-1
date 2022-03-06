@@ -5,3 +5,6 @@ import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
 import "stimulus-textarea-autogrow"
+
+import LocalTime from "local-time"
+LocalTime.start()

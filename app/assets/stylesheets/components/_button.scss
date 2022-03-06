@@ -98,7 +98,7 @@
   left: 30px;
 }
 
-.save-recipe {
+.align-right {
   text-align: right;
 }
 
@@ -127,6 +127,18 @@
 .card-recipe-like:hover {
   font-size: 26px;
 }
+
+.btn-styling {
+  background: none;
+  border: none;
+  padding: 0;
+  .fas {
+    padding-top: 0;
+    font-size: 16px;
+  }
+}
+
+
 
 // Smallest device
 @media (max-width: 600px) {

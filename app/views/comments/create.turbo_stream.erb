@@ -1,0 +1,9 @@
+<%#= turbo_stream.prepend "comments", @comment %>
+<%# # Return handled by cable %>
+
+<%#= turbo_stream.append "comments" do %>
+  <%#= render "comment", comment: comment %>
+<%# end %>
+<%#= turbo_strem.replace "#{dom_id(Comment.new)}_form" do %>
+  <%#= render "form", comment: Comment.new %>
+<%# end %>
