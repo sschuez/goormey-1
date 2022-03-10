@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import CommentsCheckController from "./comments_check_controller.js"
-application.register("comments-check", CommentsCheckController)
-
 import DragController from "./drag_controller.js"
 application.register("drag", DragController)
 
