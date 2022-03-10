@@ -8,6 +8,8 @@
 <% end %>
 <%# /METADATA %>
   
+<%= turbo_stream_from @recipe %>
+
 <%#= turbo_frame_tag "recipe" do %>
   <%# ACTION BUTTON TOP %>
   <div class="action-btns">
@@ -116,7 +118,6 @@
   </div>
 
   <div class="main-card">
-    <%= turbo_stream_from @recipe %>
     <h4>New comment</h4>
     <% if user_signed_in? %>
       <%= turbo_frame_tag "new_comment", src: new_recipe_comment_path(@recipe), target: "_top" %>
