@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        # @comment.broadcast_prepend_later_to @comment.recipe
         format.turbo_stream do
           render turbo_stream: turbo_stream.prepend(
             "comments",
