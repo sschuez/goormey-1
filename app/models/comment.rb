@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  
   #Organisation Model (Shortcut: mstr)
   # == Constants ============================================================
   

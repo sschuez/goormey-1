@@ -25,7 +25,7 @@
     <% end %>
 
     <% if policy(@comment).destroy? %>
-      <%= button_to recipe_comment_path(comment.recipe, comment), method: :delete, class: "btn-styling" do %>
+      <%= button_to recipe_comment_path(comment.recipe, comment), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn-styling" do %>
         <i class="show-icon fas fa-trash-alt"></i>
       <% end %>
     <% end %>
