@@ -1,25 +1,27 @@
-<h1>Submission ID: <%= @submission.description_short %></h1>
-<br>
-<%= link_to "Submission questions", survey_submission_question_path(@submission.survey, @submission, Question.first), class: "btn-ghost" %>
-<br><br>
+<h1>Submission: <%= @submission.description_short %></h1>
+	<div class="main-card">
+	<br>
+		<%= link_to "Submission questions", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>
+		<br><br>
 
-<% if @submission.answers.any? %>
-	<h4>Current state of your submission</h4>
-	<ul>
-		<% @questions.each do | question | %>
-			<li>
-				<%= question.content %> |
-				<% if @submission.answers.find_by(question: question) %>
-					<%= @submission.answers.find_by(question: question).content %> |
-				<% else %>
-					not yet answered |
+		<% if @submission.answers.any? %>
+			<h4>Current state of your submission</h4>
+			<ul>
+				<% @submission.survey.questions.each do | question | %>
+					<li>
+						<%= question.content %> |
+						<% if @submission.answers.find_by(question: question) %>
+							<%= @submission.answers.find_by(question: question).content %> |
+						<% else %>
+							not yet answered |
+						<% end %>
+						<%= link_to "Show", survey_submission_question_path(@submission.survey, @submission, question) %>	
+					</li>
 				<% end %>
-				<%= link_to "Show", survey_submission_question_path(@submission.survey, @submission, question) %>	
-			</li>
+			</ul>
+		<% else %>
+			<p>No submission started yet</p>
 		<% end %>
-	</ul>
-<% else %>
-	<p>No submission started yet</p>
-<% end %>
-
+	</div>
+	<br>
 <%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
