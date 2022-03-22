@@ -6,6 +6,7 @@
       @questions = Question.order(:order)
       @question = Question.new
       @survey = Survey.find(params[:survey_id])
+      @survey_questions = @survey.questions.order(:order)
       skip_policy_scope
     end
 
