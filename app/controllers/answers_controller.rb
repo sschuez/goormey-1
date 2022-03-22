@@ -6,6 +6,7 @@
 			@answer = Answer.new(answer_params)
 			@answer.question = @question
 			@answer.submission = @submission
+			@survey = @submission.survey
 			authorize @answer
 			if @answer.save
 				final_question?
@@ -16,6 +17,7 @@
 		
 		def update
 			@answer = @submission.answers.find_by(question: @question)
+			@survey = @submission.survey
 			authorize @answer
 			if @answer.update(answer_params)
 				final_question?
@@ -29,9 +31,9 @@
 		def final_question?
 			@next_question = @answer.question.next_question
 			if @next_question
-				redirect_to submission_question_path(@submission, @next_question)
+				redirect_to survey_submission_question_path(@survey, @submission, @next_question)
 			else
-				redirect_to submission_path(@submission)
+				redirect_to survey_submission_path(@survey, @submission)
 			end
 		end
 

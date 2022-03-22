@@ -1,35 +1,41 @@
-<h1>questions#index</h1>
+<h1>Questions for Survey: <%= @survey.name %></h1>
 
-<ul>
-	<% @questions.each do | question | %>
-		<li id="question-<%= question.id %>">
-			<%= question.order %>. |
-      <%= question.title %> |
-			<%= link_to "edit", edit_question_path(question) %>	
-			</li>
+<div class="main-card">
+	<br>
+		<% @survey.questions.each do | question | %>
+			<div class="ingredient-show" id="question-<%= question.id %>">
+				<p>
+					<%= question.order %>. |
+					<%= question.title %> |
+					<%= link_to "edit", edit_survey_question_path(@survey, question) %>	
+				</p>
+			</div>
+		<% end %>
+	<br><br>
+
+	<h4>Create a new question</h4>
+	<%= simple_form_for([@survey, @question], data: { turbo: :false}) do |f| %>
+		<div class="form-group">
+			<%= f.input :title, 
+					label: "Write your question title here.",
+					as: :string %>
+		</div>
+		<div class="form-group">
+			<%= f.input :order,
+					placeholder: "Latest order: #{@survey.questions.empty? ? 0 : @survey.questions.last.order }", 
+					label: "What's the order?",
+					as: :string %>
+		</div>
+		<div class="form-group">
+			<%= f.input :question_type,
+					label: "What's the question type?",
+					collection: Question::QUESTION_TYPES,
+					as: :select %>
+		</div>
+
+		<%= f.button :submit, class: "btn-ghost" %>
+		<br>
 	<% end %>
-</ul>
-<br><br>
-
-<h4>Create a new question</h4>
-<%= simple_form_for(@question) do |f| %>
-  <div class="form-group">
-  	<%= f.input :title, 
-  			label: "Write your question title here.",
-  			as: :string %>
-  </div>
-  <div class="form-group">
-  	<%= f.input :order,
-  			placeholder: "Latest order: #{Question.last ? Question.last.order : 0 }", 
-  			label: "What's the order?",
-  			as: :string %>
-  </div>
-  <div class="form-group">
-  	<%= f.input :question_type,
-  			label: "What's the question type?",
-  			collection: Question::QUESTION_TYPES,
-  			as: :select %>
-  </div>
-
-  <%= f.button :submit, class: "btn btn-secondary" %>
-<% end %>
+</div>
+<br>
+<%= link_to "Back to survey", survey_path(@survey), class: "btn-ghost" %>

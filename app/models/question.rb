@@ -1,6 +1,8 @@
 # module Surveys
 	class Question < ApplicationRecord
 		has_many :answers, dependent: :destroy#, class_name: 'Surveys::Answer'
+		belongs_to :survey, dependent: :destroy
+
 		validates :order, presence: true
 		validates :order, uniqueness: true
 		# validates :identifier, uniqueness: true

@@ -15,12 +15,14 @@
 
     def create
       # @submissions = Submission.all
+      @survey = Survey.find(params[:survey_id])
       @submission = Submission.new(submission_params)
       @submission.survey_user = SurveyUser.last
+      @submission.survey = @survey
       authorize @submission
       if @submission.save
         flash[:notice] = "Submission #{@submission.description_short} successfully created"
-        redirect_to submissions_path
+        redirect_to survey_path(@survey)
       else
         flash[:error] = "Something went wrong"
         render 'index'
