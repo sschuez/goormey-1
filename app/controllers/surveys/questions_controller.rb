@@ -6,6 +6,7 @@ module Surveys
       @questions = Question.order(:order)
       @question = Question.new
       # @submission = Submission.find(params[:submission_id])
+      skip_policy_scope
     end
 
     def show
@@ -16,20 +17,23 @@ module Surveys
 
     def create
       @question = Question.new(question_params)
+      authorize @question
       if @question.save
-        redirect_to questions_path(anchor: "question-#{@question.id}")
+        redirect_to surveys_questions_path(anchor: "question-#{@question.id}")
         flash[:notice] = "Created new question: #{@question.title}"
       else
-        render :new
+        render :index
       end
     end
 
     def edit
+      authorize @question
     end
 
     def update
+      authorize @question
       if @question.update(question_params)
-        redirect_to questions_path(anchor: "question-#{@question.id}")
+        redirect_to surveys_questions_path(anchor: "question-#{@question.id}")
         flash[:notice] = "Question #{@question.title} has been updated"
       else
         render :edit

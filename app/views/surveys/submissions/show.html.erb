@@ -1,7 +1,7 @@
 <h1>Submission ID: <%= @submission.id %></h1>
 <p><%= @submission.description_short %></p>
 
-<%= link_to "to submission_questions", surveys_submission_question_path(@submission, Question.first) %>
+<%= link_to "to submission_questions", surveys_submission_question_path(@submission, Surveys::Question.first) %>
 <br><br>
 
 <% if @submission.answers.any? %>

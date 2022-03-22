@@ -39,7 +39,7 @@ module Surveys
 		end
 
 		def answer_params
-			params.require(:answer).permit(:content)
+			params.require(:surveys_answer).permit(:content)
 		end
 	end
 end

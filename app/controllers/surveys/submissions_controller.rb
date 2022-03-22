@@ -10,6 +10,7 @@ module Surveys
     def show
       @submission = Submission.find(params[:id])
       @questions = Question.order(:order)
+      authorize @submission
     end
 
     def create

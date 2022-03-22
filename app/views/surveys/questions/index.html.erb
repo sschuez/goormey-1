@@ -5,7 +5,7 @@
 		<li id="question-<%= question.id %>">
 			<%= question.order %>. |
       <%= question.title %> |
-			<%= link_to "edit", edit_question_path(question) %>	
+			<%= link_to "edit", edit_surveys_question_path(question) %>	
 			</li>
 	<% end %>
 </ul>
@@ -14,20 +14,20 @@
 <h4>Create a new question</h4>
 <%= simple_form_for(@question) do |f| %>
   <div class="form-group">
-  	<%= f.input :content, 
-  			label: "Write your question here.",
+  	<%= f.input :title, 
+  			label: "Write your question title here.",
   			as: :string %>
   </div>
   <div class="form-group">
   	<%= f.input :order,
-  			placeholder: "Latest order: #{Question.last.order}", 
+  			placeholder: "Latest order: #{Surveys::Question.last ? Surveys::Question.last.order : 0 }", 
   			label: "What's the order?",
   			as: :string %>
   </div>
   <div class="form-group">
   	<%= f.input :question_type,
   			label: "What's the question type?",
-  			collection: Question::QUESTION_TYPES,
+  			collection: Surveys::Question::QUESTION_TYPES,
   			as: :select %>
   </div>
 
