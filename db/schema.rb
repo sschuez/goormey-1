@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_22_075951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "submission_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["submission_id"], name: "index_answers_on_submission_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -105,6 +115,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.text "content"
+    t.string "question_type"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "input_hidden", default: false
+    t.string "title"
+    t.text "moderation"
+    t.text "hint"
+    t.string "identifier"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -114,6 +137,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
     t.integer "serves"
     t.boolean "wizard_complete"
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string "description_short"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "survey_user_id", null: false
+    t.index ["survey_user_id"], name: "index_submissions_on_survey_user_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
+  end
+
+  create_table "survey_users", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -133,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "questions"
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users"
   add_foreign_key "ingredients", "recipes"
@@ -140,4 +180,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_185635) do
   add_foreign_key "likes", "recipes"
   add_foreign_key "likes", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "submissions", "survey_users"
+  add_foreign_key "submissions", "users"
 end

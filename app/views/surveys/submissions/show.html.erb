@@ -1,0 +1,26 @@
+<h1>Submission ID: <%= @submission.id %></h1>
+<p><%= @submission.description_short %></p>
+
+<%= link_to "to submission_questions", surveys_submission_question_path(@submission, Question.first) %>
+<br><br>
+
+<% if @submission.answers.any? %>
+	<h4>Current state of your submission</h4>
+	<ul>
+		<% @questions.each do | question | %>
+			<li>
+				<%= question.content %> |
+				<% if @submission.answers.find_by(question: question) %>
+					<%= @submission.answers.find_by(question: question).content %> |
+				<% else %>
+					not yet answered |
+				<% end %>
+				<%= link_to "show", surveys_submission_question_path(@submission, question) %>	
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No submission started yet</p>
+<% end %>
+
+<%= link_to "to submissions", surveys_submissions_path %>
