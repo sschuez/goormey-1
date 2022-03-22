@@ -21,7 +21,7 @@
 		<%= f.input :question_type, 
 								class: 'form-control', 
 								label: "Question type",
-								collection: Surveys::Question::QUESTION_TYPES,
+								collection: Question::QUESTION_TYPES,
 								as: :select,
 								hint: "Default is 'string', i.e. text field with limited number of characters" %>
 	</div>
@@ -75,7 +75,7 @@
 	<% end %>
 
 	<br>
-	<%= link_to "Back to questions", surveys_questions_path(anchor: "question-#{@question.id}"), class: "btn btn-primary" %>
+	<%= link_to "Back to questions", questions_path(anchor: "question-#{@question.id}"), class: "btn btn-primary" %>
 	<%= f.button :submit, "Update Question", class: 'btn btn-secondary' %>
 
 <% end %>

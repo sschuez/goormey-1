@@ -1,5 +1,5 @@
-module Surveys
-  class SubmissionPolicy < ApplicationPolicy
+# module Surveys
+  class SurveyUserPolicy < ApplicationPolicy
     class Scope < Scope
       # NOTE: Be explicit about which records you allow access to!
       def resolve
@@ -7,12 +7,9 @@ module Surveys
       end
     end
 
-    def show?
-      true
-    end
-
     def create?
       true
     end
+
   end
-end
+# end

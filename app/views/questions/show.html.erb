@@ -1,10 +1,10 @@
 <div class="question-card">
 	<!-- <h1>questions#show</h1> -->
 	<br>
-	<%#= simple_form_for([@submission, @question, @answer], data: { turbo: :false }) do | f | %>
-	<%#= simple_form_for :url => surveys_submission_question_answer_path(@submission, @question, @answer) do |f| %>
+	<%= simple_form_for([@submission, @question, @answer], data: { turbo: :false }) do | f | %>
+	<%#= simple_form_for :url => submission_question_answer_path(@submission, @question, @answer) do |f| %>
 
-	<%= form_with model: [:surveys, @submission, @question, @answer] do |f| %>
+	<%#= form_for(url: submission_question_answer_path(@submission, @question, @answer), method: "patch") do |f| %>
 		
 		<!-- Title -->
 		<% if @question.title.present? %>
@@ -37,7 +37,7 @@
 
 		<!-- Previous Button -->
 		<% if @question.previous_question.present? %>
-			<%= link_to "Previous", surveys_submission_question_path(@submission, @previous_question), class: "btn btn-secondary" %>
+			<%= link_to "Previous", submission_question_path(@submission, @previous_question), class: "btn btn-secondary" %>
 		<% end %>
 
 		<!-- Next Button -->

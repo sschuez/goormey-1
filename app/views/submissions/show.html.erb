@@ -1,7 +1,7 @@
 <h1>Submission ID: <%= @submission.id %></h1>
 <p><%= @submission.description_short %></p>
 
-<%= link_to "to submission_questions", surveys_submission_question_path(@submission, Surveys::Question.first) %>
+<%= link_to "to submission_questions", submission_question_path(@submission, Question.first) %>
 <br><br>
 
 <% if @submission.answers.any? %>
@@ -15,7 +15,7 @@
 				<% else %>
 					not yet answered |
 				<% end %>
-				<%= link_to "show", surveys_submission_question_path(@submission, question) %>	
+				<%= link_to "show", submission_question_path(@submission, question) %>	
 			</li>
 		<% end %>
 	</ul>
@@ -23,4 +23,4 @@
 	<p>No submission started yet</p>
 <% end %>
 
-<%= link_to "to submissions", surveys_submissions_path %>
+<%= link_to "to submissions", submissions_path %>

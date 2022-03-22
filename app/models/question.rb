@@ -1,4 +1,4 @@
-module Surveys
+# module Surveys
 	class Question < ApplicationRecord
 		has_many :answers, dependent: :destroy#, class_name: 'Surveys::Answer'
 		validates :order, presence: true
@@ -7,11 +7,11 @@ module Surveys
 		has_rich_text :moderation
 
 		def next_question
-			Surveys::Question.where(order: self.order + 1).first
+			Question.where(order: self.order + 1).first
 		end
 
 		def previous_question
-			Surveys::Question.where(order: self.order - 1).first
+			Question.where(order: self.order - 1).first
 		end
 
 		def question_type?
@@ -41,4 +41,4 @@ module Surveys
 
 		QUESTION_TYPES = [ "string", "text", "integer", "boolean", "radio_buttons", "check_boxes", "select",	"file", "date", "password" ]
 	end
-end
+# end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_22_075951) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_22_145335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -141,12 +141,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_22_075951) do
 
   create_table "submissions", force: :cascade do |t|
     t.string "description_short"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "survey_user_id", null: false
     t.index ["survey_user_id"], name: "index_submissions_on_survey_user_id"
-    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "survey_users", force: :cascade do |t|
@@ -181,5 +179,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_22_075951) do
   add_foreign_key "likes", "users"
   add_foreign_key "recipes", "users"
   add_foreign_key "submissions", "survey_users"
-  add_foreign_key "submissions", "users"
 end

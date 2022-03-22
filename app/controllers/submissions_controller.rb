@@ -1,4 +1,4 @@
-module Surveys
+# module Surveys
   class SubmissionsController < ApplicationController
     def index
       @submissions = Submission.all
@@ -14,15 +14,13 @@ module Surveys
     end
 
     def create
+      # @submissions = Submission.all
       @submission = Submission.new(submission_params)
-      # @survey_user = SurveyUser.new(survey_user_params)
-      # authorize @survey_user
-      authorize @submission
       @submission.survey_user = SurveyUser.last
-      @submission.user = current_user
+      authorize @submission
       if @submission.save
         flash[:notice] = "Submission #{@submission.description_short} successfully created"
-        redirect_to surveys_submissions_path
+        redirect_to submissions_path
       else
         flash[:error] = "Something went wrong"
         render 'index'
@@ -39,11 +37,7 @@ module Surveys
     private
 
     def submission_params
-      params.require(:surveys_submission).permit(:description_short)        
-    end
-
-    def survey_user_params
-      params.require(:surveys_survey_user).permit(:email)
+      params.require(:submission).permit(:description_short)        
     end
   end
-end
+# end

@@ -1,4 +1,4 @@
-module Surveys
+# module Surveys
   class QuestionsController < ApplicationController
     before_action :set_question, only: [ :show, :edit, :update ]
 
@@ -13,13 +13,14 @@ module Surveys
       @submission = Submission.find(params[:submission_id])
       @answer = @submission.answers.find_by(question: @question).nil? ? Answer.new : @submission.answers.find_by(question: @question) 
       @previous_question = @question.previous_question
+      authorize @question
     end
 
     def create
       @question = Question.new(question_params)
       authorize @question
       if @question.save
-        redirect_to surveys_questions_path(anchor: "question-#{@question.id}")
+        redirect_to questions_path(anchor: "question-#{@question.id}")
         flash[:notice] = "Created new question: #{@question.title}"
       else
         render :index
@@ -47,7 +48,7 @@ module Surveys
     end
 
     def question_params
-      params.require(:surveys_question).permit(:content, :order, :question_type, :hint, :title, :moderation, :identifier, :input_hidden, answers_attributes: [ :content ])
+      params.require(:question).permit(:content, :order, :question_type, :hint, :title, :moderation, :identifier, :input_hidden, answers_attributes: [ :content ])
     end
   end
-end
+# end

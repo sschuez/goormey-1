@@ -1,4 +1,4 @@
-module Surveys
+# module Surveys
 	class AnswersController < ApplicationController
 		before_action :set_question_answer, only: [ :create, :update ]
 		
@@ -6,15 +6,17 @@ module Surveys
 			@answer = Answer.new(answer_params)
 			@answer.question = @question
 			@answer.submission = @submission
+			authorize @answer
 			if @answer.save
 				final_question?
 			else
 				render 'questions/show'
 			end
 		end
-
+		
 		def update
 			@answer = @submission.answers.find_by(question: @question)
+			authorize @answer
 			if @answer.update(answer_params)
 				final_question?
 			else
@@ -39,7 +41,7 @@ module Surveys
 		end
 
 		def answer_params
-			params.require(:surveys_answer).permit(:content)
+			params.require(:answer).permit(:content)
 		end
 	end
-end
+# end

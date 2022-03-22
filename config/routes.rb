@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   root to: 'recipes#index'
 
   # SURVEYS
-  namespace :surveys do
+  # namespace :surveys do
     resources :submissions, only: [ :index, :create, :show, :destroy ] do
       resources :questions, only: [ :index, :show ] do
         resources :answers, only: [ :create, :update ]
@@ -49,6 +49,6 @@ Rails.application.routes.draw do
     end
     resources :survey_users
     resources :questions, only: [ :index, :create, :edit, :update, :destroy ]
-  end
+  # end
 
 end
