@@ -9,7 +9,7 @@
 
     def show
       @submission = Submission.find(params[:id])
-      @questions = Question.order(:order)
+      @questions = @submission.survey.questions.order(:order)
       authorize @submission
     end
 

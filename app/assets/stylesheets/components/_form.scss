@@ -28,6 +28,16 @@
   color: $red-very-light;
 }
 
+.surevy-question {
+  position: relative;
+  padding-right: 60px !important;
+  .handle {
+    top: 0px;
+  }
+}
+
+
+
 .label-inline {
   justify-content: flex-start !important;
 

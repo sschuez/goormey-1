@@ -1,6 +1,9 @@
 <h1>Survey: <%= @survey.name %></h1>
 <div class="main-card">
   <br>
+  <div class="align-right">
+    <%= link_to "Survey questions", survey_questions_path(@survey), class: "btn-ghost" %>
+  </div>
 
   <% if @survey.submissions.any? %>
     <h4>Current state of your survey</h4>
@@ -19,7 +22,6 @@
     <p>No submissions yet</p>
   <% end %>
   <br>
-  <%= link_to "Survey questions", survey_questions_path(@survey), class: "btn-ghost" %>
   <br>
   <br>
   <br>

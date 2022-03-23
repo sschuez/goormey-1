@@ -2,15 +2,24 @@
 
 <div class="main-card">
 	<br>
-		<% @survey_questions.each do | question | %>
-			<div class="ingredient-show" id="question-<%= question.id %>">
-				<p>
-					<%= question.order %>. |
-					<%= question.title %> |
-					<%= link_to "edit", edit_survey_question_path(@survey, question) %>	
-				</p>
-			</div>
-		<% end %>
+		<div data-controller="drag" data-drag-url="/surveys/<%= @survey.id %>/questions/:id/question_position">
+			<% @survey_questions.each do | question | %>
+				
+				<div class="ingredient-show surevy-question" id="question-<%= question.id %>" data-id="<%= question.id %>">
+					
+					<p>
+						<%= question.order %>. |
+						<%= question.title %> |
+						<%= link_to "edit", edit_survey_question_path(@survey, question) %>	
+					</p>
+					
+					<div class="handle">
+						<i class="fas fa-grip-lines"></i>
+					</div>
+
+				</div>
+			<% end %>
+		</div>
 	<br><br>
 
 	<h4>Create a new question</h4>

@@ -48,7 +48,9 @@ Rails.application.routes.draw do
         resources :answers, only: [ :create, :update ]
       end
     end
-    resources :questions, only: [ :index, :create, :edit, :update, :destroy ]
+    resources :questions, only: [ :index, :create, :edit, :update, :destroy ] do
+      resource :question_position, only: :update
+    end
     resources :survey_users
   end
   
