@@ -4,10 +4,10 @@
 	<%= simple_form_for(@question, data: { turbo: :false }) do |f| %>
 
 		<div class="form-group">
-			<%= f.input :title, 
+			<%= f.input :content, 
 									class: 'form-control', 
-									label: "Title of question page", 
-									hint: "If empty, no title will appear" %> 
+									label: "Question content", 
+									hint: "This field is required" %> 
 		</div>
 
 		<div class="form-group">
@@ -28,42 +28,12 @@
 		</div>
 
 		<div class="form-group">
-			<%= f.input :content, 
-									class: 'form-control', 
-									label: "Question content", 
-									hint: "This field is required" %> 
-		</div>
-		
-		<div class="form-group">
 			<%= f.input :hint, 
 									class: 'form-control', 
 									label: "Hint",
 									hint: "Any hint you will give will appear here" %>
 		</div>
 
-		<div class="form-group">
-			<%= f.input :order, 
-									class: 'form-control', 
-									label: "Order", 
-									as: :integer,
-									hint: "Danger! Dependancy with wizard logic" %>
-		</div>
-
-		<div class="form-group">
-			<%= f.input :identifier, 
-									class: 'form-control', 
-									label: "Identifier", 
-									hint: "This is to label the question" %>
-		</div>
-
-		<div class="form-group">
-			<%= f.input :input_hidden, 
-									class: 'form-control', 
-									label: "Would you like to hide the input field", 
-									hint: "This needs to be checked if you want to show text only",
-									as: :boolean %>
-		</div>
-		
 		<!-- Error messages -->
 		<% if @question.errors.any? %>
 			<div class="errors-container">

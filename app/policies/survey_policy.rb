@@ -17,4 +17,8 @@ class SurveyPolicy < ApplicationPolicy
   def update?
     create?
   end
+
+  def destroy?
+    create?
+  end
 end

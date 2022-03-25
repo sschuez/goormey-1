@@ -6,7 +6,6 @@
       @questions = Question.order(:order)
       @question = Question.new
       @survey = Survey.find(params[:survey_id])
-      @survey_questions = @survey.questions.order(:position)
       skip_policy_scope
     end
 
@@ -20,13 +19,14 @@
 
     def create
       @question = Question.new(question_params)
+      @question.question_type = "text"
       @survey = Survey.find(params[:survey_id])
       @question.survey = @survey
       
       authorize @question
       if @question.save
         redirect_to survey_questions_path(@question.survey)
-        flash[:notice] = "Created new question: #{@question.title}"
+        flash[:notice] = "Created new question: #{@question.content}"
       else
         render :index
       end
@@ -42,7 +42,7 @@
       authorize @question
       if @question.update(question_params)
         redirect_to survey_questions_path(@survey, anchor: "question-#{@question.id}")
-        flash[:notice] = "Question #{@question.title} has been updated"
+        flash[:notice] = "Question #{@question.content} has been updated"
       else
         render :edit
       end
@@ -55,7 +55,7 @@
     end
 
     def question_params
-      params.require(:question).permit(:content, :order, :question_type, :hint, :title, :moderation, :identifier, :input_hidden, answers_attributes: [ :content ])
+      params.require(:question).permit(:content, :question_type, :hint, :moderation, answers_attributes: [ :content ])
     end
   end
 # end

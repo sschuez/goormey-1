@@ -1,4 +1,6 @@
 class SurveysController < ApplicationController
+  before_action :set_survey, only: %i[ show edit update destroy ]
+
   def index
     @surveys = Survey.all
     @survey = Survey.new
@@ -6,34 +8,57 @@ class SurveysController < ApplicationController
   end
 
   def show
-    @survey = Survey.find(params[:id])
     @questions = Question.order(:order)
     @submission = Submission.new
-    authorize @survey
   end
   
+  def edit
+  end
+
   def create
-    # @surveys = survey.all
     @survey = Survey.new(survey_params)
     authorize @survey
-    if @survey.save
-      flash[:notice] = "Survey #{@survey.name} successfully created"
-      redirect_to surveys_path
-    else
-      flash[:error] = "Something went wrong"
-      render 'index'
+
+    respond_to do |format|
+      if @survey.save
+        format.html { redirect_to surveys_url, notice: "Survey #{@survey.name} was successfully created." }
+        format.json { render :show, status: :created, location: @survey }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @survey.errors, status: :unprocessable_entity }
+      end
     end
   end
-  
-  def destroy
-    @survey = Survey.find(params[:id])
-    @survey.destroy
-    redirect_to surveys_path
-    flash[:notice] = "Survey #{@survey.description_short} has been deleted."
+
+  def update
+    respond_to do |format|
+      if @survey.update(survey_params)
+        format.html { redirect_to survey_url(@survey), notice: "Survey #{@survey.name} was successfully updated." }
+        format.json { render :show, status: :ok, location: @survey }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @survey.errors, status: :unprocessable_entity }
+      end
+    end
   end
+
+  def destroy
+    @survey.destroy
+
+    respond_to do |format|
+      format.html { redirect_to surveys_url, status: :see_other, notice: "Survey #{@survey.name} was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
   
   private
   
+  def set_survey
+    @survey = Survey.find(params[:id])
+    authorize @survey
+  end
+
   def survey_params
     params.require(:survey).permit(:name)        
   end

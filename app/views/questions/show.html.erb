@@ -2,26 +2,23 @@
 	<!-- <h1>questions#show</h1> -->
 	<br>
 	<%= simple_form_for([@survey, @submission, @question, @answer], data: { turbo: :false }) do | f | %>
-	
-		<!-- Title -->
-		<% if @question.title.present? %>
-			<h1><%= @question.title %></h1>
-		<% end %>
+
+		<%# Counter %>
+		<h5>Question <%= @question.position %> out of <%= @survey.questions.count %></h5>
+		<br>
+
+		<!-- Question -->
+		<h4><%= @question.content %></h4>
 
 		<!-- Moderation -->
 		<% if @question.moderation.present? %>
 			<p><%= @question.moderation %></p>
 		<% end %>
 
-		<!-- Input -->
-		<% if @question.input_hidden %>
-			<%= f.input :content, as: :hidden	%>
-		<% else %>
-			<%= f.input :content,
-						as: @question.question_type?,		
-						label: @question.content,
-						hint: @question.hint %>
-		<% end %>
+		<%= f.input :content,
+					as: @question.question_type?,		
+					label: false,
+					hint: @question.hint %>
 		
 		<!-- Errors -->
 		<% if @answer.errors.any? %>

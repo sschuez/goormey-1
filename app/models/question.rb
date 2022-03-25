@@ -3,13 +3,11 @@
 		has_many :answers, dependent: :destroy#, class_name: 'Surveys::Answer'
 		belongs_to :survey, dependent: :destroy
 
-		validates :order, presence: true
-		validates :order, uniqueness: true
-		# validates :identifier, uniqueness: true
+		validates :content, presence: true
+		
 		has_rich_text :moderation
 
 		acts_as_list scope: :survey
-
 		scope :by_survey, -> (survey) { joins(:survey).where(surveys: {id: survey}) }
 		
 		def next_question
@@ -45,6 +43,6 @@
 			end
 		end
 
-		QUESTION_TYPES = [ "string", "text", "integer", "boolean"]#"radio_buttons", "check_boxes", "select",	"file", "date", "password" ]
+		QUESTION_TYPES = [ "text", "string", "integer", "boolean"]#"radio_buttons", "check_boxes", "select",	"file", "date", "password" ]
 	end
 # end

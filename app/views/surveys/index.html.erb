@@ -4,12 +4,15 @@
   <% @surveys.each do | survey | %>
     <div class="ingredient-show">
       <p> 
-      Id: <%= survey.id %> - 
       <%= survey.name %> |
-      <%= link_to "show", survey_path(survey) %> |
-      <%= link_to "delete", survey_path(survey), 
-          method: :delete,
-          data: { confirm: "Are you sure you want to delete #{survey.name}?" }
+      <%= link_to "Edit", edit_survey_path(survey) %> |
+      <%= link_to "Show", survey_path(survey) %> |
+      <%= link_to "Delete", survey_path(survey), 
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure you want to delete #{survey.name}?",
+            "data-turbo-frame": "_top"
+          }
           %>
       </p>
     </div>

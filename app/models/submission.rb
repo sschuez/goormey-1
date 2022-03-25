@@ -1,7 +1,7 @@
 # module Surveys
   class Submission < ApplicationRecord
-    belongs_to :survey, dependent: :destroy
-    belongs_to :survey_user, dependent: :destroy#, class_name: 'Surveys::SurveyUser'
-    has_many :answers, dependent: :destroy#, class_name: 'Survey::Answer'
+    belongs_to :survey
+    belongs_to :survey_user
+    has_many :answers, dependent: :destroy
   end
 # end

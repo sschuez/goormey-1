@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   # SURVEYS
   # namespace :surveys do
-  resources :surveys, only: [:index, :create, :show, :destroy] do  
+  resources :surveys do 
     resources :submissions, only: [ :index, :create, :show, :destroy ] do
       resources :questions, only: [ :index, :show ] do
         resources :answers, only: [ :create, :update ]

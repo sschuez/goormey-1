@@ -1,4 +1,4 @@
 class Survey < ApplicationRecord
-  has_many :submissions
-  has_many :questions
+  has_many :submissions, dependent: :destroy
+  has_many :questions, dependent: :destroy
 end
