@@ -10,12 +10,14 @@
 
 		acts_as_list scope: :survey
 
+		scope :by_survey, -> (survey) { joins(:survey).where(surveys: {id: survey}) }
+		
 		def next_question
-			Question.where(order: self.order + 1).first
+			Question.by_survey(self.survey.id).where(position: self.position + 1).first
 		end
 
 		def previous_question
-			Question.where(order: self.order - 1).first
+			Question.by_survey(self.survey.id).where(position: self.position - 1).first
 		end
 
 		def question_type?
