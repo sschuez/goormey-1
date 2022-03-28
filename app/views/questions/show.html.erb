@@ -18,7 +18,8 @@
 		<%= f.input :content,
 					as: @question.question_type?,		
 					label: false,
-					hint: @question.hint %>
+					hint: @question.hint,
+					input_html: { data: { controller: "textarea-autogrow" } } %>
 		
 		<!-- Errors -->
 		<% if @answer.errors.any? %>
