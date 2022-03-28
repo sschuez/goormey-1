@@ -1,5 +1,8 @@
 # module Surveys
   class SubmissionsController < ApplicationController
+    before_action :set_submission, only: %i[ show ]
+    before_action :set_survey, only: %i[ new create ]
+    
     def index
       @submissions = Submission.all
       @submission = Submission.new
@@ -8,14 +11,15 @@
     end
 
     def show
-      @submission = Submission.find(params[:id])
       @questions = @submission.survey.questions.order(:order)
+    end
+
+    def new
+      @submission = Submission.new
       authorize @submission
     end
 
     def create
-      # @submissions = Submission.all
-      @survey = Survey.find(params[:survey_id])
       @submission = Submission.new(submission_params)
       @submission.survey_user = SurveyUser.last
       @submission.survey = @survey
@@ -40,6 +44,15 @@
 
     def submission_params
       params.require(:submission).permit(:description_short)        
+    end
+
+    def set_submission
+      @submission = Submission.find(params[:id])
+      authorize @submission
+    end
+
+    def set_survey
+      @survey = Survey.find(params[:survey_id])
     end
   end
 # end
