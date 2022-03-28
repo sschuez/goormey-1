@@ -43,7 +43,9 @@
 
 		<!-- To Submission -->
 		<% unless @question.next_question.nil? %>
+			<br><br>
 			<%= link_to "Overview Submission", survey_submission_path(@survey, @submission),class: "btn-ghost" %>
+			<br><br>
 		<% end %>
 	<% end %>
 </div>

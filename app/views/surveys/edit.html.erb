@@ -10,6 +10,13 @@
                   hint: "This field is required" %> 
     </div>
 
+    <div class="form-group">
+      <%= f.input :description, 
+                  class: 'form-control', 
+                  label: "Description shown at new submissions",
+                  input_html: { data: { controller: "textarea-autogrow" } } %> 
+    </div>
+
     <!-- Error messages -->
     <% if @survey.errors.any? %>
       <div class="errors-container">

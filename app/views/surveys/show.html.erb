@@ -27,7 +27,7 @@
   <br>
   <%= simple_form_for([@survey, @submission], data: { turbo: :false }) do |f| %>
     <div class="form-group">
-      <%= f.input :description_short, label: "Name for your new submission" %>
+      <%= f.input :email, label: "Email for this submission" %>
     </div>
     <%= f.button :submit, class: "btn-ghost" %>
   <% end %>

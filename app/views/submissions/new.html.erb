@@ -1,9 +1,17 @@
-<h1>Create a new submission</h1>
-<%= simple_form_for([@survey, @submission], data: { turbo: :false }) do |f| %>
-  <div class="form-group">
-  <%= f.input :email, 
-              label: "Please enter email address",
-              hint: "If you're uncomfrtable giving away you email, feel free to enter anyting you like." %>
-  </div>
-  <%= f.button :submit, class: "btn btn-secondary" %>
-<% end %>
+<h1>Just a quick survey..</h1>
+<div class="main-card">
+  <br>
+  <h4>Only <%= @survey.questions.count %> questions</h4>
+  <% if @survey.description %>  
+    <p><%= @survey.description %></p>
+  <% end %>
+  <%= simple_form_for([@survey, @submission], data: { turbo: :false }) do |f| %>
+    <div class="form-group">
+    <%= f.input :email, 
+                label: "Please enter email address",
+                hint: "If you're uncomfortable giving away you email, feel free to enter anyting you like." %>
+    </div>
+    <%= f.button :submit, class: "btn-ghost" %>
+  <% end %>
+  <br>
+</div>

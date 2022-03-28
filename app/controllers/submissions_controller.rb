@@ -6,7 +6,6 @@
     def index
       @submissions = Submission.all
       @submission = Submission.new
-      @survey_user = SurveyUser.new
       skip_policy_scope
     end
 
@@ -21,12 +20,11 @@
 
     def create
       @submission = Submission.new(submission_params)
-      @submission.survey_user = SurveyUser.last
-      @submission.survey = @survey
       authorize @submission
+      @submission.survey = @survey
       if @submission.save
-        flash[:notice] = "Submission #{@submission.description_short} successfully created"
-        redirect_to survey_path(@survey)
+        flash[:notice] = "Let's go (#{@submission.email})"
+        redirect_to survey_submission_question_path(@survey, @submission, @survey.questions.find_by(position: 1))
       else
         flash[:error] = "Something went wrong"
         render 'index'
@@ -37,13 +35,13 @@
       @submission = Submission.find(params[:id])
       @submission.destroy
       redirect_to submissions_path
-      flash[:notice] = "Submission #{@submission.description_short} has been deleted."
+      flash[:notice] = "Submission (#{@submission.email}) has been deleted."
     end
 
     private
 
     def submission_params
-      params.require(:submission).permit(:description_short)        
+      params.require(:submission).permit(:email)        
     end
 
     def set_submission
