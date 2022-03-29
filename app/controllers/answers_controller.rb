@@ -1,5 +1,6 @@
 # module Surveys
 	class AnswersController < ApplicationController
+		skip_before_action :authenticate_user!, only: %i[ create update ]
 		before_action :set_question_answer, only: [ :create, :update ]
 		
 		def create

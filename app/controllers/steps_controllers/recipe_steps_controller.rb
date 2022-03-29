@@ -13,7 +13,7 @@ module StepsControllers
     def update
       @recipe = Recipe.wizard_not_completed_only.find(params[:recipe_id])
       authorize @recipe
-      # Use #assign_attributes since render_wizard runs a #save for us
+      # Use #assign_attributes since render_wizard runs a #save
       @recipe.assign_attributes recipe_params
       if @recipe.valid?
         render_wizard @recipe

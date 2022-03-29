@@ -1,5 +1,6 @@
 # module Surveys
   class SubmissionsController < ApplicationController
+    skip_before_action :authenticate_user!, only: %i[ show new create update ]
     before_action :set_submission, only: %i[ show ]
     before_action :set_survey, only: %i[ new create ]
     
@@ -14,7 +15,7 @@
     end
 
     def new
-      @submission = Submission.new
+      @submission = Submission.new submission_complete: false
       authorize @submission
     end
 
@@ -29,6 +30,10 @@
         flash[:error] = "Something went wrong"
         render 'index'
       end
+    end
+
+    def update
+      finish_submission_path
     end
 
     def destroy
@@ -51,6 +56,15 @@
 
     def set_survey
       @survey = Survey.find(params[:survey_id])
+    end
+
+    def finish_submission_path
+      @submission = Submission.find(params[:id])
+      authorize @submission
+      @submission.update! submission_complete: true
+      redirect_to root_path
+      @contact = Contact.new
+      flash[:notice] = "Thanks a lot! Feel free to take a look at the early stage platform. If you have any additional feedback, please get touch via the contact button at the bottom."
     end
   end
 # end

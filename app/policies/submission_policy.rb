@@ -12,11 +12,19 @@
     end
     
     def new?
-      true
+      show?
     end
 
     def create?
-      true
+      show?
+    end
+
+    def update?
+      show?  
+    end
+
+    def destroy?
+      user.admin if user
     end
   end
 # end

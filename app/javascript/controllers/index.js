@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ClipboardController from "./clipboard_controller.js"
+application.register("clipboard", ClipboardController)
+
 import DragController from "./drag_controller.js"
 application.register("drag", DragController)
 

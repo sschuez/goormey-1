@@ -1,8 +1,8 @@
-<h1>Submission: <%= @submission.email %></h1>
+<h1>Survey Overview</h1>
 	<div class="main-card">
 	<br>
 		<% if @submission.answers.any? %>
-			<h4>Your submission</h4>
+			<h4>Your answers (<%= @submission.email %>)</h4>
 			<br>
 			<div>
 				<% @submission.survey.questions.each do | question | %>
@@ -24,10 +24,14 @@
 		<p><% end 
 		%>
 		<br>
-		<%= link_to "Back to survey", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>
-		<br><br>
-		<%= link_to "Submit your answers", root_path, class: "btn-ghost btn-green" %>
-		<br><br>
+		<%= simple_form_for([@submission.survey, @submission], :finish_submission => true) do |f| %>
+			<%#= link_to "⭐️ Submit your answers", root_path, class: "btn-ghost btn-green" %>
+			<%= f.button :submit, "⭐️ Submit your answers", class: "btn-ghost btn-green" %>
+		<% end %>
+			<br>
 	</div>
 	<br>
-<%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
+	<%= link_to "Back to survey", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>
+	<% if policy(@submission).destroy? %>
+		<%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
+	<% end %>
