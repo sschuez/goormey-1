@@ -5,7 +5,7 @@
 			<h4>Your answers (<%= @submission.email %>)</h4>
 			<br>
 			<div>
-				<% @submission.survey.questions.each do | question | %>
+				<% @submission.survey.questions.order(:position).each do | question | %>
 					<p class="question">
 						<strong><%= question.position %>. <%= question.content %></strong>
 						<%= link_to "Go to question", survey_submission_question_path(@submission.survey, @submission, question) %>	
@@ -24,11 +24,12 @@
 		<p><% end 
 		%>
 		<br>
-		<%= simple_form_for([@submission.survey, @submission], :finish_submission => true) do |f| %>
-			<%#= link_to "⭐️ Submit your answers", root_path, class: "btn-ghost btn-green" %>
-			<%= f.button :submit, "⭐️ Submit your answers", class: "btn-ghost btn-green" %>
+		<% unless @submission.answers.any? %>
+			<%= simple_form_for([@submission.survey, @submission], :finish_submission => true) do |f| %>
+				<%= f.button :submit, "⭐️ Submit your answers", class: "btn-ghost btn-green" %>
+			<% end %>
 		<% end %>
-			<br>
+		<br>
 	</div>
 	<br>
 	<%= link_to "Back to survey", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>

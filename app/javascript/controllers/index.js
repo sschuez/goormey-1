@@ -27,3 +27,6 @@ application.register("refresh-list", RefreshListController)
 
 import ResetFormController from "./reset_form_controller.js"
 application.register("reset-form", ResetFormController)
+
+import SliderController from "./slider_controller.js"
+application.register("slider", SliderController)

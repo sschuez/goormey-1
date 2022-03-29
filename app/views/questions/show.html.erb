@@ -15,11 +15,27 @@
 			<p><%= @question.moderation %></p>
 		<% end %>
 
-		<%= f.input :content,
-					as: @question.question_type?,		
-					label: false,
-					hint: @question.hint,
-					input_html: { data: { controller: "textarea-autogrow" } } %>
+		<!-- Answer -->
+		<% if @question.question_type == "scale" %>
+			<div data-controller="slider" id="sliderDiv" value="<%= @submission.answers.find_by(question: @question).content %>"> 
+				<%= f.input :content,
+							as: :hidden,
+							:input_html => { :class => "scale-form" } %>
+				
+				<%# Bootstrap scale slider %>
+				<input data-slider-target="source" type="range" class="form-range" min="0" max="10" step="1" id="customRange3">
+				<p><%= @question.hint %></p>
+				<p>Selection: <strong id="sliderSelection"></strong></p>
+			</div>
+		<% else %>
+			<%= f.input :content,
+						as: @question.question_type?,		
+						label: false,
+						hint: @question.hint,
+						input_html: { data: { controller: "textarea-autogrow" } } %>
+		<% end %>
+
+
 		
 		<!-- Errors -->
 		<% if @answer.errors.any? %>
