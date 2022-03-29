@@ -3,7 +3,7 @@
 <div class="main-card">
 	<br>
 		<div data-controller="drag" data-drag-url="/surveys/<%= @survey.id %>/questions/:id/question_position">
-			<% @survey.questions.order(position: :asc).each do | question | %>
+			<% @questions.each do | question | %>
 				
 				<div class="ingredient-show surevy-question" id="question-<%= question.id %>" data-id="<%= question.id %>">
 					

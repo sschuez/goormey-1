@@ -4,10 +4,9 @@
     before_action :set_question, only: [ :show, :edit, :update ]
 
     def index
-      @questions = Question.order(:order)
-      @question = Question.new
       @survey = Survey.find(params[:survey_id])
-      skip_policy_scope
+      @questions = policy_scope(Question.where(survey: @survey).order(position: :asc))
+      @question = Question.new
     end
 
     def show
