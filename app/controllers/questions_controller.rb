@@ -1,7 +1,7 @@
 # module Surveys
   class QuestionsController < ApplicationController
     skip_before_action :authenticate_user!, only: %i[ show ]
-    before_action :set_question, only: %i[ show, update, destroy ]
+    # before_action :set_question, only: %i[ show, update, destroy ]
 
     def index
       @survey = Survey.find(params[:survey_id])
@@ -10,6 +10,8 @@
     end
 
     def show
+      @question = Question.find(params[:id])
+      authorize @question
       @survey = Survey.find(params[:survey_id])
       @submission = Submission.find(params[:submission_id])
       @answer = @submission.answers.find_by(question: @question).nil? ? Answer.new : 
@@ -51,6 +53,8 @@
     end
 
     def destroy
+      @question = Question.find(params[:id])
+      authorize @question
       @survey = Survey.find(params[:survey_id])
       @question.destroy
 
@@ -61,11 +65,6 @@
     end
 
     private
-
-    def set_question
-      @question = Question.find(params[:id])
-      authorize @question
-    end
 
     def question_params
       params.require(:question).permit(:content, :question_type, :hint, :moderation, answers_attributes: [ :content ])
