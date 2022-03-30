@@ -8,6 +8,7 @@
   font-weight: bold;
   cursor: pointer;
   margin: 1.5px;
+  white-space: nowrap;
 }
 
 .btn-ghost:hover {
@@ -149,5 +150,6 @@
     right: 18px;
     top: 12px;
   }
+
   
 }
