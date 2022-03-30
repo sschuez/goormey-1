@@ -14,7 +14,7 @@
     end
     
     def create?
-      user.admin if user
+      user.admin
     end
 
     def edit?

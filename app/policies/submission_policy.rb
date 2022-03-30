@@ -24,7 +24,7 @@
     end
 
     def destroy?
-      user.admin if user
+      user.admin
     end
   end
 # end

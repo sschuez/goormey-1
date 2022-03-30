@@ -9,7 +9,7 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin if user
+    user.admin
   end
   
   def create?
