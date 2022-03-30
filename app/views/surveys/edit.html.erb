@@ -1,0 +1,37 @@
+<h1>Edit Survey</h1>
+<div class="main-card">				
+<br>
+  <%= simple_form_for(@survey, data: { turbo: :false }) do |f| %>
+
+    <div class="form-group">
+      <%= f.input :name, 
+                  class: 'form-control', 
+                  label: "Name of your survey", 
+                  hint: "This field is required" %> 
+    </div>
+
+    <div class="form-group">
+      <%= f.input :description, 
+                  class: 'form-control', 
+                  label: "Description shown at new submissions",
+                  input_html: { data: { controller: "textarea-autogrow" } } %> 
+    </div>
+
+    <!-- Error messages -->
+    <% if @survey.errors.any? %>
+      <div class="errors-container">
+        <ul>
+          <% @question.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <br>
+    <%= link_to "Back to survey", survey_path(@survey), class: "btn-ghost" %>
+    <%= f.button :submit, "Update Survey", class: 'btn-ghost' %>
+    <br>
+    <br>
+  <% end %>
+</div>

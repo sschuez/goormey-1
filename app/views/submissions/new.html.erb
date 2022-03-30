@@ -1,0 +1,23 @@
+<%# METADATA %>
+<% content_for :meta_title, "A few questions on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, "They will help figure out how to best build a meaningful community around sharing in the joy of food!" %>
+<%# /METADATA %>
+
+<h1>Just a quick survey..</h1>
+<div class="main-card">
+  <br>
+  <h4>Only <%= @survey.questions.count %> questions</h4>
+  <% if @survey.description %>  
+    <p><%= @survey.description %></p>
+  <% end %>
+  <br>
+  <%= simple_form_for([@survey, @submission], data: { turbo: :false }) do |f| %>
+    <div class="form-group">
+    <%= f.input :email, 
+                label: "Please enter email address",
+                hint: "If you're uncomfortable giving away you email, feel free to enter anyting you like." %>
+    </div>
+    <%= f.button :submit, "To survey", class: "btn-ghost" %>
+  <% end %>
+  <br>
+</div>

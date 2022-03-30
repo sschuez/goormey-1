@@ -1,0 +1,38 @@
+<h1>Survey Overview</h1>
+	<div class="main-card">
+	<br>
+		<% if @submission.answers.any? %>
+			<h4>Your answers (<%= @submission.email %>)</h4>
+			<br>
+			<div>
+				<% @submission.survey.questions.order(:position).each do | question | %>
+					<p class="question">
+						<strong><%= question.position %>. <%= question.content %></strong>
+						<%= link_to "Go to question", survey_submission_question_path(@submission.survey, @submission, question) %>	
+					</p>
+					<p class="answer">
+						<% if @submission.answers.find_by(question: question) %>
+							<%= @submission.answers.find_by(question: question).content %>
+						<% else %>
+							Not (yet) answered..
+						<% end %>
+					</p>
+				<% end %>
+			</div>
+		<% else %>
+			<p>No submission started yet</p>
+		<p><% end 
+		%>
+		<br>
+		<% if @submission.answers.any? %>
+			<%= simple_form_for([@submission.survey, @submission], :finish_submission => true) do |f| %>
+				<%= f.button :submit, "⭐️ Submit your answers", class: "btn-ghost btn-green" %>
+			<% end %>
+		<% end %>
+		<br>
+	</div>
+	<br>
+	<%= link_to "Back to survey", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>
+	<% if policy(@submission).destroy? %>
+		<%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
+	<% end %>

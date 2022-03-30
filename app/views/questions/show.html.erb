@@ -1,0 +1,67 @@
+<div class="main-card">
+	<!-- <h1>questions#show</h1> -->
+	<br>
+	<%= simple_form_for([@survey, @submission, @question, @answer], data: { turbo: :false }) do | f | %>
+
+		<%# Counter %>
+		<h5>Question <%= @question.position %> out of <%= @survey.questions.count %></h5>
+		<br>
+
+		<!-- Question -->
+		<h4><%= @question.content %></h4>
+
+		<!-- Moderation -->
+		<% if @question.moderation.present? %>
+			<p><%= @question.moderation %></p>
+		<% end %>
+
+		<!-- Answer -->
+		<% if @question.question_type == "scale" %>
+			<div data-controller="slider" id="sliderDiv"> 
+				<%= f.input :content,
+							as: :hidden,
+							:input_html => { :class => "scale-form" } %>
+				
+				<%# Bootstrap scale slider %>
+				<input data-slider-target="source" type="range" class="form-range" min="0" max="10" step="1" id="customRange3" value="<%= @answer.content ? @answer.content : 5 %>">
+				<p>Selection: <strong id="sliderSelection"><%= @answer.content ? @answer.content : "Slide" %></strong></p>
+			</div>
+		<% else %>
+			<%= f.input :content,
+						as: @question.question_type?,		
+						label: false,
+						hint: @question.hint,
+						input_html: { data: { controller: "textarea-autogrow" } } %>
+		<% end %>
+
+
+		
+		<!-- Errors -->
+		<% if @answer.errors.any? %>
+			<% @answer.errors.full_messages.each do |error| %>
+			<p><%= error %></p>
+			<% end %>
+		<% end %>
+
+		<!-- Previous Button -->
+		<% if @question.previous_question.present? %>
+			<%= link_to "Previous", survey_submission_question_path(@survey, @submission, @previous_question), class: "btn-ghost" %>
+		<% end %>
+
+		<!-- Next Button -->
+		<% if @question.next_question.nil? %>
+			<%= f.submit "Finish", class: "btn-ghost" %>
+		<% else %>
+			<%= f.submit "Next *", class: "btn-ghost" %>
+		<% end %>
+
+		<!-- To Submission -->
+		<% unless @question.next_question.nil? %>
+			<br><br>
+			<%= link_to "Overview Submission", survey_submission_path(@survey, @submission),class: "btn-ghost" %>
+			<br><br>
+			<br>
+			<p><small>*press next to save your answer</small></p>
+		<% end %>
+	<% end %>
+</div>

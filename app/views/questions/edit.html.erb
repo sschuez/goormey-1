@@ -1,0 +1,54 @@
+<h1>Edit Question</h1>
+<div class="main-card">				
+<br>
+	<%= simple_form_for(@question, data: { turbo: :false }) do |f| %>
+
+		<div class="form-group">
+			<%= f.input :content, 
+									class: 'form-control', 
+									label: "Question content", 
+									hint: "This field is required" %> 
+		</div>
+
+		<div class="form-group">
+			<%= f.input :moderation,
+									as: :rich_text_area,
+									class: 'form-control rich-text-editor', 
+									label: "Moderation before actual question", 
+									hint: "If empty, no moderation will appear" %> 
+		</div>
+
+		<div class="form-group">
+			<%= f.input :question_type, 
+									class: 'form-control', 
+									label: "Question type",
+									collection: Question::QUESTION_TYPES,
+									as: :select,
+									hint: "Default is 'text'" %>
+		</div>
+
+		<div class="form-group">
+			<%= f.input :hint, 
+									class: 'form-control', 
+									label: "Hint",
+									hint: "Any hint you will give will appear here" %>
+		</div>
+
+		<!-- Error messages -->
+		<% if @question.errors.any? %>
+			<div class="errors-container">
+				<ul>
+					<% @question.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<br>
+		<%= link_to "Back to questions", survey_questions_path(@question.survey, anchor: "question-#{@question.id}"), class: "btn-ghost" %>
+		<%= f.button :submit, "Update Question", class: 'btn-ghost' %>
+		<br>
+		<br>
+	<% end %>
+</div>

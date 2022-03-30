@@ -1,0 +1,44 @@
+<h1>Survey: <%= @survey.name %></h1>
+<div class="main-card">
+  <br>
+  <div class="align-right">
+    <%= link_to "Survey questions", survey_questions_path(@survey), class: "btn-ghost" %>
+  </div>
+
+  <% if @survey.submissions.any? %>
+    <h4>Current state of your survey</h4>
+    <p>You have <strong><%= @survey.submissions.count %></strong> submissions</p>
+    
+      <% @survey.submissions.each do | submission | %>
+        <div class="ingredient-show">
+          <p>
+            <%= submission.email %> |
+            Submitted: <%= submission.submission_complete ? "👍" : "👎" %> |
+            <%= link_to "Show", survey_submission_path(@survey, submission) %> |
+            <%= link_to "Do survey", survey_submission_question_path(@survey, submission, @survey.questions.find_by(position: 1)) %>
+          </p>
+        </div>
+      <% end %>
+    
+  <% else %>
+    <p>No submissions yet</p>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to "New submission *", new_survey_submission_path(@survey, Submission.new), class: "btn-ghost" %>
+  <br>
+  <br>
+  <div data-controller="clipboard" class="url-copy">
+    <p>
+      <small>* Link:</small>
+      <small data-clipboard-target="source">
+        <%= request.base_url %><%= new_survey_submission_path(@survey, Submission.new) %>
+      </small>&nbsp;
+      <a data-action="clipboard#copy" href="#">
+        <i class="fas fa-copy"></i>
+      </a>
+    </p>
+  </div>
+</div>
+  <br>
+  <%= link_to "Surveys", surveys_path, class: "btn-ghost" %>

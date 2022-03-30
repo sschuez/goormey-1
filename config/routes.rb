@@ -25,7 +25,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  
 
   # USERS
   devise_for :users
@@ -40,5 +39,23 @@ Rails.application.routes.draw do
 
   # LAYOUTS
   root to: 'recipes#index'
+
+  # SURVEYS
+  # namespace :surveys do
+  resources :surveys do 
+    resources :submissions do
+      resources :questions, only: [ :index, :show ] do
+        resources :answers, only: [ :create, :update ]
+      end
+    end
+    resources :questions, only: [ :index, :create, :edit, :update, :destroy ] do
+      resource :question_position, only: :update
+    end
+    resources :survey_users
+  end
+  
+  resources :survey_users
+  resources :questions, only: [ :index, :create, :edit, :update, :destroy ]
+  # end
 
 end

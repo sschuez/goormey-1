@@ -1,0 +1,44 @@
+<h1>Questions for Survey: <%= @survey.name %></h1>
+
+<div class="main-card">
+	<br>
+		<div data-controller="drag" data-drag-url="/surveys/<%= @survey.id %>/questions/:id/question_position">
+			<% @questions.each do | question | %>
+				
+				<div class="ingredient-show surevy-question" id="question-<%= question.id %>" data-id="<%= question.id %>">
+					
+					<p>
+						<%= question.position %>.
+						<%= question.content %> |
+						<%= link_to "edit", edit_survey_question_path(@survey, question) %>	
+					</p>
+					
+					<div class="handle">
+						<i class="fas fa-grip-lines"></i>
+					</div>
+
+				</div>
+			<% end %>
+		</div>
+	<br><br>
+
+	<h4>Create a new question</h4>
+	<%= simple_form_for([@survey, @question], data: { turbo: :false}) do |f| %>
+		<div class="form-group">
+			<%= f.input :content, 
+					label: "Write your question here.",
+					as: :string %>
+		</div>
+		<%# <div class="form-group"> %>
+			<%#= f.input :question_type,
+					label: "What's the question type?",
+					collection: Question::QUESTION_TYPES,
+					as: :select %>
+		<%# </div> %>
+
+		<%= f.button :submit, class: "btn-ghost" %>
+		<br>
+	<% end %>
+</div>
+<br>
+<%= link_to "Back to survey", survey_path(@survey), class: "btn-ghost" %>

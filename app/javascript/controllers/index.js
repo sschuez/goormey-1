@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ClipboardController from "./clipboard_controller.js"
+application.register("clipboard", ClipboardController)
+
 import DragController from "./drag_controller.js"
 application.register("drag", DragController)
 
@@ -24,3 +27,6 @@ application.register("refresh-list", RefreshListController)
 
 import ResetFormController from "./reset_form_controller.js"
 application.register("reset-form", ResetFormController)
+
+import SliderController from "./slider_controller.js"
+application.register("slider", SliderController)
