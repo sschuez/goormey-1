@@ -20,7 +20,7 @@ class SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to surveys_url, notice: "Survey #{@survey.name} was successfully created." }
+        format.html { redirect_to surveys_path, notice: "Survey #{@survey.name} was successfully created." }
         format.json { render :show, status: :created, location: @survey }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +32,7 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
-        format.html { redirect_to survey_url(@survey), notice: "Survey #{@survey.name} was successfully updated." }
+        format.html { redirect_to survey_path(@survey), notice: "Survey #{@survey.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @survey }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class SurveysController < ApplicationController
     @survey.destroy
 
     respond_to do |format|
-      format.html { redirect_to surveys_url, status: :see_other, notice: "Survey #{@survey.name} was successfully destroyed." }
+      format.html { redirect_to surveys_path, status: :see_other, notice: "Survey #{@survey.name} was successfully destroyed." }
       format.json { head :no_content }
     end
   end
