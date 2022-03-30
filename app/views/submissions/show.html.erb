@@ -33,6 +33,8 @@
 	</div>
 	<br>
 	<%= link_to "Back to survey", survey_submission_question_path(@submission.survey, @submission, @submission.survey.questions.first), class: "btn-ghost" %>
-	<% if policy(@submission).destroy? %>
-		<%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
+	<% if current_user %>
+		<% if current_user.admin? %>
+			<%= link_to "Submissions", survey_path(@submission.survey), class: "btn-ghost" %>
+		<% end %>
 	<% end %>
