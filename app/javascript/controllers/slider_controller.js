@@ -6,12 +6,14 @@ export default class extends Controller {
   
   connect() {
     var slider = this.sourceTarget
-    var storedValue = document.getElementById("sliderDiv").value
-    console.log(storedValue);
+    
     slider.addEventListener("change", function() {
+      // Insert source value from slider into hidden form value as answer
       var destination = document.querySelector(".scale-form")
       var source = document.getElementById("customRange3").value
       destination.value = source
+
+      // Indicate live current selection
       var sliderSelection = document.getElementById("sliderSelection")
       sliderSelection.innerHTML = source
   }, false); 

@@ -24,8 +24,8 @@
 				:text
 			when "integer"
 				:integer
-			when "boolean"
-				:boolean
+			# when "boolean"
+			# 	:boolean
 			when "scale"
 				:integer
 			# when "radio_buttons"
@@ -45,6 +45,6 @@
 			end
 		end
 
-		QUESTION_TYPES = [ "text", "string", "integer", "boolean", "scale" ]#"radio_buttons", "check_boxes", "select",	"file", "date", "password" ]
+		QUESTION_TYPES = [ "text", "string", "integer", "scale" ]#"boolean", "radio_buttons", "check_boxes", "select",	"file", "date", "password" ]
 	end
 # end

@@ -12,7 +12,8 @@
     def show
       @survey = Survey.find(params[:survey_id])
       @submission = Submission.find(params[:submission_id])
-      @answer = @submission.answers.find_by(question: @question).nil? ? Answer.new : @submission.answers.find_by(question: @question) 
+      @answer = @submission.answers.find_by(question: @question).nil? ? Answer.new : 
+      @submission.answers.find_by(question: @question)
       @previous_question = @question.previous_question
       authorize @question
     end

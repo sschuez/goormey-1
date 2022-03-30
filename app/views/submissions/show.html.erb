@@ -24,7 +24,7 @@
 		<p><% end 
 		%>
 		<br>
-		<% unless @submission.answers.any? %>
+		<% if @submission.answers.any? %>
 			<%= simple_form_for([@submission.survey, @submission], :finish_submission => true) do |f| %>
 				<%= f.button :submit, "⭐️ Submit your answers", class: "btn-ghost btn-green" %>
 			<% end %>

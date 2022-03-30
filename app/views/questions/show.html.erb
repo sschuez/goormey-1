@@ -17,15 +17,14 @@
 
 		<!-- Answer -->
 		<% if @question.question_type == "scale" %>
-			<div data-controller="slider" id="sliderDiv" value="<%= @submission.answers.find_by(question: @question).content %>"> 
+			<div data-controller="slider" id="sliderDiv"> 
 				<%= f.input :content,
 							as: :hidden,
 							:input_html => { :class => "scale-form" } %>
 				
 				<%# Bootstrap scale slider %>
-				<input data-slider-target="source" type="range" class="form-range" min="0" max="10" step="1" id="customRange3">
-				<p><%= @question.hint %></p>
-				<p>Selection: <strong id="sliderSelection"></strong></p>
+				<input data-slider-target="source" type="range" class="form-range" min="0" max="10" step="1" id="customRange3" value="<%= @answer.content ? @answer.content : 5 %>">
+				<p>Selection: <strong id="sliderSelection"><%= @answer.content ? @answer.content : "Slide" %></strong></p>
 			</div>
 		<% else %>
 			<%= f.input :content,
