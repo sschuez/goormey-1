@@ -28,10 +28,9 @@
       </div>
     <% end %>
 
-    <br>
-    <%= link_to "Back to survey", survey_path(@survey), class: "btn-ghost" %>
     <%= f.button :submit, "Update Survey", class: 'btn-ghost' %>
-    <br>
     <br>
   <% end %>
 </div>
+<br>
+<%= link_to "Back to survey", survey_path(@survey), class: "btn-ghost" %>
