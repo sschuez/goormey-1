@@ -1,7 +1,7 @@
 # module Surveys
   class QuestionsController < ApplicationController
     skip_before_action :authenticate_user!, only: %i[ show ]
-    before_action :set_question, only: [ :show, :edit, :update ]
+    before_action :set_question, only: %i[ show, edit, update, destroy ]
 
     def index
       @survey = Survey.find(params[:survey_id])
@@ -15,16 +15,14 @@
       @answer = @submission.answers.find_by(question: @question).nil? ? Answer.new : 
       @submission.answers.find_by(question: @question)
       @previous_question = @question.previous_question
-      authorize @question
     end
 
     def create
+      @survey = Survey.find(params[:survey_id])
       @question = Question.new(question_params)
       @question.question_type = "text"
-      @survey = Survey.find(params[:survey_id])
       @question.survey = @survey
       
-      authorize @question
       if @question.save
         redirect_to survey_questions_path(@question.survey)
         flash[:notice] = "Created new question: #{@question.content}"
@@ -34,13 +32,12 @@
     end
 
     def edit
-      authorize @question
+      @survey = Survey.find(params[:survey_id])
     end
 
     def update
       @survey = @question.survey
       @question.survey = @survey
-      authorize @question
       if @question.update(question_params)
         redirect_to survey_questions_path(@survey, anchor: "question-#{@question.id}")
         flash[:notice] = "Question #{@question.content} has been updated"
@@ -49,10 +46,21 @@
       end
     end
 
+    def destroy
+      @survey = Survey.find(params[:survey_id])
+      @question.destroy
+
+      respond_to do |format|
+        format.html { redirect_to survey_questions_path(@survey), status: :see_other, notice: "Question #{@question.content} was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    end
+
     private
 
     def set_question
       @question = Question.find(params[:id])
+      authorize @question
     end
 
     def question_params
