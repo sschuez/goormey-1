@@ -59,6 +59,7 @@
       @question.destroy
 
       respond_to do |format|
+        # format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
         format.html { redirect_to survey_questions_path(@survey), status: :see_other, notice: "Question #{@question.content} was successfully destroyed." }
         format.json { head :no_content }
       end

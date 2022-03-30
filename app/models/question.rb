@@ -1,7 +1,7 @@
 # module Surveys
 	class Question < ApplicationRecord
 		has_many :answers, dependent: :destroy#, class_name: 'Surveys::Answer'
-		belongs_to :survey, dependent: :destroy
+		belongs_to :survey
 
 		validates :content, presence: true
 		
