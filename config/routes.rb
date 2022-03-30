@@ -50,11 +50,7 @@ Rails.application.routes.draw do
     end
     resources :questions, only: [ :index, :create, :edit, :update, :destroy ] do
       resource :question_position, only: :update
-      # member do
-        # post :destroy
-      # end
     end
-    resources :survey_users
   end
   # end
 

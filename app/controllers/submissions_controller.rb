@@ -2,7 +2,7 @@
   class SubmissionsController < ApplicationController
     skip_before_action :authenticate_user!, only: %i[ show new create update ]
     before_action :set_submission, only: %i[ show ]
-    before_action :set_survey, only: %i[ new create ]
+    before_action :set_survey, only: %i[ new create destroy ]
     
     def index
       @submissions = Submission.all
@@ -38,9 +38,16 @@
 
     def destroy
       @submission = Submission.find(params[:id])
+      @survey = @submission.survey
+      authorize @submission
       @submission.destroy
-      redirect_to submissions_path
-      flash[:notice] = "Submission (#{@submission.email}) has been deleted."
+      # redirect_to survey_path(@survey)
+      # flash[:notice] = "Submission (#{@submission.email}) has been deleted."
+      
+      respond_to do |format|
+        format.html { redirect_to survey_path(@survey), status: :see_other, notice: "Submission (#{@submission.email}) has been deleted." }
+        format.json { head :no_content }
+      end
     end
 
     private

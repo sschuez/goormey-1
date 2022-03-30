@@ -31,7 +31,10 @@
             <%= submission.email %> |
             Submitted: <%= submission.submission_complete ? "👍" : "👎" %> |
             <%= link_to "Show", survey_submission_path(@survey, submission) %> |
-            <%= link_to "Do survey", survey_submission_question_path(@survey, submission, @survey.questions.find_by(position: 1)) %>
+            <%= link_to "Do survey", survey_submission_question_path(@survey, submission, @survey.questions.find_by(position: 1)) %> |
+            <%= link_to "Delete", survey_submission_path(@survey, submission), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure you want to delete submission #{submission.email}?"} %>
           </p>
         </div>
       <% end %>
