@@ -22,6 +22,7 @@
       @question = Question.new(question_params)
       @question.question_type = "text"
       @question.survey = @survey
+      authorize @question
       
       if @question.save
         redirect_to survey_questions_path(@question.survey)
