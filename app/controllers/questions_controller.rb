@@ -1,7 +1,7 @@
 # module Surveys
   class QuestionsController < ApplicationController
     skip_before_action :authenticate_user!, only: %i[ show ]
-    before_action :set_question, only: %i[ show, edit, update, destroy ]
+    before_action :set_question, only: %i[ show, update, destroy ]
 
     def index
       @survey = Survey.find(params[:survey_id])
@@ -33,12 +33,15 @@
     end
 
     def edit
-      @survey = Survey.find(params[:survey_id])
-    end
-
-    def update
+      @question = Question.find(params[:id])
+      authorize @question
       @survey = @question.survey
-      @question.survey = @survey
+    end
+    
+    def update
+      @question = Question.find(params[:id])
+      authorize @question
+      @survey = @question.survey
       if @question.update(question_params)
         redirect_to survey_questions_path(@survey, anchor: "question-#{@question.id}")
         flash[:notice] = "Question #{@question.content} has been updated"

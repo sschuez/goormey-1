@@ -1,7 +1,7 @@
 <h1>Edit Question</h1>
 <div class="main-card">				
 <br>
-	<%= simple_form_for(@question, data: { turbo: :false }) do |f| %>
+	<%= simple_form_for([@survey, @question], data: { turbo: :false }) do |f| %>
 
 		<div class="form-group">
 			<%= f.input :content, 
