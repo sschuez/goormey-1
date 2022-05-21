@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @recipe.comments.new(comment_params)
+    authorize @comment
     @comment.recipe = @recipe
     @comment.user = current_user
     respond_to do |format|
@@ -33,10 +34,10 @@ class CommentsController < ApplicationController
       format.html { render :new, status: :unprocessable_entity }
       format.json { render json: @comment.errors, status: :unprocessable_entity }
     end
-    authorize @comment
   end
 
   def edit
+    authorize @comment
     respond_to do |format|
       format.turbo_stream do 
         render turbo_stream: turbo_stream.update(
@@ -45,10 +46,10 @@ class CommentsController < ApplicationController
           locals: {comment: @comment}) 
       end
     end
-    authorize @comment
   end
 
   def update
+    authorize @comment
     @comment.recipe = @comment.recipe
     respond_to do |format|
       if @comment.update(comment_params)
@@ -70,15 +71,14 @@ class CommentsController < ApplicationController
         end   
       end
     end
-    authorize @comment
   end
 
   def destroy
+    authorize @comment
     @comment.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
     end
-    authorize @comment
   end
 
   private

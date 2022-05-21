@@ -18,6 +18,6 @@ class CommentPolicy < ApplicationPolicy
   end
   
   def destroy?
-    record.user == user || user.admin if user || record.recipe.user == user  # Only comment creator recipe creator or admin can destroy it
+    record.user == user || user.admin if user # Only comment creator or admin can destroy it
   end
 end

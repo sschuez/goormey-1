@@ -21,7 +21,7 @@ class Recipe < ApplicationRecord
 	include PgSearch::Model
 	multisearchable against: [ :name, :description ]
 
-	broadcasts
+	# broadcasts
 	
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do

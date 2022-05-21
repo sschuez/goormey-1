@@ -18,16 +18,16 @@
     </p>
   </div>
   <div class="comment-actions">
-    <%# if policy(@comment).update? %>
+    <% if policy(@comment).update? %>
       <%= button_to edit_recipe_comment_path(comment.recipe, comment), method: :post, class: "btn-styling" do %>
         <i class="show-icon fas fa-edit"></i>
       <% end %>
-    <%# end %>
+    <% end %>
 
-    <%# if policy(@comment).destroy? %>
+    <% if policy(@comment).destroy? %>
       <%= button_to recipe_comment_path(comment.recipe, comment), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn-styling" do %>
         <i class="show-icon fas fa-trash-alt"></i>
       <% end %>
-    <%# end %>
+    <% end %>
   </div>
 </div>
