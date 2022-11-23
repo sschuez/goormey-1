@@ -3,7 +3,7 @@ import Rails from "@rails/ujs"
 import { Sortable } from "sortablejs"
 
 export default class extends Controller {
-
+  static_targets = [  ]
   connect() {
     this.sortable = Sortable.create(this.element, {
       animation: 150,
