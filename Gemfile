@@ -29,7 +29,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -82,3 +82,6 @@ gem "acts_as_list", "~> 1.0"
 gem "kaminari", "~> 1.2"
 
 gem "pg_search", "~> 2.3"
+
+gem "sidekiq"
+gem "sidekiq-failures", "~> 1.0"
