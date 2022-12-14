@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :new, :create ]
+  before_action :validate_cloudflare_turnstile, only: :create
 
   def new
     @contact = Contact.new
@@ -25,6 +26,13 @@ class ContactsController < ApplicationController
 
   def contact_params
     params.require(:contact).permit(:email, :message)
+  end
+
+  def validate_cloudflare_turnstile
+    validation = CloudflareTurnstile.validate(params[:"cf-turnstile-response"], request.remote_ip)
+    return if validation
+    flash.alert = "Failed Cloudflare turnstile check"
+    render :new, status: :see_other
   end
 
 end

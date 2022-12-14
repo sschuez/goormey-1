@@ -20,6 +20,11 @@
                   required: true %>
       <br>
 
+      <div class="cf-turnstile mb-3"
+          data-controller="cloudflare-turnstile"
+          data-sitekey="<%= Rails.application.credentials.dig(:cloudflare, :site_key) %>" 
+          data-callback="javascriptCallback"></div>
+
       <div class="action-btns">
         <%= f.button :submit, "✓ Send message", class: "btn-ghost btn-green" %>
       </div>  

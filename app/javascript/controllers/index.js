@@ -7,6 +7,9 @@ import { application } from "./application"
 import ClipboardController from "./clipboard_controller.js"
 application.register("clipboard", ClipboardController)
 
+import CloudflareTurnstileController from "./cloudflare_turnstile_controller.js"
+application.register("cloudflare-turnstile", CloudflareTurnstileController)
+
 import DragController from "./drag_controller.js"
 application.register("drag", DragController)
 
