@@ -22,11 +22,12 @@ class User < ApplicationRecord
   # == Validations ==========================================================
   # validates :username, uniqueness: true
   # validates :username, presence: true
+  validates :first_name, :last_name, length: { maximum: 40 }
 
   # == Scopes ===============================================================
 
   # == Callbacks ============================================================
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
 
   # == Class Methods ========================================================
   def full_name

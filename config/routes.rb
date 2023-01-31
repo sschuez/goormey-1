@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   require "sidekiq/web"
 
-  authenticate :user, ->(user) { user.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
-
+  
   # RECIPES
   resources :recipes do
     # NESTED SORTABLE INSTRUCTIONS
@@ -16,14 +13,14 @@ Rails.application.routes.draw do
     resources :ingredients do  
       resource :ingredient_position, only: :update
     end
-
+    
     # FORM WIZARD
     resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
-
+    
     # LIKEABLE
     post 'likes', to: "likes#create"
     delete 'likes', to: "likes#destroy"
-
+    
     # COMMENTS
     resources :comments do
       member do
@@ -31,8 +28,11 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
   # USERS
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   devise_for :users
   resources :users, only: [:index, :show] do
     member do
