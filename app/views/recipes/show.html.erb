@@ -7,179 +7,183 @@
   <% content_for :meta_image, cl_image_path("sample_meal.jpg") %>
 <% end %>
 <%# /METADATA %>
-  
-<%# ACTION BUTTON TOP %>
-<div class="action-btns">
-  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
-  <% if policy(@recipe).update? %>
-    <%= link_to edit_recipe_path(@recipe) do %>
-      <i class="show-icon fas fa-edit"></i>
-    <% end %>
-  <% end %>
 
-  <% if policy(@recipe).destroy? %>
-    <%= link_to recipe_path(@recipe), data: {
-      turbo_method: :delete,
-      turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-      }, "data-turbo-frame": "_top" do %>
-      <i class="show-icon fas fa-trash-alt"></i>
-    <% end %>
-  <% end %>
-</div>
-
-<div class="main-card recipe">
-  
-  <%# PHOTO %>
-  <div class="photo-show">
-    <% if @recipe.photo.attached? %>
-      <%= cl_image_tag @recipe.photo.key, :transformation=>[
-        {:width=>800, :height=>800}], 
-        class: "card-image" %>
-    <% else %>
-      <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
-    <% end %>
-  </div>
-
-  <%# DESCRIPTION %>
-  <div class="description-show">
-    <%= turbo_frame_tag nested_dom_id(:description, @recipe) do %>
-      <h4><%= @recipe.name %></h4>
-      <p><%= @recipe.description %></p>
-      
-      <%# EDIT DESCRIPTION BUTTON %>
-      <% if policy(@recipe).update? %>
-      <div class="flex-end">
-        <%= link_to edit_description_recipe_path(@recipe), 
-          class: "btn btn-ghost btn-coral",
-          data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
-          <%= Icon.call("edit") %>
-          description
-        <% end %>
-      <% end %>
-      </div>
-    <% end %>
-    
-    <%# USER AVATAR %>
-    <div class="user-show">
-      <%= link_to user_path(@recipe.user) do %>
-        <% if @recipe.user.avatar.attached? %> 
-          <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
-            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
-            class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% else %>
-          <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% end %>
-      <% end %>
-
-      <%# USER NAME %>
-      <div class="user-name">
-        <%= link_to user_path(@recipe.user) do %>
-          <small><p><%= @recipe.user.full_name %></p></small>
-        <% end %>
-      </div>
-      
-    </div>
-
-    <%# LIKE BUTTON %>
-    <div data-controller="like" class="card-recipe-like" data-like-url="/recipes/<%= @recipe.id %>/likes">
-      <i data-action="click->like#save" data-like-target="heart" class="<%= liked?(@recipe) %> fa-heart"></i>
-    </div>
-    
-  </div>
-</div>
-
-<%# INGREDIENTS %>
-<div class="main-card">
-  <h4>Ingredients</h4>
-  
-  <%= turbo_frame_tag nested_dom_id(:serves, @recipe) do %>
-    <div class="justify-space-between">
-      <div>Ingredients serve <strong><%= @recipe.serves %></strong> <%= @recipe.serves == 1 ? "person" : "persons" %></div>
-      <% if policy(@recipe).update? %>
-        <%= link_to edit_serves_recipe_path(@recipe), class: "btn btn-ghost btn-coral" do %>
-          <%= Icon.call("edit") %>
-          serves
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div data-controller="toggle-actions">
-    <div id="ingredients">
-      <%= render @recipe.ingredients %>
-      <%= render "ingredients/empty_state" %>
-    </div>
-    <%= turbo_frame_tag Ingredient.new %>
-    
+<div class="narrow-container">
+  <%# ACTION BUTTON TOP %>
+  <div class="action-btns">
+    <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
     <% if policy(@recipe).update? %>
-      <div class="flex-end">
-        <%= link_to "#", class: "btn btn-ghost btn-coral", data: { action: "click->toggle-actions#toggle" } do %>
-          <%= Icon.call("edit") %>
-          ingredients
-        <% end %>
-        
-        <%= link_to new_recipe_ingredient_path(@recipe), 
-            class: "btn btn-ghost btn-coral",
-            data: { turbo_frame: dom_id(Ingredient.new) } do %>
-          +
-        <% end %>
-      </div>
+      <%= link_to edit_recipe_path(@recipe) do %>
+        <i class="show-icon fas fa-edit"></i>
+      <% end %>
+    <% end %>
+
+    <% if policy(@recipe).destroy? %>
+      <%= link_to recipe_path(@recipe), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
+        }, "data-turbo-frame": "_top" do %>
+        <i class="show-icon fas fa-trash-alt"></i>
+      <% end %>
     <% end %>
   </div>
-</div>
 
-<%# INSTRUCITONS %>
-<div data-controller="nested-form" class="main-card">
-  <h4>Instructions</h4>
-  <% @recipe.instructions.each do |instruction| %>
-    <div data-nested-form-target="inputElement" class="ingredient-show">
-      <div class="counter"><h4></h4></div>
-      <div class="instruction-description"><p>
-        <%= instruction.description %>
-      </p>
-      </div>
-    </div>
-  <% end %>
-  <% if policy(@recipe).update? %>
-    <br>
-    <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
-  <% end %>
-</div>
-
-<div class="main-card">
-  <h4>New comment</h4>
-  <% if user_signed_in? %>
-    <%= turbo_frame_tag "new_comment", src: new_recipe_comment_path(@recipe), target: "_top" %>
-  <% else %>
-    <p>
-      <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
-    </p>
-  <% end %>
-  
-  <h4>Comments</h4>
-  <div id="comments">
-    <%= render @recipe.comments.order(created_at: :desc) %>
-  </div>
-</div>
-
-<br>
-<div class="action-btns">
-  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
+  <div class="main-card recipe">
     
-  <% if policy(@recipe).update? %>
-    <%= link_to edit_recipe_path(@recipe) do %>
-      <i class="show-icon fas fa-edit"></i>
+    <%# PHOTO %>
+    <div class="photo-show">
+      <% if @recipe.photo.attached? %>
+        <%= cl_image_tag @recipe.photo.key, :transformation=>[
+          {:width=>800, :height=>800}], 
+          class: "card-image" %>
+      <% else %>
+        <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
+      <% end %>
+    </div>
+
+    <%# DESCRIPTION %>
+    <div class="description-show">
+      <%= turbo_frame_tag nested_dom_id(:description, @recipe) do %>
+        <h4><%= @recipe.name %></h4>
+        <p><%= @recipe.description %></p>
+        
+        <%# EDIT DESCRIPTION BUTTON %>
+        <% if policy(@recipe).update? %>
+        <div class="flex-end">
+          <%= link_to edit_description_recipe_path(@recipe), 
+            class: "btn btn-ghost btn-coral",
+            data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
+            <%= Icon.call("edit") %>
+            description
+          <% end %>
+        <% end %>
+        </div>
+      <% end %>
+      
+      <%# USER AVATAR %>
+      <div class="user-show">
+        <%= link_to user_path(@recipe.user) do %>
+          <% if @recipe.user.avatar.attached? %> 
+            <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
+              {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
+              class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+          <% else %>
+            <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+          <% end %>
+        <% end %>
+
+        <%# USER NAME %>
+        <div class="user-name">
+          <%= link_to user_path(@recipe.user) do %>
+            <small><p><%= @recipe.user.full_name %></p></small>
+          <% end %>
+        </div>
+        
+      </div>
+
+      <%# LIKE BUTTON %>
+      <div data-controller="like" class="card-recipe-like" data-like-url="/recipes/<%= @recipe.id %>/likes">
+        <i data-action="click->like#save" data-like-target="heart" class="<%= liked?(@recipe) %> fa-heart"></i>
+      </div>
+      
+    </div>
+  </div>
+
+  <%# INGREDIENTS %>
+  <div class="main-card">
+    <h4>Ingredients</h4>
+    
+    <%= turbo_frame_tag nested_dom_id(:serves, @recipe) do %>
+      <div class="justify-space-between">
+        <div>Ingredients serve <strong><%= @recipe.serves ? @recipe.serves : "not sure how many" %></strong> <%= @recipe.serves == 1 ? "person" : "persons" %></div>
+        
+        <% if policy(@recipe).update? %>
+          <%= link_to edit_serves_recipe_path(@recipe), class: "btn btn-ghost btn-coral" do %>
+            <%= Icon.call("edit") %>
+            serves
+          <% end %>
+        <% end %>
+
+      </div>
     <% end %>
-  <% end %>
 
-  <% if policy(@recipe).destroy? %>
-    <%= link_to recipe_path(@recipe), data: {
-      turbo_method: :delete,
-      turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
-      }, "data-turbo-frame": "_top" do %>
-      <i class="show-icon fas fa-trash-alt"></i>
+    <div data-controller="toggle-actions">
+      <div id="ingredients">
+        <%= render @recipe.ingredients %>
+        <%= render "ingredients/empty_state" %>
+      </div>
+      <%= turbo_frame_tag Ingredient.new %>
+      
+      <% if policy(@recipe).update? %>
+        <div class="flex-end">
+          <%= link_to "#", 
+              class: "btn btn-ghost btn-coral", 
+              data: { action: "click->toggle-actions#toggle" } do %>
+            <%= Icon.call("edit") %>
+            ingredients
+          <% end %>
+          
+          <%= link_to new_recipe_ingredient_path(@recipe), 
+              class: "btn btn-ghost btn-coral",
+              data: { turbo_frame: dom_id(Ingredient.new) } do %>
+            +
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# INSTRUCITONS %>
+  <div data-controller="nested-form" class="main-card">
+    <h4>Instructions</h4>
+    <% @recipe.instructions.each do |instruction| %>
+      <div data-nested-form-target="inputElement" class="ingredient-show">
+        <div class="counter"><h4></h4></div>
+        <div class="instruction-description"><p>
+          <%= instruction.description %>
+        </p>
+        </div>
+      </div>
     <% end %>
-  <% end %>
-</div>
+    <% if policy(@recipe).update? %>
+      <br>
+      <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
+    <% end %>
+  </div>
 
+  <div class="main-card">
+    <h4>New comment</h4>
+    <% if user_signed_in? %>
+      <%= turbo_frame_tag "new_comment", src: new_recipe_comment_path(@recipe), target: "_top" %>
+    <% else %>
+      <p>
+        <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
+      </p>
+    <% end %>
+    
+    <h4>Comments</h4>
+    <div id="comments">
+      <%= render @recipe.comments.order(created_at: :desc) %>
+    </div>
+  </div>
 
+  <br>
+  <div class="action-btns">
+    <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
+      
+    <% if policy(@recipe).update? %>
+      <%= link_to edit_recipe_path(@recipe) do %>
+        <i class="show-icon fas fa-edit"></i>
+      <% end %>
+    <% end %>
+
+    <% if policy(@recipe).destroy? %>
+      <%= link_to recipe_path(@recipe), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
+        }, "data-turbo-frame": "_top" do %>
+        <i class="show-icon fas fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>  

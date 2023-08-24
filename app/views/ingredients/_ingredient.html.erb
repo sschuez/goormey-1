@@ -7,14 +7,15 @@
       
       <% if policy(ingredient.recipe).edit? %>
       <div class="item-actions" data-toggle-actions-target="actions">
+
         <%= link_to edit_recipe_ingredient_path(ingredient.recipe, ingredient), 
             data: { turbo_frame: dom_id(ingredient) } do %>
           <%= Icon.call("edit") %>
         <% end %>
         
         <%= button_to ingredient_path(ingredient), 
+            form: { data: { turbo_confirm: "Are you sure?" } }, 
             method: :delete, 
-            data: { turbo_confirm: "Are you sure?" }, 
             class: "btn-styling" do %>
           <%= Icon.call("trash") %>
         <% end %>
