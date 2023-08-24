@@ -1,0 +1,12 @@
+<%= turbo_frame_tag nested_dom_id(:description, @recipe) do %>
+  <%= simple_form_for @recipe do |f| %>
+    <%= form_error_notification(@recipe) %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    
+    <div class="flex-end">
+      <%= link_to "Cancel", recipe_path(@recipe), class: "btn btn-ghost"  %>
+      <%= f.button :submit, class: "btn btn-ghost btn-coral" %>
+    </div>
+  <% end %>
+<% end %>

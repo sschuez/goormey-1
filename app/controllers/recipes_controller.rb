@@ -20,13 +20,12 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new wizard_complete: false
-    @recipe.ingredients.new
-    @recipe.instructions.new
-    @recipe.user = current_user
+    @recipe = Recipe.new 
     authorize @recipe
+    
+    @recipe.user = current_user
     @recipe.save! validate: false
-    redirect_to recipe_step_path(@recipe, Recipe.form_steps.keys.first)
+    redirect_to recipe_path(@recipe)
   end
 
   # GET /recipes/1/edit
@@ -70,6 +69,22 @@ class RecipesController < ApplicationController
     #   format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
     #   format.json { head :no_content }
     # end
+  end
+
+  def edit_description
+    @recipe = Recipe.find(params[:id])
+    authorize @recipe, :edit?
+  end
+
+  def update_description
+    @recipe = Recipe.find(params[:id])
+    authorize @recipe, :update?
+    @recipe.update(recipe_params)
+    
+    respond_to do |format|
+      format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
+      format.turbo_stream { flash.now[:notice] = "Recipe was successfully updated." }
+    end
   end
 
   private

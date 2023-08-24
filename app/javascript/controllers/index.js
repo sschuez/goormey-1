@@ -4,32 +4,35 @@
 
 import { application } from "./application"
 
-import ClipboardController from "./clipboard_controller.js"
+import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
-import CloudflareTurnstileController from "./cloudflare_turnstile_controller.js"
+import CloudflareTurnstileController from "./cloudflare_turnstile_controller"
 application.register("cloudflare-turnstile", CloudflareTurnstileController)
 
-import DragController from "./drag_controller.js"
+import DragController from "./drag_controller"
 application.register("drag", DragController)
 
-import HelloController from "./hello_controller.js"
+import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import LikeController from "./like_controller.js"
+import LikeController from "./like_controller"
 application.register("like", LikeController)
 
-import NestedFormController from "./nested_form_controller.js"
+import NestedFormController from "./nested_form_controller"
 application.register("nested-form", NestedFormController)
 
-import PhotoPreviewController from "./photo_preview_controller.js"
+import PhotoPreviewController from "./photo_preview_controller"
 application.register("photo-preview", PhotoPreviewController)
 
-import RefreshListController from "./refresh_list_controller.js"
+import RefreshListController from "./refresh_list_controller"
 application.register("refresh-list", RefreshListController)
 
-import ResetFormController from "./reset_form_controller.js"
+import RemovalsController from "./removals_controller"
+application.register("removals", RemovalsController)
+
+import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
 
-import SliderController from "./slider_controller.js"
+import SliderController from "./slider_controller"
 application.register("slider", SliderController)

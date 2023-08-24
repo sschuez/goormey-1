@@ -1,0 +1,28 @@
+.narrow-container {
+  max-width: 800px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  &--home {
+    max-width: 1000px;
+  }
+}
+
+.white-bg {
+  background-color: var(--color-white);
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}

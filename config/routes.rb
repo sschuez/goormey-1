@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   
   # RECIPES
   resources :recipes do
+    get :edit_description, on: :member
+    patch :update_description, on: :member
+    
     # NESTED SORTABLE INSTRUCTIONS
     resources :instructions do
       resource :instruction_position, only: :update
