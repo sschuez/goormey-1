@@ -87,6 +87,22 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit_serves
+    @recipe = Recipe.find(params[:id])
+    authorize @recipe, :edit?
+  end
+
+  def update_serves
+    @recipe = Recipe.find(params[:id])
+    authorize @recipe, :update?
+    @recipe.update(recipe_params)
+    
+    respond_to do |format|
+      format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
+      format.turbo_stream { flash.now[:notice] = "Recipe was successfully updated." }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
@@ -96,6 +112,13 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :photo, :serves, ingredients_attributes: [:id, :description, :position, :_destroy], instructions_attributes: [:id, :description, :position, :_destroy])
+      params.require(:recipe).permit(
+        :name, 
+        :description, 
+        :photo, 
+        :serves, 
+        ingredients_attributes: [:id, :description, :position, :_destroy], 
+        instructions_attributes: [:id, :description, :position, :_destroy]
+      )
     end
 end

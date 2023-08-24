@@ -13,6 +13,15 @@
   }
 }
 
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  i {
+    color: $bright-coral !important;
+  }
+}
+
 .main-card .ingredient-show {
   display: flex;
   border: black 1px solid;
@@ -22,7 +31,7 @@
   background-color: $brown-dark;
 }
 
-.ingredient-show p {
+.ingredient-show {
   margin: 0px;
   color: $brown-light;
 }

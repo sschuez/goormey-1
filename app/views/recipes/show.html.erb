@@ -46,12 +46,15 @@
       <h4><%= @recipe.name %></h4>
       <p><%= @recipe.description %></p>
       
-      <%# EDIT BUTTON %>
+      <%# EDIT DESCRIPTION BUTTON %>
       <% if policy(@recipe).update? %>
       <div class="flex-end">
-        <%= link_to 'Edit description', edit_description_recipe_path(@recipe), 
+        <%= link_to edit_description_recipe_path(@recipe), 
           class: "btn btn-ghost btn-coral",
-          data: { turbo_frame: nested_dom_id(:description, @recipe) } %>
+          data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
+          <%= Icon.call("edit") %>
+          description
+        <% end %>
       <% end %>
       </div>
     <% end %>
@@ -88,16 +91,41 @@
 <%# INGREDIENTS %>
 <div class="main-card">
   <h4>Ingredients</h4>
-  <p>Ingredients serve <strong><%= @recipe.serves %></strong> <%= @recipe.serves == 1 ? "person" : "persons" %></p>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <div class="ingredient-show">
-      <p><%= ingredient.description %></p>
+  
+  <%= turbo_frame_tag nested_dom_id(:serves, @recipe) do %>
+    <div class="justify-space-between">
+      <div>Ingredients serve <strong><%= @recipe.serves %></strong> <%= @recipe.serves == 1 ? "person" : "persons" %></div>
+      <% if policy(@recipe).update? %>
+        <%= link_to edit_serves_recipe_path(@recipe), class: "btn btn-ghost btn-coral" do %>
+          <%= Icon.call("edit") %>
+          serves
+        <% end %>
+      <% end %>
     </div>
   <% end %>
-  <% if policy(@recipe).update? %>
-    <br>
-    <%= link_to 'Edit ingredients', edit_recipe_path(@recipe, anchor: "edit-ingredients"), class: "btn btn-ghost btn-coral" %>
-  <% end %>
+
+  <div data-controller="toggle-actions">
+    <div id="ingredients">
+      <%= render @recipe.ingredients %>
+      <%= render "ingredients/empty_state" %>
+    </div>
+    <%= turbo_frame_tag Ingredient.new %>
+    
+    <% if policy(@recipe).update? %>
+      <div class="flex-end">
+        <%= link_to "#", class: "btn btn-ghost btn-coral", data: { action: "click->toggle-actions#toggle" } do %>
+          <%= Icon.call("edit") %>
+          ingredients
+        <% end %>
+        
+        <%= link_to new_recipe_ingredient_path(@recipe), 
+            class: "btn btn-ghost btn-coral",
+            data: { turbo_frame: dom_id(Ingredient.new) } do %>
+          +
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <%# INSTRUCITONS %>

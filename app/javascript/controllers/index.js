@@ -36,3 +36,6 @@ application.register("reset-form", ResetFormController)
 
 import SliderController from "./slider_controller"
 application.register("slider", SliderController)
+
+import ToggleActionsController from "./toggle_actions_controller"
+application.register("toggle-actions", ToggleActionsController)

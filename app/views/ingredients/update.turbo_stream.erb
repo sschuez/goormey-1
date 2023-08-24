@@ -1,0 +1,5 @@
+<%#= render_turbo_stream_flash_messages %>
+
+<%= turbo_stream.replace @ingredient do %>
+  <%= render "ingredient", ingredient: @ingredient %>
+<% end %>

@@ -2,19 +2,24 @@ Rails.application.routes.draw do
   require "sidekiq/web"
 
   
+  # INGREDIENTS
+  resources :ingredients, only: [:destroy]
+  
   # RECIPES
   resources :recipes do
     get :edit_description, on: :member
     patch :update_description, on: :member
+    get :edit_serves, on: :member
+    patch :update_serves, on: :member
     
+    # NESTED SORTABLE INGREDIENTS
+    resources :ingredients, only: [:new, :create, :edit, :update] do  
+      resource :ingredient_position, only: :update
+    end
+
     # NESTED SORTABLE INSTRUCTIONS
     resources :instructions do
       resource :instruction_position, only: :update
-    end
-    
-    # NESTED SORTABLE INGREDIENTS
-    resources :ingredients do  
-      resource :ingredient_position, only: :update
     end
     
     # FORM WIZARD

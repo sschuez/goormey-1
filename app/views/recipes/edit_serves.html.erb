@@ -1,0 +1,13 @@
+<%= turbo_frame_tag nested_dom_id(:serves, @recipe) do %>
+  <%= simple_form_for @recipe do |f| %>
+    <div class="justify-space-between">
+      <%= form_error_notification(@recipe) %>
+      <%= f.input :serves %>
+      
+      <div class="flex-end">
+        <%= link_to "X", recipe_path(@recipe), class: "btn btn-ghost"  %>
+        <%= f.button :submit, "Update", class: "btn btn-ghost btn-coral" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

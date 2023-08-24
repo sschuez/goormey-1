@@ -48,6 +48,8 @@ class Icon
       dollar: '<i class="bi bi-currency-dollar"></i>',
       user: '<i class="bi bi-person-circle"></i>',
       tick_green: '<i class="bi bi-check-circle-fill" style="color: hsl(117, 75%, 61%)"></i>',
+      cross: '<i class="bi bi-x-square"></i>',
+      tick: '<i class="bi bi-check-square"></i>',
       tick_orange: '<i class="bi bi-check-circle-fill" style="color: hsl(24, 96%, 53%)"></i>',
       sunglasses: '<i class="bi bi-sunglasses"></i>',
       published: '<i class="bi bi-eye-fill" style="color: hsl(120, 45%, 56%)"></i>',
