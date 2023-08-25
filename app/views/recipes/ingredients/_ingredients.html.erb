@@ -5,7 +5,7 @@
     <div>Ingredients serve <strong><%= recipe.serves ? recipe.serves : "not sure how many" %></strong> <%= recipe.serves == 1 ? "person" : "persons" %></div>
         
     <% if policy(recipe).update? %>
-      <%= link_to edit_serf_path(recipe), class: "btn btn-ghost btn-coral" do %>
+      <%= link_to edit_recipe_serves_path(recipe), class: "btn btn-ghost btn-coral" do %>
         <%= Icon.call("edit") %>
         serves
       <% end %>

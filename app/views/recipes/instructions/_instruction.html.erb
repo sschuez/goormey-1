@@ -1,0 +1,32 @@
+<%= turbo_frame_tag instruction, data: { sgid: instruction.to_sgid_param } do %>
+
+  <div data-nested-form-target="inputElement" class="ingredient-show justify-space-between">
+    
+    <div class="d-flex">
+      <div class="counter"><h4></h4></div>
+      <div class="instruction-description">
+        <%= instruction.description %>
+      </div>
+    </div>
+
+    <% if policy(instruction.recipe).edit? %>
+      <div class="item-actions" data-toggle-actions-target="actions">
+        <%= link_to edit_recipe_instruction_path(instruction.recipe, instruction), 
+            data: { turbo_frame: dom_id(instruction) } do %>
+          <%= Icon.call("edit") %>
+        <% end %>
+        
+        <%= button_to recipe_instruction_path(instruction.recipe, instruction), 
+            form: { data: { turbo_confirm: "Are you sure?" } }, 
+            method: :delete, 
+            class: "btn-styling" do %>
+          <%= Icon.call("trash") %>
+        <% end %>
+
+        <%= Icon.call("handle") %>
+      </div>
+    <% end %>
+
+  </div>
+
+<% end %>

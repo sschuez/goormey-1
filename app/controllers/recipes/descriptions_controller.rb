@@ -21,7 +21,7 @@ class Recipes::DescriptionsController < ApplicationController
   private
 
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
   end
   
   def recipe_params

@@ -1,0 +1,29 @@
+<h4>Instructions</h4>
+
+<div data-controller="toggle-actions">
+  <div id="instructions" data-controller="nested-form positions">
+    <%= render recipe.instructions %>
+    <%= render "recipes/instructions/empty_state" %>
+  </div>
+  <%= turbo_frame_tag Instruction.new %>
+
+  <% if policy(recipe).update? %>
+    <div class="flex-end">
+      <%= link_to new_recipe_ingredient_path(recipe),
+          class: "btn btn-ghost btn-coral",
+          data: {
+            turbo_frame: dom_id(Instruction.new),
+            "toggle-actions-target": "actions"
+          } do %>
+        + add
+      <% end %>
+
+      <%= link_to "#",
+          class: "btn btn-ghost btn-coral",
+          data: { action: "click->toggle-actions#toggle" } do %>
+        <%= Icon.call("edit") %>
+        instructions
+      <% end %>
+    </div>
+  <% end %>
+</div>

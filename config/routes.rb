@@ -5,50 +5,50 @@ Rails.application.routes.draw do
   scope module: :recipes do
     # RECIPES
     resources :recipes do  
+      # RECIPE ATTRIBUTES
+      resource :descriptions, only: [:edit, :update]
+      resource :serves, only: [:edit, :update]
+      
       # INGREDIENTS
       resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
+      # INSTRUCTIONS
+      resources :instructions, only: [:new, :create, :edit, :update, :destroy]
+      
+      # COMMENTS
+      resources :comments do
+        post :edit, on: :member
+      end
     end
 
-    # RECIPE ATTRIBUTES
-    resources :descriptions, only: [:edit, :update]
-    resources :serves, only: [:edit, :update]
   end
 
   # POSITION
   resource :position, only: [:update]
   
-  resources :ingredients, only: [:destroy]
+  # LIKEABLE
+  post 'likes', to: "likes#create"
+  delete 'likes', to: "likes#destroy"
   
-  resources :recipes do
-    get :edit_description, on: :member
-    patch :update_description, on: :member
-    get :edit_serves, on: :member
-    patch :update_serves, on: :member
+  # resources :recipes do
+    # get :edit_description, on: :member
+    # patch :update_description, on: :member
+    # get :edit_serves, on: :member
+    # patch :update_serves, on: :member
     
     # NESTED SORTABLE INGREDIENTS
-    resources :ingredients, only: [:new, :create, :edit, :update] do  
-      resource :ingredient_position, only: :update
-    end
+    # resources :ingredients, only: [:new, :create, :edit, :update] do  
+      # resource :ingredient_position, only: :update
+    # end
 
     # NESTED SORTABLE INSTRUCTIONS
-    resources :instructions do
-      resource :instruction_position, only: :update
-    end
+    # resources :instructions do
+      # resource :instruction_position, only: :update
+    # end
     
     # FORM WIZARD
-    resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
+    # resources :steps, only: [:show, :update], controller: 'steps_controllers/recipe_steps'
     
-    # LIKEABLE
-    post 'likes', to: "likes#create"
-    delete 'likes', to: "likes#destroy"
-    
-    # COMMENTS
-    resources :comments do
-      member do
-        post :edit
-      end
-    end
-  end
+  # end
   
   # USERS
   authenticate :user, ->(user) { user.admin? } do

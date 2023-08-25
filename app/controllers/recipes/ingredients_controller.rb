@@ -25,11 +25,13 @@ class Recipes::IngredientsController < ApplicationController
   end
 
   def update
-    @ingredient.update(ingredient_params)
-    
     respond_to do |format|
-      format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient was successfully updated." }
-      format.turbo_stream { flash.now[:notice] = "Ingredient was successfully updated." }
+      if @ingredient.update(ingredient_params)
+        format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient was successfully updated." }
+        format.turbo_stream { flash.now[:notice] = "Ingredient was successfully updated." }
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

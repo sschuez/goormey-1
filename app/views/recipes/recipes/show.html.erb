@@ -11,13 +11,6 @@
 <div class="narrow-container">
   <%# ACTION BUTTON TOP %>
   <div class="action-btns">
-    <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
-    <% if policy(@recipe).update? %>
-      <%= link_to edit_recipe_path(@recipe) do %>
-        <i class="show-icon fas fa-edit"></i>
-      <% end %>
-    <% end %>
-
     <% if policy(@recipe).destroy? %>
       <%= link_to recipe_path(@recipe), data: {
         turbo_method: :delete,
@@ -50,7 +43,7 @@
         <%# EDIT DESCRIPTION BUTTON %>
         <% if policy(@recipe).update? %>
         <div class="flex-end">
-          <%= link_to edit_description_path(@recipe), 
+          <%= link_to edit_recipe_descriptions_path(@recipe), 
             class: "btn btn-ghost btn-coral",
             data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
             <%= Icon.call("edit") %>
@@ -95,21 +88,8 @@
   </div>
 
   <%# INSTRUCITONS %>
-  <div data-controller="nested-form" class="main-card">
-    <h4>Instructions</h4>
-    <% @recipe.instructions.each do |instruction| %>
-      <div data-nested-form-target="inputElement" class="ingredient-show">
-        <div class="counter"><h4></h4></div>
-        <div class="instruction-description"><p>
-          <%= instruction.description %>
-        </p>
-        </div>
-      </div>
-    <% end %>
-    <% if policy(@recipe).update? %>
-      <br>
-      <%= link_to 'Edit instructions', edit_recipe_path(@recipe, anchor: "edit-instructions"), class: "btn btn-ghost btn-coral" %>
-    <% end %>
+  <div class="main-card">
+    <%= render "recipes/instructions/instructions", recipe: @recipe %>
   </div>
 
   <div class="main-card">
