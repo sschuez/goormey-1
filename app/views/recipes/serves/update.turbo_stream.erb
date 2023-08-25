@@ -1,3 +1,4 @@
+<%#= turbo_stream.update "remote_modal", "" %>
 <%= turbo_stream.replace nested_dom_id(:serves, @recipe) do %>
   <%= render "recipes/serves/serve", recipe: @recipe %>
 <% end %>

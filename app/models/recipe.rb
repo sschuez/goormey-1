@@ -27,9 +27,9 @@ class Recipe < ApplicationRecord
 
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do
-		validates :name, presence: true, length: { minimum: 2, maximum: 100}
-		validates :description, presence: true, length: { minimum: 2, maximum: 750}
-		validates :serves, presence: true, numericality: { only_integer: true, in: 1..50 }
+		# validates :name, presence: true, length: { minimum: 2, maximum: 100}
+		# validates :description, presence: true, length: { minimum: 2, maximum: 750}
+		# validates :serves, presence: true, numericality: { only_integer: true, in: 1..50 }
 	end
 
 	with_options if: -> { required_for_step?(:ingredients) } do
@@ -39,8 +39,8 @@ class Recipe < ApplicationRecord
 	end
 
 	# == Scopes ===============================================================
-	default_scope { where wizard_complete: true }
-	scope :wizard_not_completed_only, -> { unscope(where: :wizard_complete).where(wizard_complete: false) }
+	# default_scope { where wizard_complete: true }
+	# scope :wizard_not_completed_only, -> { unscope(where: :wizard_complete).where(wizard_complete: false) }
 
 	# == Callbacks ============================================================
 	

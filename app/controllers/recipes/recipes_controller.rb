@@ -52,8 +52,10 @@ class Recipes::RecipesController < ApplicationController
     authorize @recipe, :update?
 
     respond_to do |format|
-      if @recipe.name.blank? || @recipe.description.blank?
-        format.turbo_stream { flash.now[:notice] = "Please add a title or description before publishing." }
+      if @recipe.name.blank? || 
+        @recipe.description.blank? || 
+          @recipe.serves < 0
+        format.turbo_stream { flash.now[:notice] = "Please add a title or description and make sure serves is not smaller than 0 before publishing." }
       else
         @recipe.toggle!(:published)
         state = @recipe.published? ? "published" : "unpublished"
