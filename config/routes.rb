@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       # RECIPE ATTRIBUTES
       resource :description, only: [:edit, :update]
       resource :serve, only: [:edit, :update]
+      resource :photo, only: [:edit, :update]
       
       # INGREDIENTS
       resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
 
   # POSITION
   resource :position, only: [:update]
+
+  # FILE UPLOADS
+  resources :file_uploads, only: [:destroy]
   
   # LIKEABLE
   post 'likes', to: "likes#create"

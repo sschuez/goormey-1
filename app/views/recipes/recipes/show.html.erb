@@ -14,15 +14,26 @@
   <div class="main-card recipe">
     
     <%# PHOTO %>
-    <div class="photo-show">
-      <% if @recipe.photo.attached? %>
-        <%= cl_image_tag @recipe.photo.key, :transformation=>[
-          {:width=>800, :height=>800}], 
-          class: "card-image" %>
-      <% else %>
-        <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
-      <% end %>
-    </div>
+    <%= turbo_frame_tag :recipe_photo do %>
+
+      <div class="photo-show">
+        <% if @recipe.photo.attached? %>
+          <%= cl_image_tag @recipe.photo.key, :transformation=>[
+            {:width=>800, :height=>800}], 
+            class: "card-image" %>
+        <% else %>
+          <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
+        <% end %> 
+
+        <% if policy(@recipe).update? %>
+          <%= link_to edit_recipe_photo_path(@recipe), class: "btn btn-ghost btn-coral photo-show--btn" do %>
+            <%= Icon.call("edit") %>
+            photo
+          <% end %>
+        <% end %>
+      </div>
+
+    <% end %>
 
     <%# DESCRIPTION %>
     <%= render "recipes/descriptions/show", recipe: @recipe %>

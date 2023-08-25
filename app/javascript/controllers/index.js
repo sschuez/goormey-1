@@ -13,6 +13,9 @@ application.register("cloudflare-turnstile", CloudflareTurnstileController)
 import DragController from "./drag_controller"
 application.register("drag", DragController)
 
+import DropzoneController from "./dropzone_controller"
+application.register("dropzone", DropzoneController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

@@ -5,6 +5,7 @@ class Recipes::RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.search(params[:query])
+      .published
       .order(created_at: :desc)
       .page(params[:page])
       .without_count

@@ -1,0 +1,31 @@
+<%= turbo_frame_tag :recipe_photo do %>
+  <%= simple_form_for @recipe, url: recipe_photo_path(@recipe), html: { class: "dropzone--recipe" } do |f| %>
+
+    <%= dropzone_controller_div(1) do %>
+      <% if @recipe.photo.attached? %>
+        <% file_details = file_details_for(@recipe.photo) %>
+        <%= f.hidden_field :photo, multiple: false, value: @recipe.photo, data: { filename: file_details[:filename], size: file_details[:size], content_type: file_details[:content_type], url: file_details[:url], blob_id: file_details[:blob_id], "dropzone-target": "existingFile" } %>
+      <% end %>
+      <%= f.file_field :photo, direct_upload: true, multiple: false, 'data-dropzone-target': 'input' %>
+      <div data-dropzone-target="dropzoneMsg" class="dropzone-msg dz-message needsclick">
+        <h5 class="dropzone-msg-title">
+          Drag to upload or click to browse
+        </h5> 
+        <span class="dropzone-msg-desc text-sm small">
+          10 MB max size. 
+          <%# Allowed file types png, jpg. %>
+        </span>
+      </div>
+    <% end %>
+
+    <div class="flex-end item-actions">
+      <%= link_to recipe_path(@recipe) do %>
+        <%= Icon.call("cross") %>
+      <% end %>
+      <button name="button" type="submit" class="btn-styling">
+        <%= Icon.call("tick") %>
+      </button>
+    </div>
+
+  <% end %>
+<% end %>

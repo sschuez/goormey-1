@@ -8,11 +8,26 @@
   border-radius: 25px;
 }
 
-.photo-show img {
-  height: 300px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 25px 25px 0px 0px;
+.photo-show {
+  position: relative;
+
+  img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 25px 25px 0px 0px;
+  } 
+
+  &--btn {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+  }
+
+}
+
+.recipe-photo {
+
 }
 
 .recipe {
