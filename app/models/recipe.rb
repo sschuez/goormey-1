@@ -90,4 +90,11 @@ class Recipe < ApplicationRecord
 		!!(ordered_keys.index(step) <= ordered_keys.index(form_step))
 	end
 
+	def published_icon
+		if self.published
+			Icon.call("published")
+		else
+			Icon.call("unpublished")
+		end
+	end
 end

@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "recipe_#{recipe.id}_publish_btn_#{location}" do %>
+  <%= button_to publish_recipe_path(recipe), class: "btn-styling", method: :patch do %>
+    <%= recipe.published_icon %>
+  <% end %>
+<% end %>

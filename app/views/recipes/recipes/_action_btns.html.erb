@@ -1,0 +1,18 @@
+<div class="justify-space-between">
+  <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost" %>
+    
+  <div class="action-btns">
+    <% if policy(@recipe).create? %>
+      <%= render "recipes/recipes/publish_btn", recipe: @recipe, location: location %>
+    <% end %>
+
+    <% if policy(@recipe).destroy? %>
+      <%= link_to recipe_path(@recipe), data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete recipe #{@recipe.name}?"
+        }, "data-turbo-frame": "_top" do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -71,35 +71,16 @@ class Recipes::RecipesController < ApplicationController
     # end
   end
 
-  def edit_description
-    @recipe = Recipe.find(params[:id])
-    authorize @recipe, :edit?
-  end
-
-  def update_description
+  def publish
     @recipe = Recipe.find(params[:id])
     authorize @recipe, :update?
-    @recipe.update(recipe_params)
-    
-    respond_to do |format|
-      format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
-      format.turbo_stream { flash.now[:notice] = "Recipe was successfully updated." }
-    end
-  end
 
-  def edit_serves
-    @recipe = Recipe.find(params[:id])
-    authorize @recipe, :edit?
-  end
+    @recipe.toggle!(:published)
+    state = @recipe.published? ? "published" : "unpublished"
 
-  def update_serves
-    @recipe = Recipe.find(params[:id])
-    authorize @recipe, :update?
-    @recipe.update(recipe_params)
-    
     respond_to do |format|
-      format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
-      format.turbo_stream { flash.now[:notice] = "Recipe was successfully updated." }
+      format.turbo_stream { flash.now[:notice] = "Post #{@recipe.name} was successfully #{state}." }
+      format.html { redirect_to post_path(@recipe), notice: "Post was successfully published." }
     end
   end
 

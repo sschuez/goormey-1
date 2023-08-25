@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   scope module: :recipes do
     # RECIPES
     resources :recipes do  
+      patch :publish, on: :member
       # RECIPE ATTRIBUTES
       resource :descriptions, only: [:edit, :update]
       resource :serves, only: [:edit, :update]
