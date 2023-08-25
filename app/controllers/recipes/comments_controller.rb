@@ -18,7 +18,7 @@ class Recipes::CommentsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.prepend(
             "comments",
-            partial: "comments/comment",
+            partial: "recipes/comments/comment",
             locals: { comment: @comment })
         end
         format.html { redirect_to @comment, notice: "comment was successfully created." }
@@ -27,7 +27,7 @@ class Recipes::CommentsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.update(
             'new_comment',
-            partial: "comments/form",
+            partial: "recipes/comments/form",
             locals: {comment: @comment})
         end
       end
@@ -42,7 +42,7 @@ class Recipes::CommentsController < ApplicationController
       format.turbo_stream do 
         render turbo_stream: turbo_stream.update(
           @comment,
-          partial: "comments/form",
+          partial: "recipes/comments/form",
           locals: {comment: @comment}) 
       end
     end
@@ -57,7 +57,7 @@ class Recipes::CommentsController < ApplicationController
           render turbo_stream: [
             turbo_stream.update(
               @comment,
-              partial: "comments/comment",
+              partial: "recipes/comments/comment",
               locals: {comment: @comment}),
             turbo_stream.update('notice', "Comment #{@comment.id} updated")
           ]
@@ -66,7 +66,7 @@ class Recipes::CommentsController < ApplicationController
         format.turbo_stream do 
           render turbo_stream: turbo_stream.update(
             @comment,
-            partial: "comments/form",
+            partial: "recipes/comments/form",
             locals: {comment: @comment}) 
         end   
       end

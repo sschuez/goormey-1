@@ -12,10 +12,8 @@
     <% end %>
   </div>
   <div class="user-comment ingredient-show">
-    <p>
     <%= comment.content %>
     <small style="font-style: italic;">- <%= time_tag comment.created_at, "data-local": "time-ago" %></small>
-    </p>
   </div>
   <div class="comment-actions">
     <% if policy(@comment).update? %>

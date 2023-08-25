@@ -11,29 +11,9 @@
 <div class="narrow-container">
   <%= render "recipes/recipes/action_btns", recipe: @recipe, location: :top %>
 
-  <div class="main-card recipe">
-    
+  <div class="main-card recipe">    
     <%# PHOTO %>
-    <%= turbo_frame_tag :recipe_photo do %>
-
-      <div class="photo-show">
-        <% if @recipe.photo.attached? %>
-          <%= cl_image_tag @recipe.photo.key, :transformation=>[
-            {:width=>800, :height=>800}], 
-            class: "card-image" %>
-        <% else %>
-          <%= image_tag "sample_meal.jpg", class: "card-image", :width=>200 %>
-        <% end %> 
-
-        <% if policy(@recipe).update? %>
-          <%= link_to edit_recipe_photo_path(@recipe), class: "btn btn-ghost btn-coral photo-show--btn" do %>
-            <%= Icon.call("edit") %>
-            photo
-          <% end %>
-        <% end %>
-      </div>
-
-    <% end %>
+    <%= render "recipes/photos/show", recipe: @recipe %>
 
     <%# DESCRIPTION %>
     <%= render "recipes/descriptions/show", recipe: @recipe %>
@@ -50,19 +30,7 @@
   </div>
 
   <div class="main-card">
-    <h4>New comment</h4>
-    <% if user_signed_in? %>
-      <%= turbo_frame_tag Comment.new, src: new_recipe_comment_path(@recipe), target: :_top %>
-    <% else %>
-      <p>
-        <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
-      </p>
-    <% end %>
-    
-    <h4>Comments</h4>
-    <div id="comments">
-      <%= render @recipe.comments.order(created_at: :desc) %>
-    </div>
+    <%= render "recipes/comments/show", recipe: @recipe %>
   </div>
 
   <br>
