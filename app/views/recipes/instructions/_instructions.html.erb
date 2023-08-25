@@ -9,7 +9,7 @@
 
   <% if policy(recipe).update? %>
     <div class="flex-end">
-      <%= link_to new_recipe_ingredient_path(recipe),
+      <%= link_to new_recipe_instruction_path(recipe),
           class: "btn btn-ghost btn-coral",
           data: {
             turbo_frame: dom_id(Instruction.new),

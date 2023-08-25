@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Recipes::CommentsController < ApplicationController
   before_action :set_recipe, only: %i[ new create edit update destroy ]
   before_action :set_comment, only: %i[ edit update destroy ]
 

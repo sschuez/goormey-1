@@ -37,20 +37,27 @@
     <%# DESCRIPTION %>
     <div class="description-show">
       <%= turbo_frame_tag nested_dom_id(:description, @recipe) do %>
+
         <h4><%= @recipe.name %></h4>
-        <p><%= @recipe.description %></p>
+        
+        <% if @recipe.description.nil? || @recipe.description == "" %>
+          <%= render "recipes/descriptions/empty_state" %>
+        <% else %>
+          <p><%= @recipe.description %></p>
+        <% end %>
         
         <%# EDIT DESCRIPTION BUTTON %>
         <% if policy(@recipe).update? %>
-        <div class="flex-end">
-          <%= link_to edit_recipe_descriptions_path(@recipe), 
-            class: "btn btn-ghost btn-coral",
-            data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
-            <%= Icon.call("edit") %>
-            description
-          <% end %>
+          <div class="flex-end">
+            <%= link_to edit_recipe_descriptions_path(@recipe), 
+              class: "btn btn-ghost btn-coral",
+              data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
+              <%= Icon.call("edit") %>
+              description
+            <% end %>
+          </div>
         <% end %>
-        </div>
+
       <% end %>
       
       <%# USER AVATAR %>
@@ -95,7 +102,7 @@
   <div class="main-card">
     <h4>New comment</h4>
     <% if user_signed_in? %>
-      <%= turbo_frame_tag "new_comment", src: new_recipe_comment_path(@recipe), target: "_top" %>
+      <%= turbo_frame_tag Comment.new, src: new_recipe_comment_path(@recipe), target: :_top %>
     <% else %>
       <p>
         <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
@@ -112,12 +119,6 @@
   <div class="action-btns">
     <%= link_to 'Back to recipes', recipes_path, class: "recipes-btn btn-ghost", "data-turbo-frame": "_top" %>
       
-    <% if policy(@recipe).update? %>
-      <%= link_to edit_recipe_path(@recipe) do %>
-        <i class="show-icon fas fa-edit"></i>
-      <% end %>
-    <% end %>
-
     <% if policy(@recipe).destroy? %>
       <%= link_to recipe_path(@recipe), data: {
         turbo_method: :delete,

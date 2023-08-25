@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   require "sidekiq/web"
-
+  
+  # LAYOUTS
+  root to: 'recipes/recipes#index'
   
   scope module: :recipes do
     # RECIPES
@@ -19,7 +21,6 @@ Rails.application.routes.draw do
         post :edit, on: :member
       end
     end
-
   end
 
   # POSITION
@@ -64,8 +65,6 @@ Rails.application.routes.draw do
   # CONTACTS
   resources :contacts, only: [:new, :create]
 
-  # LAYOUTS
-  root to: 'recipes#index'
 
   # SURVEYS
   # namespace :surveys do
