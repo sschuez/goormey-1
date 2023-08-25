@@ -26,31 +26,12 @@ class Recipe < ApplicationRecord
 	multisearchable against: [ :name, :description ]
 
 	# == Validations ==========================================================
-	with_options if: -> { required_for_step?(:recipe) } do
-		# validates :name, presence: true, length: { minimum: 2, maximum: 100}
-		# validates :description, presence: true, length: { minimum: 2, maximum: 750}
-		# validates :serves, presence: true, numericality: { only_integer: true, in: 1..50 }
-	end
-
-	with_options if: -> { required_for_step?(:ingredients) } do
-	end
-
-	with_options if: -> { required_for_step?(:instructions) } do
-	end
 
 	# == Scopes ===============================================================
-	# default_scope { where wizard_complete: true }
-	# scope :wizard_not_completed_only, -> { unscope(where: :wizard_complete).where(wizard_complete: false) }
 
 	# == Callbacks ============================================================
 	
 	# == Class Methods ========================================================
-	enum form_steps: {
-		recipe: [:name, :description, :serves, :photo],
-		ingredients: [ingredients_attributes: [:id, :description, :_destroy]],
-		instructions: [instructions_attributes: [:id, :description, :_destroy]]
-	}
-	attr_accessor :form_step
 
 	def self.search(query)
 		return all unless query.present?
@@ -74,15 +55,6 @@ class Recipe < ApplicationRecord
 	end
 	
 	# == Instance Methods =====================================================
-	def required_for_step?(step)
-		# All fields are required if no form step is present
-		return true if form_step.nil?
-	
-		# All fields from previous steps are required
-		ordered_keys = self.class.form_steps.keys.map(&:to_sym)
-		!!(ordered_keys.index(step) <= ordered_keys.index(form_step))
-	end
-
 	def published_icon
 		if self.published
 			Icon.call("unpublished")
