@@ -25,6 +25,9 @@ application.register("nested-form", NestedFormController)
 import PhotoPreviewController from "./photo_preview_controller"
 application.register("photo-preview", PhotoPreviewController)
 
+import PositionsController from "./positions_controller"
+application.register("positions", PositionsController)
+
 import RefreshListController from "./refresh_list_controller"
 application.register("refresh-list", RefreshListController)
 

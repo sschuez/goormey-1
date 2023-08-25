@@ -1,4 +1,4 @@
-class IngredientsController < ApplicationController
+class Recipes::IngredientsController < ApplicationController
   before_action :set_ingredient, except: [:new, :create]
   skip_after_action :verify_authorized
   

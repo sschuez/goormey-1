@@ -1,0 +1,10 @@
+<div class="empty-state empty-state--only-child my-3">
+  <p class="empty-state__text">
+    You don't have any ingredients yet!
+  </p>
+
+  <%#= link_to "+ ingredient", 
+      new_recipe_ingredient_path(@recipe), 
+      class: "btn btn-ghost btn-coral",
+      data: { turbo_frame: dom_id(Ingredient.new) } %>
+</div>

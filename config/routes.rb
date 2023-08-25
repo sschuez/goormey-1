@@ -2,10 +2,23 @@ Rails.application.routes.draw do
   require "sidekiq/web"
 
   
-  # INGREDIENTS
+  scope module: :recipes do
+    # RECIPES
+    resources :recipes do  
+      # INGREDIENTS
+      resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
+    end
+
+    # RECIPE ATTRIBUTES
+    resources :descriptions, only: [:edit, :update]
+    resources :serves, only: [:edit, :update]
+  end
+
+  # POSITION
+  resource :position, only: [:update]
+  
   resources :ingredients, only: [:destroy]
   
-  # RECIPES
   resources :recipes do
     get :edit_description, on: :member
     patch :update_description, on: :member

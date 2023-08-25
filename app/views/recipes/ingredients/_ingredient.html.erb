@@ -1,11 +1,11 @@
-<%= turbo_frame_tag ingredient do %>
-  <div class="ingredient-show justify-space-between">
+<%= turbo_frame_tag ingredient, data: { sgid: ingredient.to_sgid_param } do %>
 
-      <div>
-        <%= ingredient.description %>
-      </div>
-      
-      <% if policy(ingredient.recipe).edit? %>
+  <div class="ingredient-show justify-space-between">
+    <div>
+      <%= ingredient.description %>
+    </div>
+    
+    <% if policy(ingredient.recipe).edit? %>
       <div class="item-actions" data-toggle-actions-target="actions">
 
         <%= link_to edit_recipe_ingredient_path(ingredient.recipe, ingredient), 
@@ -13,7 +13,7 @@
           <%= Icon.call("edit") %>
         <% end %>
         
-        <%= button_to ingredient_path(ingredient), 
+        <%= button_to recipe_ingredient_path(ingredient.recipe, ingredient), 
             form: { data: { turbo_confirm: "Are you sure?" } }, 
             method: :delete, 
             class: "btn-styling" do %>
@@ -22,7 +22,8 @@
 
         <%= Icon.call("handle") %>
       </div>
-      <% end %>
-
+    <% end %>
   </div>
+
+
 <% end %>

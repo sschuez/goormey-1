@@ -1,0 +1,20 @@
+<%= simple_form_for [ingredient.recipe, ingredient], html: { class: "justify-space-between ingredient-show" } do |f| %>
+  
+  <div>
+    <%= form_error_notification(ingredient) %>
+    <%= f.input :description,
+        as: :text,
+        label: false,
+        input_html: { data: { controller: "textarea-autogrow" } } %>
+  </div>
+
+  <div class="item-actions">
+    <%= link_to recipe_path(ingredient.recipe) do %>
+      <%= Icon.call("cross") %>
+    <% end %>
+    <button name="button" type="submit" class="btn-styling">
+      <%= Icon.call("tick") %>
+    </button>
+  </div>
+  
+<% end %>

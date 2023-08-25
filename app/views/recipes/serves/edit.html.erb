@@ -4,9 +4,13 @@
       <%= form_error_notification(@recipe) %>
       <%= f.input :serves %>
       
-      <div class="flex-end">
-        <%= link_to "X", recipe_path(@recipe), class: "btn btn-ghost"  %>
-        <%= f.button :submit, "Update", class: "btn btn-ghost btn-coral" %>
+      <div class="flex-end item-actions">
+        <%= link_to recipe_path(@recipe) do %>
+          <%= Icon.call("cross") %>
+        <% end %>
+        <button name="button" type="submit" class="btn-styling">
+          <%= Icon.call("tick") %>
+        </button>
       </div>
     </div>
   <% end %>

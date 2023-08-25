@@ -1,4 +1,4 @@
-class RecipesController < ApplicationController
+class Recipes::RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
