@@ -36,7 +36,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem "devise", github: "heartcombo/devise", branch: "main"
 gem 'pundit'
-gem 'wicked'
 gem 'possessive'
 gem 'cloudinary'
 gem 'letter_opener', group: [:development, :staging]
