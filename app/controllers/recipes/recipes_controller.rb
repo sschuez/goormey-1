@@ -79,8 +79,8 @@ class Recipes::RecipesController < ApplicationController
     state = @recipe.published? ? "published" : "unpublished"
 
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = "Post #{@recipe.name} was successfully #{state}." }
-      format.html { redirect_to post_path(@recipe), notice: "Post was successfully published." }
+      format.turbo_stream { flash.now[:notice] = "Recipe #{@recipe.name} was successfully #{state}." }
+      format.html { redirect_to post_path(@recipe), notice: "Recipe was successfully published." }
     end
   end
 

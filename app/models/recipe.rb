@@ -92,9 +92,9 @@ class Recipe < ApplicationRecord
 
 	def published_icon
 		if self.published
-			Icon.call("published")
-		else
 			Icon.call("unpublished")
+		else
+			Icon.call("published")
 		end
 	end
 end

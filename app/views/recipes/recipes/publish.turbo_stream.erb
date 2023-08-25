@@ -7,3 +7,7 @@
 <%= turbo_stream.replace "recipe_#{@recipe.id}_publish_btn_bottom" do %>
   <%= render "recipes/recipes/publish_btn", recipe: @recipe, location: :bottom %>
 <% end %>
+
+<%= turbo_stream.replace nested_dom_id(@recipe, :publish_btn) do %>
+  <%= render "recipes/recipes/publish_btn_2", recipe: @recipe %>
+<% end %>
