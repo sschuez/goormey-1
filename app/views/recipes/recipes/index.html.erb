@@ -20,7 +20,7 @@
 
 <%# Result counter %>
 <% if params[:query].blank? %>
-  <p><%= pluralize Recipe.all.count, 'recipe' %> available</p>
+  <p><%= pluralize Recipe.published.count, 'recipe' %> available</p>
 <% else %>
   <p><%= pluralize @recipes.count, 'result' %> for <code><%= params[:query] %></code></p>
 <% end %>

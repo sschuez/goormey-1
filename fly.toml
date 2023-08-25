@@ -5,6 +5,8 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+console_command = "/rails/bin/rails console"
+
 [build]
   [build.args]
     BUILD_COMMAND = "bin/rails fly:build"
