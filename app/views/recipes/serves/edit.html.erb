@@ -1,9 +1,9 @@
 <%= turbo_frame_tag nested_dom_id(:serves, @recipe) do %>
-  <%= simple_form_for @recipe do |f| %>
+
+  <%= simple_form_for @recipe, url: recipe_serve_path(@recipe) do |f| %>
     <div class="justify-space-between">
-      <%= form_error_notification(@recipe) %>
       <%= f.input :serves %>
-      
+        
       <div class="flex-end item-actions">
         <%= link_to recipe_path(@recipe) do %>
           <%= Icon.call("cross") %>
@@ -14,4 +14,5 @@
       </div>
     </div>
   <% end %>
+    
 <% end %>

@@ -1,17 +1,6 @@
 <h4>Ingredients</h4>
     
-<%= turbo_frame_tag nested_dom_id(:serves, recipe) do %>
-  <div class="justify-space-between">
-    <div>Ingredients serve <strong><%= recipe.serves ? recipe.serves : "not sure how many" %></strong> <%= recipe.serves == 1 ? "person" : "persons" %></div>
-        
-    <% if policy(recipe).update? %>
-      <%= link_to edit_recipe_serves_path(recipe), class: "btn btn-ghost btn-coral" do %>
-        <%= Icon.call("edit") %>
-        serves
-      <% end %>
-    <% end %>
-  </div>
-<% end %>
+<%= render "recipes/serves/serve", recipe: recipe %>
 
 <div data-controller="toggle-actions">
   <div id="ingredients" data-controller="positions">

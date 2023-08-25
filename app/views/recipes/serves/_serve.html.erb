@@ -1,0 +1,16 @@
+<%= turbo_frame_tag nested_dom_id(:serves, recipe) do %>
+  
+  <div class="justify-space-between">
+    <div>Ingredients serve <strong><%= recipe.serves ? recipe.serves : "not sure how many" %></strong> <%= recipe.serves == 1 ? "person" : "persons" %></div>
+        
+    <% if policy(recipe).update? %>
+      <%= link_to edit_recipe_serve_path(recipe), 
+          class: "btn btn-ghost btn-coral", 
+          data: { turbo_frame: nested_dom_id(:serves, recipe) } do %>
+        <%= Icon.call("edit") %>
+        serves
+      <% end %>
+    <% end %>
+  </div>
+  
+<% end %>

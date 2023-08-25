@@ -15,23 +15,16 @@ class Recipe < ApplicationRecord
 	accepts_nested_attributes_for :instructions, reject_if: :all_blank, allow_destroy: :true
 	belongs_to :user
 	# has_one_attached :photo
-	
+	has_many :likes, dependent: :destroy
+	has_many :comments, dependent: :destroy
 	has_one_attached :photo do |blob|
 		blob.variant :thumb, resize_and_pad: [200,200], saver: { quality: 8 }, convert: :jpeg
 		blob.variant :medium, resize_to_limit: [250,250]
 	end
 
-
-
-
-	has_many :likes, dependent: :destroy
-	has_many :comments, dependent: :destroy
-
 	include PgSearch::Model
 	multisearchable against: [ :name, :description ]
 
-	# broadcasts
-	
 	# == Validations ==========================================================
 	with_options if: -> { required_for_step?(:recipe) } do
 		validates :name, presence: true, length: { minimum: 2, maximum: 100}

@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     resources :recipes do  
       patch :publish, on: :member
       # RECIPE ATTRIBUTES
-      resource :descriptions, only: [:edit, :update]
-      resource :serves, only: [:edit, :update]
+      resource :description, only: [:edit, :update]
+      resource :serve, only: [:edit, :update]
       
       # INGREDIENTS
       resources :ingredients, only: [:new, :create, :edit, :update, :destroy]

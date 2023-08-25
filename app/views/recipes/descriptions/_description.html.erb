@@ -1,52 +1,24 @@
-<div class="description-show">
-    <%= turbo_frame_tag nested_dom_id(:description, @recipe) do %>
+<%= turbo_frame_tag nested_dom_id(:description, recipe) do %>
 
-      <h4><%= @recipe.name %></h4>
+  <h4><%= recipe.name %></h4>
         
-      <% if @recipe.description.nil? || @recipe.description == "" %>
-        <%= render "recipes/descriptions/empty_state" %>
-      <% else %>
-        <p><%= @recipe.description %></p>
-      <% end %>
+  <% if recipe.description.nil? || recipe.description == "" %>
+    <%= render "recipes/descriptions/empty_state" %>
+  <% else %>
+    <p><%= recipe.description %></p>
+  <% end %>
         
-      <%# EDIT DESCRIPTION BUTTON %>
-      <% if policy(@recipe).update? %>
-        <div class="flex-end">
-          <%= link_to edit_recipe_descriptions_path(@recipe), 
-            class: "btn btn-ghost btn-coral",
-            data: { turbo_frame: nested_dom_id(:description, @recipe) } do %>
-            <%= Icon.call("edit") %>
-            description
-          <% end %>
-        </div>
+  <%# EDIT DESCRIPTION BUTTON %>
+  <% if policy(recipe).update? %>
+    <div class="flex-end">
+      <%= link_to edit_recipe_description_path(recipe), 
+        class: "btn btn-ghost btn-coral",
+        data: { turbo_frame: nested_dom_id(:description, recipe) } do %>
+        <%= Icon.call("edit") %>
+        description
       <% end %>
-
-    <% end %>
-      
-    <%# USER AVATAR %>
-    <div class="user-show">
-      <%= link_to user_path(@recipe.user) do %>
-        <% if @recipe.user.avatar.attached? %> 
-          <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
-            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
-            class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% else %>
-          <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-        <% end %>
-      <% end %>
-
-      <%# USER NAME %>
-      <div class="user-name">
-        <%= link_to user_path(@recipe.user) do %>
-          <small><p><%= @recipe.user.full_name %></p></small>
-        <% end %>
-      </div>
-        
     </div>
+  <% end %>
 
-    <%# LIKE BUTTON %>
-    <div data-controller="like" class="card-recipe-like" data-like-url="/recipes/<%= @recipe.id %>/likes">
-      <i data-action="click->like#save" data-like-target="heart" class="<%= liked?(@recipe) %> fa-heart"></i>
-    </div>
-      
-  </div>
+<% end %>
+    

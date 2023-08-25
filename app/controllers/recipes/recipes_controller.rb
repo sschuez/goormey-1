@@ -13,12 +13,10 @@ class Recipes::RecipesController < ApplicationController
       skip_policy_scope
   end
 
-  # GET /recipes/1 or /recipes/1.json
   def show
     @comment = @recipe.comments.new
   end
 
-  # GET /recipes/new
   def new
     @recipe = Recipe.new 
     authorize @recipe
@@ -28,78 +26,60 @@ class Recipes::RecipesController < ApplicationController
     redirect_to recipe_path(@recipe)
   end
 
-  # GET /recipes/1/edit
-  def edit
-  end
-
-  # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
     authorize @recipe
+
     @recipe.user = current_user
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully created." }
-        format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /recipes/1 or /recipes/1.json
-  def update
-    respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
-        format.json { render :show, status: :ok, location: @recipe }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /recipes/1 or /recipes/1.json
   def destroy
     @recipe.destroy
+
     redirect_to root_path, status: :see_other, notice: "Recipe was successfully deleted."
-    # respond_to do |format|
-    #   format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
-    #   format.json { head :no_content }
-    # end
   end
 
   def publish
     @recipe = Recipe.find(params[:id])
     authorize @recipe, :update?
 
-    @recipe.toggle!(:published)
-    state = @recipe.published? ? "published" : "unpublished"
-
     respond_to do |format|
-      format.turbo_stream { flash.now[:notice] = "Recipe #{@recipe.name} was successfully #{state}." }
-      format.html { redirect_to post_path(@recipe), notice: "Recipe was successfully published." }
+      if @recipe.name.blank? || @recipe.description.blank?
+        format.turbo_stream { flash.now[:notice] = "Please add a title or description before publishing." }
+      else
+        @recipe.toggle!(:published)
+        state = @recipe.published? ? "published" : "unpublished"
+        
+        format.turbo_stream { flash.now[:notice] = "Recipe was successfully #{state}." }
+        format.html { redirect_to post_path(@recipe), notice: "Recipe was successfully #{state}." }
+      end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-      authorize @recipe
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+    authorize @recipe
+  end
 
-    # Only allow a list of trusted parameters through.
-    def recipe_params
-      params.require(:recipe).permit(
-        :name, 
-        :description, 
-        :photo, 
-        :serves, 
-        ingredients_attributes: [:id, :description, :position, :_destroy], 
-        instructions_attributes: [:id, :description, :position, :_destroy]
-      )
-    end
+  # Only allow a list of trusted parameters through.
+  def recipe_params
+    params.require(:recipe).permit(
+      :name, 
+      :description, 
+      :photo, 
+      :serves, 
+      ingredients_attributes: [:id, :description, :position, :_destroy], 
+      instructions_attributes: [:id, :description, :position, :_destroy]
+    )
+  end
 end

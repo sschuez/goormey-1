@@ -1,0 +1,31 @@
+<div class="description-show">
+    
+    <%= render "recipes/descriptions/description", recipe: @recipe %>
+      
+    <%# USER AVATAR %>
+    <div class="user-show">
+      <%= link_to user_path(@recipe.user) do %>
+        <% if @recipe.user.avatar.attached? %> 
+          <%= cl_image_tag @recipe.user.avatar.key, :transformation=>[
+            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"}], 
+            class: "card-recipe-user avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+        <% else %>
+          <%= image_tag "default_avatar_square.png", class: "card-recipe-user avatar", alt: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+        <% end %>
+      <% end %>
+
+      <%# USER NAME %>
+      <div class="user-name">
+        <%= link_to user_path(@recipe.user) do %>
+          <small><p><%= @recipe.user.full_name %></p></small>
+        <% end %>
+      </div>
+        
+    </div>
+
+    <%# LIKE BUTTON %>
+    <div data-controller="like" class="card-recipe-like" data-like-url="/recipes/<%= @recipe.id %>/likes">
+      <i data-action="click->like#save" data-like-target="heart" class="<%= liked?(@recipe) %> fa-heart"></i>
+    </div>
+      
+  </div>
