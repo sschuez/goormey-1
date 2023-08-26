@@ -1,13 +1,21 @@
-<h4>New comment</h4>
-<% if user_signed_in? %>
-  <%= turbo_frame_tag Comment.new, src: new_recipe_comment_path(recipe), target: :_top %>
-<% else %>
-  <p>
-    <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
-  </p>
+<%= turbo_frame_tag :published_comments do %>
+  <% if recipe.published %>
+  
+    <div class="main-card">
+      <h4>New comment</h4>
+      <% if user_signed_in? %>
+        <%= turbo_frame_tag Comment.new, src: new_recipe_comment_path(recipe), target: :_top %>
+      <% else %>
+        <p>
+          <strong><%= link_to "Sign up", new_user_registration_path %></strong> or <strong><%= link_to "login", new_user_session_path %></strong> to comment
+        </p>
+      <% end %>
+          
+      <h4>Comments</h4>
+      <div id="comments">
+        <%= render recipe.comments.order(created_at: :desc) %>
+      </div>
+    </div>
+  
+  <% end %>
 <% end %>
-    
-<h4>Comments</h4>
-<div id="comments">
-  <%= render recipe.comments.order(created_at: :desc) %>
-</div>

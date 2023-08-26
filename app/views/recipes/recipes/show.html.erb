@@ -9,6 +9,7 @@
 <%# /METADATA %>
 
 <div class="narrow-container">
+  <%= render "recipes/recipes/publish_banner", recipe: @recipe, location: :top %>
   <%= render "recipes/recipes/action_btns", recipe: @recipe, location: :top %>
 
   <div class="main-card recipe">    
@@ -29,10 +30,10 @@
     <%= render "recipes/instructions/instructions", recipe: @recipe %>
   </div>
 
-  <div class="main-card">
-    <%= render "recipes/comments/show", recipe: @recipe %>
-  </div>
+  <%= render "recipes/comments/show", recipe: @recipe %>  
 
   <br>
   <%= render "recipes/recipes/action_btns", recipe: @recipe, location: :bottom %>
+  <br>
+  <%= render "recipes/recipes/publish_banner", recipe: @recipe, location: :bottom %>
 </div>  

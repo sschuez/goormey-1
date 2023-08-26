@@ -53,10 +53,8 @@ class Recipes::RecipesController < ApplicationController
     authorize @recipe, :update?
 
     respond_to do |format|
-      if @recipe.name.blank? || 
-        @recipe.description.blank? || 
-          @recipe.serves < 0
-        format.turbo_stream { flash.now[:notice] = "Please add a title or description and make sure serves is not smaller than 0 before publishing." }
+      if unvalidated(@recipe)
+        format.turbo_stream { flash.now[:notice] = error_message(@recipe) }
       else
         @recipe.toggle!(:published)
         state = @recipe.published? ? "published" : "unpublished"
@@ -68,13 +66,30 @@ class Recipes::RecipesController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+ 
+  def unvalidated(recipe)
+    recipe.name.blank? || recipe.description.blank? || (recipe.serves.blank? || recipe.serves < 0)
+  end
+
+  def error_message(recipe)
+    if recipe.name.blank? && recipe.description.blank? && (recipe.serves.blank? || recipe.serves < 0)
+      "Please add title and description and make sure serves is not smaller than 0 before publishing."
+    elsif recipe.name.blank? && recipe.description.blank?
+      "Please add a title or description before publishing."
+    elsif recipe.serves.blank? || recipe.serves < 0
+      "Please make sure serves is not smaller than 0 before publishing."
+    elsif recipe.name.blank?
+      "Please add a title before publishing."
+    elsif recipe.description.blank?
+      "Please add a description before publishing."
+    end
+  end
+
   def set_recipe
     @recipe = Recipe.find(params[:id])
     authorize @recipe
   end
 
-  # Only allow a list of trusted parameters through.
   def recipe_params
     params.require(:recipe).permit(
       :name, 

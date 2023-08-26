@@ -1,13 +1,19 @@
 <%= render_turbo_stream_flash_messages %>
 
-<%= turbo_stream.replace "recipe_#{@recipe.id}_publish_btn_top" do %>
-  <%= render "recipes/recipes/publish_btn", recipe: @recipe, location: :top %>
-<% end %>
+<% [:top, :bottom].each do |location| %>
+  <%= turbo_stream.replace "recipe_#{@recipe.id}_publish_btn_#{location}" do %>
+    <%= render "recipes/recipes/publish_btn", recipe: @recipe, location: location %>
+  <% end %>
 
-<%= turbo_stream.replace "recipe_#{@recipe.id}_publish_btn_bottom" do %>
-  <%= render "recipes/recipes/publish_btn", recipe: @recipe, location: :bottom %>
+  <%= turbo_stream.replace "publish_banner_#{location}" do %>
+    <%= render "recipes/recipes/publish_banner", recipe: @recipe, location: location %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.replace nested_dom_id(@recipe, :publish_btn) do %>
   <%= render "recipes/recipes/publish_btn_2", recipe: @recipe %>
+<% end %>
+
+<%= turbo_stream.replace :published_comments do %>
+  <%= render "recipes/comments/show", recipe: @recipe %>
 <% end %>

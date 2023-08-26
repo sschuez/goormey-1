@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "publish_banner_#{location}" do %>
+  <% unless recipe.published %>
+    <div class="alert alert-danger" role="alert">
+      This recipe is not yet published and as such is only visible in your profile. To publish it, you need to define a title, a description and serves how many. Ready to publish? Go ahead <%= button_to "here", publish_recipe_path(recipe), class: "btn-styling alert-link", method: :patch %>
+    </div>
+  <% end %>
+<% end %>
