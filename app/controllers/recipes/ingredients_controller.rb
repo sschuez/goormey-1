@@ -13,7 +13,7 @@ class Recipes::IngredientsController < ApplicationController
     
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient was successfully created." }
+        format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient created." }
         format.turbo_stream {}
       else
         render :new, status: :unprocessable_entity
@@ -27,8 +27,8 @@ class Recipes::IngredientsController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient was successfully updated." }
-        format.turbo_stream { flash.now[:notice] = "Ingredient was successfully updated." }
+        format.html { redirect_to recipe_path(@ingredient.recipe), notice: "Ingredient updated." }
+        format.turbo_stream { flash.now[:notice] = "Ingredient updated." }
       else
         render :edit, status: :unprocessable_entity
       end

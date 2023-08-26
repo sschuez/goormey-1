@@ -19,4 +19,8 @@
       display: revert;
     }
   }
+
+  &--narrow {
+    max-height: 4rem;
+  }
 }

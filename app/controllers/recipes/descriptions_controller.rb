@@ -11,8 +11,8 @@ class Recipes::DescriptionsController < ApplicationController
             recipe_params[:name].length > 0 &&
               recipe_params[:name].length < 100 &&
         @recipe.update(recipe_params)
-        format.turbo_stream { flash.now[:notice] = "Recipe was successfully updated." }
-        format.html { redirect_to recipe_path(@recipe), notice: "Recipe was successfully updated." }
+        format.turbo_stream { flash.now[:notice] = "Recipe updated." }
+        format.html { redirect_to recipe_path(@recipe), notice: "Recipe updated." }
       else
         format.turbo_stream { flash.now[:notice] = "Please make sure name and description are present." }
         format.html { render :edit, status: :unprocessable_entity }

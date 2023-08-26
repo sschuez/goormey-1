@@ -1,15 +1,17 @@
 <%= turbo_frame_tag nested_dom_id(recipe, :publish_btn) do %>
-  <div class="flex-end">
-    <% if recipe.published %>
-      <%= button_to publish_recipe_path(recipe), class: "btn btn-ghost btn-coral", method: :patch do %>
-        <%= Icon.call("unpublished") %>
-        unpublish recipe
-      <% end %> 
-    <% else %>
+  <% if policy(recipe).update? %>
+    <div class="flex-end">
+      <% if recipe.published %>
         <%= button_to publish_recipe_path(recipe), class: "btn btn-ghost btn-coral", method: :patch do %>
-          <%= Icon.call("published") %>
-          publish recipe
-        <% end %>
-    <% end %>
-  </div>
+          <%= Icon.call("unpublished") %>
+          unpublish recipe
+        <% end %> 
+      <% else %>
+          <%= button_to publish_recipe_path(recipe), class: "btn btn-ghost btn-coral", method: :patch do %>
+            <%= Icon.call("published") %>
+            publish recipe
+          <% end %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

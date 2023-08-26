@@ -1,9 +1,13 @@
 <%= turbo_frame_tag nested_dom_id(:description, recipe) do %>
 
-  <h4><%= recipe.name %></h4>
+  <% if recipe.name.blank? %>
+    <%= render "recipes/descriptions/empty_state", attribute: "title" %>
+  <% else %>
+    <h4><%= recipe.name %></h4>
+  <% end %>
         
-  <% if recipe.description.nil? || recipe.description == "" %>
-    <%= render "recipes/descriptions/empty_state" %>
+  <% if recipe.description.blank? %>
+    <%= render "recipes/descriptions/empty_state", attribute: "description" %>
   <% else %>
     <p><%= recipe.description %></p>
   <% end %>
