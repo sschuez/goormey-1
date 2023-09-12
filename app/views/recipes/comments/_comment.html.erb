@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div class="user-comment ingredient-show">
-    <%= comment.content %>
+    <%= simple_format comment.content %>
     <small style="font-style: italic;">- <%= time_tag comment.created_at, "data-local": "time-ago" %></small>
   </div>
   <div class="comment-actions">
