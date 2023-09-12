@@ -9,7 +9,7 @@
   <% if recipe.description.blank? %>
     <%= render "recipes/descriptions/empty_state", attribute: "description" %>
   <% else %>
-    <p><%= recipe.description %></p>
+    <p><%= simple_format recipe.description %></p>
   <% end %>
         
   <%# EDIT DESCRIPTION BUTTON %>
