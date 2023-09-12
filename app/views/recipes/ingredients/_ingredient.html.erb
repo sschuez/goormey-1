@@ -2,7 +2,7 @@
 
   <div class="ingredient-show justify-space-between">
     <div>
-      <%= ingredient.description %>
+      <%= simple_format ingredient.description %>
     </div>
     
     <% if policy(ingredient.recipe).edit? %>
