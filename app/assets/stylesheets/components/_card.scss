@@ -34,7 +34,15 @@
 
 .ingredient-show {
   margin: 0px;
-  color: $brown-light;
+  
+  p {
+    color: $brown-light;
+    margin: 0px;
+  }
+}
+
+.serve {
+  color: $red-middle;
 }
 
 .ingredient-show .instruction-description {

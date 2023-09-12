@@ -1,6 +1,6 @@
 <%= turbo_frame_tag nested_dom_id(:serves, recipe) do %>
   
-  <div class="justify-space-between">
+  <div class="justify-space-between serve">
     <div>Ingredients serve <strong><%= recipe.serves ? recipe.serves : "not sure how many" %></strong> <%= recipe.serves == 1 ? "person" : "persons" %></div>
         
     <% if policy(recipe).update? %>
