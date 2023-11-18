@@ -21,9 +21,11 @@
     "trix": "^2.0.0-alpha.0"
   },
   "version": "0.1.0",
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
