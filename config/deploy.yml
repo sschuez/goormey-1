@@ -9,7 +9,7 @@ servers:
       "add-host": host.docker.internal:host-gateway   
     labels:
       traefik.http.routers.rails_recipes.entrypoints: websecure
-      traefik.http.routers.rails_recipes.rule: Host(`rails.recipes`)
+      traefik.http.routers.rails_recipes.rule: Host(`goormey.com`)
       traefik.http.routers.rails_recipes.tls.certresolver: letsencrypt
   worker:
     hosts:
