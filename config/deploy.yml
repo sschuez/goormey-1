@@ -9,7 +9,7 @@ servers:
       "add-host": host.docker.internal:host-gateway   
     labels:
       traefik.http.routers.goormey.entrypoints: websecure
-      traefik.http.routers.myapp.rule: "Host(`goormey.com`) || Host(`www.goormey.com`)"
+      traefik.http.routers.goormey.rule: "Host(`goormey.com`) || Host(`www.goormey.com`)"
       # traefik.http.routers.goormey.rule: Host(`goormey.com`)
       traefik.http.routers.goormey.tls.certresolver: letsencrypt
       traefik.http.routers.goormey.tls.domains[0].main: goormey.com
