@@ -11,6 +11,8 @@ servers:
       traefik.http.routers.goormey.entrypoints: websecure
       traefik.http.routers.goormey.rule: Host(`goormey.com`)
       traefik.http.routers.goormey.tls.certresolver: letsencrypt
+      traefik.http.routers.goormey.tls.domains[0].main: goormey.com
+      traefik.http.routers.goormey.tls.domains[0].sans: www.goormey.com
   worker:
     hosts:
       - 168.119.127.165
