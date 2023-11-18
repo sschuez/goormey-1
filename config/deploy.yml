@@ -2,7 +2,13 @@
 service: goormey_1
 image: pschuez/goormey_1
 servers:
-- 78.47.73.113
+  web:
+    hosts:
+      - 78.47.73.113
+  worker:
+    hosts:
+      - 78.47.73.113
+    cmd: bundle exec sidekiq
 registry:
   username: pschuez
   password:
@@ -34,7 +40,9 @@ accessories:
     - data:/var/lib/postgresql/data
   redis:
     image: redis:7.0
-    host: 78.47.73.113
+    roles:
+      - web
+      - worker
     port: 6379
     directories:
     - data:/data
