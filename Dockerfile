@@ -17,9 +17,12 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl nodejs redis-tools 
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl nodejs redis-tools && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install --no-install-recommends yarn
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -37,8 +40,7 @@ RUN yarn install
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-# RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
-RUN SECRET_KEY_BASE_DUMMY=1 RAILS_ENV=production NODE_ENV=production ./bin/rails assets:precompile --trace
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
 
 # Final stage for app image
 FROM base
