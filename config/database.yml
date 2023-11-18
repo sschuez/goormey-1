@@ -90,4 +90,4 @@ production:
   host: '<%= ENV["DB_HOST"] %>'
   database: '<%= ENV["POSTGRES_DB"] %>'
   username: '<%= ENV["POSTGRES_USER"] %>'
-  password: '<%= ENV["POSTGRES_PASSWORD"] %>
+  password: '<%= ENV["POSTGRES_PASSWORD"] %>'
