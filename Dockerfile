@@ -19,7 +19,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl nodejs redis-tools yarn
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl nodejs redis-tools 
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -30,18 +30,22 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Install JavaScript dependencies
+RUN yarn install
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
+# RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
+RUN SECRET_KEY_BASE_DUMMY=1 RAILS_ENV=production NODE_ENV=production ./bin/rails assets:precompile --trace
 
 # Final stage for app image
 FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client curl nodejs yarn && \
+    apt-get install --no-install-recommends -y curl libvips postgresql-client curl nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
