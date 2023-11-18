@@ -4,21 +4,43 @@ image: pschuez/goormey_1
 servers:
   web:
     hosts:
-      - 78.47.73.113
+      - 168.119.127.165
+    options:
+      "add-host": host.docker.internal:host-gateway   
+    labels:
+      traefik.http.routers.rails_recipes.entrypoints: websecure
+      traefik.http.routers.rails_recipes.rule: Host(`rails.recipes`)
+      traefik.http.routers.rails_recipes.tls.certresolver: letsencrypt
   worker:
     hosts:
-      - 78.47.73.113
+      - 168.119.127.165
     cmd: bundle exec sidekiq
 registry:
   username: pschuez
   password:
   - KAMAL_REGISTRY_PASSWORD
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "stephens@hey.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
 env:
   clear:
-    DB_HOST: 78.47.73.113
+    DB_HOST: 168.119.127.165
     POSTGRES_USER: goormey_1_user
     POSTGRES_DB: goormey_1_production
-    redis: 78.47.73.113
+    redis: 168.119.127.165
   secret:
   - RAILS_MASTER_KEY
   - POSTGRES_PASSWORD
@@ -28,7 +50,7 @@ ssh:
 accessories:
   db:
     image: postgres:16
-    host: 78.47.73.113
+    host: 168.119.127.165
     port: 5432
     env:
       clear:
