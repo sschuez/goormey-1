@@ -1,0 +1,39 @@
+---
+service: goormey_1
+image: pschuez/goormey_1
+servers:
+- 78.47.73.113
+registry:
+  username: pschuez
+  password:
+  - KAMAL_REGISTRY_PASSWORD
+env:
+  clear:
+    DB_HOST: 78.47.73.113
+    POSTGRES_USER: goormey_1_user
+    POSTGRES_DB: goormey_1_production
+    redis: 78.47.73.113
+  secret:
+  - RAILS_MASTER_KEY
+  - POSTGRES_PASSWORD
+ssh:
+  user: root
+accessories:
+  db:
+    image: postgres:16
+    host: 78.47.73.113
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: goormey_1_user
+        POSTGRES_DB: goormey_1_production
+      secret:
+      - POSTGRES_PASSWORD
+    directories:
+    - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0
+    host: 78.47.73.113
+    port: 6379
+    directories:
+    - data:/data
