@@ -62,7 +62,9 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/registrations'
+  }
   resources :users, only: [:index, :show] do
     member do
       get 'user_recipes'

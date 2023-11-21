@@ -5,7 +5,7 @@
 
   <div class="form-inputs">
     <div class="main-card">
-      <h4>Log in details</h4>
+      <h4>Profile details</h4>
       <br>
       <%= f.input :email,
                   required: true,
@@ -30,6 +30,11 @@
                   required: true,
                   hint: "Required, but can also be different from you real name" %>
       
+      <div class="cf-turnstile mb-3"
+          data-controller="cloudflare-turnstile"
+          data-sitekey="<%= Rails.application.credentials.dig(:cloudflare, :site_key) %>" 
+          data-callback="javascriptCallback"></div>
+
       <div class="form-actions">
         <%= f.button :submit, "Sign up", class: "btn btn-ghost" %>
       </div>
