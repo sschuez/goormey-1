@@ -18,6 +18,7 @@
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
+      <br>
     </div>
 
     <div class="main-card">
@@ -30,7 +31,7 @@
                   required: true,
                   hint: "Required, but can also be different from you real name" %>
       
-      <div class="cf-turnstile mb-3"
+      <div class="cf-turnstile my-3"
           data-controller="cloudflare-turnstile"
           data-sitekey="<%= Rails.application.credentials.dig(:cloudflare, :site_key) %>" 
           data-callback="javascriptCallback"></div>

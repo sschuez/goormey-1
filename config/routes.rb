@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   devise_for :users, controllers: {
-    sessions: 'users/registrations'
+    registrations: 'users/registrations'
   }
   resources :users, only: [:index, :show] do
     member do
