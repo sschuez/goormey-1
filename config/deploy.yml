@@ -5,38 +5,52 @@ servers:
   web:
     hosts:
       - 168.119.127.165
-    options:
-      "add-host": host.docker.internal:host-gateway   
-    labels:
-      traefik.http.routers.goormey.entrypoints: websecure
-      traefik.http.routers.goormey.rule: "Host(`goormey.com`) || Host(`www.goormey.com`)"
-      traefik.http.routers.goormey.tls.certresolver: letsencrypt
-      traefik.http.routers.goormey.tls.domains[0].main: goormey.com
-      traefik.http.routers.goormey.tls.domains[0].sans: www.goormey.com
+
+    # options:
+    #   "add-host": host.docker.internal:host-gateway
+    # labels:
+    #   traefik.http.routers.goormey.entrypoints: websecure
+    #   traefik.http.routers.goormey.rule: "Host(`goormey.com`) || Host(`www.goormey.com`)"
+    #   traefik.http.routers.goormey.tls.certresolver: letsencrypt
+    #   traefik.http.routers.goormey.tls.domains[0].main: goormey.com
+    #   traefik.http.routers.goormey.tls.domains[0].sans: www.goormey.com
   worker:
     hosts:
       - 168.119.127.165
     cmd: bundle exec sidekiq
+
 registry:
   username: pschuez
   password:
-  - KAMAL_REGISTRY_PASSWORD
-traefik:
-  options:
-    publish:
-      - "443:443"
-    volume:
-      - "/root/acme.json:/letsencrypt/acme.json"
-  args:
-    entryPoints.web.address: ":80"
-    entryPoints.websecure.address: ":443"
-    entryPoints.web.http.redirections.entryPoint.to: websecure
-    entryPoints.web.http.redirections.entryPoint.scheme: https
-    entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "stephens@hey.com"
-    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
-    certificatesResolvers.letsencrypt.acme.httpchallenge: true
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: aarch64
+
+proxy:
+  app_port: 3000
+  ssl: false
+  hosts:
+    - goormey.com
+    - www.goormey.com
+
+# Original setup to host several apps on one server with traefik. No longer needed since kamal 2
+# traefik:
+#   options:
+#     publish:
+#       - "443:443"
+#     volume:
+#       - "/root/acme.json:/letsencrypt/acme.json"
+#   args:
+#     entryPoints.web.address: ":80"
+#     entryPoints.websecure.address: ":443"
+#     entryPoints.web.http.redirections.entryPoint.to: websecure
+#     entryPoints.web.http.redirections.entryPoint.scheme: https
+#     entryPoints.web.http.redirections.entrypoint.permanent: true
+#     certificatesResolvers.letsencrypt.acme.email: "stephens@hey.com"
+#     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+#     certificatesResolvers.letsencrypt.acme.httpchallenge: true
+#     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
 env:
   clear:
     DB_HOST: 168.119.127.165
@@ -44,11 +58,13 @@ env:
     POSTGRES_DB: goormey_1_production
     redis: 168.119.127.165
   secret:
-  - RAILS_MASTER_KEY
-  - POSTGRES_PASSWORD
-  - REDIS_URL
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+    - REDIS_URL
+
 ssh:
   user: root
+
 accessories:
   db:
     image: postgres:16
@@ -59,9 +75,9 @@ accessories:
         POSTGRES_USER: goormey_1_user
         POSTGRES_DB: goormey_1_production
       secret:
-      - POSTGRES_PASSWORD
+        - POSTGRES_PASSWORD
     directories:
-    - data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
   redis:
     image: redis:7.0
     roles:
@@ -69,4 +85,10 @@ accessories:
       - worker
     port: 6379
     directories:
-    - data:/data
+      - data:/data
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
